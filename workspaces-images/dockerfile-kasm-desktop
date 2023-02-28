@@ -7,7 +7,6 @@ USER root
 ENV HOME /home/kasm-default-profile
 ENV STARTUPDIR /dockerstartup
 WORKDIR $HOME
-
 ######### Customize Container Here ###########
 
 ENV DOCKER_CHANNEL=stable \
@@ -27,8 +26,6 @@ RUN chmod 755 $STARTUPDIR/custom_startup.sh
 COPY ./src/ubuntu/install/dind/modprobe /usr/local/bin/modprobe
 RUN chmod +x /usr/local/bin/modprobe
 COPY ./src/ubuntu/install/dind/dockerd.conf /etc/supervisor/conf.d/
-
-######### End Customizations ###########
 
 
 # Add Kasm Branding
@@ -52,8 +49,9 @@ COPY ./src/ubuntu/install/edge $INST_SCRIPTS/edge/
 RUN bash $INST_SCRIPTS/edge/install_edge.sh  && rm -rf $INST_SCRIPTS/edge/
 
 
-COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
-RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
+ COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
+ RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
+
 # install cuda 
 ENV NVARCH x86_64
 ENV NVIDIA_REQUIRE_CUDA "cuda>=11.3 brand=tesla,driver>=418,driver<419 driver>=450"
@@ -77,9 +75,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 ENV PATH /usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
 ENV LD_LIBRARY_PATH /usr/local/nvidia/lib:/usr/local/nvidia/lib64
+
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES compute,utility
+ENV NVIDIA_DRIVER_CAPABILITIES all
 ######## End cuda #####################
 
 #RUN chown 1000:0 $HOME 
@@ -89,11 +88,11 @@ ENV HOME /home/kasm-user
 WORKDIR $HOME
 
 # copy idea
-#RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
-#cp -r   /tmp/kasm-user /home &&  chown -R 1000:0 $HOME
+RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
+cp -r   /tmp/kasm-user /home &&  chown -R 1000:0 $HOME
  
-#RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
-#cp -r /tmp/idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
+RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
+cp -r /tmp/idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
 
 
 

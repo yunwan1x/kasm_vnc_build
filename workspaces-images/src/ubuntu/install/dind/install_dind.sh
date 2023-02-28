@@ -7,6 +7,7 @@ apt-get install -y \
     curl \
     dbus-user-session \
     kmod \
+    fuse-overlayfs \
     iptables \
     openssh-client \
     sudo \

@@ -39,7 +39,15 @@ kasm_exec() {
     if [ -n "$URL" ] ; then
         /usr/bin/desktop_ready
         bash ${MAXIMIZE_SCRIPT} &
-        $START_COMMAND $ARGS
+	sudo iptables -L
+	if [ $? -eq 0 ]; then
+	 $START_COMMAND $ARGS
+         echo "set --privileged  succeed"
+	 else
+	  echo set --privileged  false , need  start up with  --privileged option
+	  sleep 36000
+        fi
+        
     else
         echo "No URL specified for exec command. Doing nothing."
     fi
@@ -63,7 +71,14 @@ kasm_startup() {
                 /usr/bin/desktop_ready
                 set +e
                 bash ${MAXIMIZE_SCRIPT} &
-                $START_COMMAND $ARGS
+                sudo iptables -L
+        	if [ $? -eq 0 ]; then
+	         $START_COMMAND $ARGS
+                 echo "set --privileged  succeed"
+	        else
+	         echo set --privileged  false , need  start up with  --privileged option
+	         sleep 36000
+                fi
                 set -e
             fi
             sleep 1
@@ -79,3 +94,4 @@ if [ -n "$GO" ] || [ -n "$ASSIGN" ] ; then
 else
     kasm_startup
 fi
+

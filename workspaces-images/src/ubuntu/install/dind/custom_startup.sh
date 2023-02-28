@@ -89,8 +89,6 @@ kasm_startup() {
     fi
 
 }
-sudo chmod   a+w -R /usr/share/kasmvnc/www
-sudo echo '#noVNC_connect_button {display:block !important}' >>/usr/share/kasmvnc/www/dist/style.bundle.css
 
 if [ -n "$GO" ] || [ -n "$ASSIGN" ] ; then
     kasm_exec
