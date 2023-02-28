@@ -11,3 +11,6 @@
 
 # 修改style.css,连接按钮始终可见
 echo '#noVNC_connect_button {display:block !important}' >>/usr/share/kasmvnc/www/dist/style.bundle.css
+
+# 新立得软件包
+apt-get install synaptic
