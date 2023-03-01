@@ -88,11 +88,11 @@ ENV HOME /home/kasm-user
 WORKDIR $HOME
 
 # copy idea
-RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
-cp -r   /tmp/kasm-user /home &&  chown -R 1000:0 $HOME
+#RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
+#cp -r   /tmp/kasm-user /home &&  chown -R 1000:0 $HOME
  
-RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
-cp -r /tmp/idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
+#RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
+#cp -r /tmp/idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
 
 
 

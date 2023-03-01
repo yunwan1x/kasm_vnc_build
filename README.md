@@ -12,3 +12,6 @@
 
 # 新立得软件包
 apt-get install synaptic
+
+# 开启代理
+gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port

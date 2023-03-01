@@ -49,6 +49,8 @@ function start_kasmvnc (){
 	fi
 
 	DISPLAY_NUM=$(echo $DISPLAY | grep -Po ':\d+')
+	# disable display auth
+	
 
 	if [[ $STARTUP_COMPLETE == 0 ]]; then
 	    vncserver -kill $DISPLAY &> $STARTUPDIR/vnc_startup.log \
@@ -213,7 +215,7 @@ start_audio_out
 start_upload
 start_nginx
 STARTUP_COMPLETE=1
-
+xhost +
 
 ## log connect options
 echo -e "\n\n------------------ KasmVNC environment started ------------------"
