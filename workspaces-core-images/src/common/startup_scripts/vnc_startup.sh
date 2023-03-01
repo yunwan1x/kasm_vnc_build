@@ -110,10 +110,10 @@ function start_audio_out_websocket (){
 }
 
 function start_nginx (){
-                sudo nginx
-                KASM_PROCS['nginx']=$!
-
-       }
+    sudo -i  sed 's/user.*;/user kasm-user;/' /etc/nginx/nginx.conf	
+    nginx -g "daemon off;" &
+    KASM_PROCS['nginx']=$!
+}
 
 function start_audio_out (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
@@ -140,7 +140,7 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -o -u  -a kasm-user:$VNC_PW  --tls-cert ${HOME}/.vnc/self.pem --tls-key ${HOME}/.vnc/self.pem  $HOME/Desktop/Uploads &
+        miniserve -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads &  
         KASM_PROCS['upload_server']=$!
 
 }
@@ -204,6 +204,7 @@ echo "kasm_viewer:${VNC_VIEW_PW_HASH}:" >> $PASSWD_PATH
 chmod 600 $PASSWD_PATH
 
 sudo service dbus start
+ sudo service  network-manager start
 # start processes
 start_kasmvnc
 start_window_manager

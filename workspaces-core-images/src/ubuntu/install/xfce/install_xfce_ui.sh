@@ -59,6 +59,7 @@ then
     sed -i "s@<value type=\"int\" value=\"${PLUGIN_ID}\"/>@@g" /etc/xdg/xfce4/panel/default.xml
   elif [ "$DISTRO" = "ubuntu" ]; then
     apt-get install -y supervisor xfce4 xfce4-terminal xterm xclip
+    apt-get   remove  -y light-locker 
   elif [[ "${DISTRO}" == @(centos|oracle7) ]]; then
     if [ "${DISTRO}" == centos ]; then
       yum install -y epel-release

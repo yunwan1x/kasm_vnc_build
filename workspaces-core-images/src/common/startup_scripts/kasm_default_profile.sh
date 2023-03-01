@@ -15,7 +15,7 @@ function set_user_permission {
 
 function copy_default_profile_to_home {
     echo "Copying default profile to home directory"
-    sudo chown -R 1000:0  $DEFAULT_PROFILE_HOME/
+    sudo chown -R 1000:0  $DEFAULT_PROFILE_HOME/ /run /var/lib/nginx /var/run /var/log 
     sudo  cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/
     #sudo chown -R 1000:0 $HOME/
        #ls -la $HOME
