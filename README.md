@@ -15,3 +15,12 @@ apt-get install synaptic
 
 # 开启代理
 gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
+
+# 开启gpu加速
+去这里下载  https://rawcdn.githack.com/VirtualGL/virtualgl/3.0.2/doc/index.html
+https://sourceforge.net/projects/virtualgl/files/
+
+apt install --fix-broken  ./virtualgl.deb
+export VGL_DISPLAY=/dev/dri/card2
+chmod a+rw /dev/dri/renderD129
+vglrun /opt/VirtualGL/bin/glxspheres64

@@ -206,7 +206,7 @@ echo "kasm_viewer:${VNC_VIEW_PW_HASH}:" >> $PASSWD_PATH
 chmod 600 $PASSWD_PATH
 
 sudo service dbus start
- sudo service  network-manager start
+# sudo service  network-manager start
 # start processes
 start_kasmvnc
 start_window_manager
