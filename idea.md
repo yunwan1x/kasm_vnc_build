@@ -1,5 +1,6 @@
-idea资源文件：
+# idea资源文件：
 
+```bash
 ~=/home/kasm-user
 ~/.config/JetBrains
 ~/.cache/JetBrains
@@ -14,3 +15,4 @@ idea资源文件：
 ~/Desktop/clion.desktop
 ~/Desktop/activate page.desktop
 ~/Desktop/idea.desktop
+```
