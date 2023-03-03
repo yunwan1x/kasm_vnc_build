@@ -364,12 +364,13 @@ select:active {
     transition: transform .5s ease-in-out;
     background: url(images/294bda69d4ed0f7d5b47bc8145978966.svg);
     background-repeat: no-repeat;
-    background-position: 50%;
+    background-position: 80%;
     position: absolute;
-    transform: translateX(1px) rotate(90deg);
+    transform: translateX(0px) rotate(90deg);
     right: 50%;
     width: 15px;
     height: 60px;
+    top: -5px;
     background-color: rgba(9, 2, 2, .6);
     border-bottom-right-radius: 10px;
     border-top-right-radius: 10px;
