@@ -81,13 +81,13 @@ function start_window_manager (){
 	if [ "${START_XFCE4}" == "1" ] ; then
 		if [ -f /opt/VirtualGL/bin/vglrun ] && [ ! -z "${KASM_EGL_CARD}" ] && [ ! -z "${KASM_RENDERD}" ] && [ -O "${KASM_RENDERD}" ] && [ -O "${KASM_EGL_CARD}" ] ; then
 		echo "Starting XFCE with VirtualGL using EGL device ${KASM_EGL_CARD}"
-			DISPLAY=:1 /opt/VirtualGL/bin/vglrun -d "${KASM_EGL_CARD}" /usr/bin/startxfce4 --replace &
+			DISPLAY=:1 /opt/VirtualGL/bin/vglrun -d "${KASM_EGL_CARD}" /usr/bin/startxfce4 --replace &>/dev/null &
 		else    
 			echo "Starting XFCE"
 			if [ -f '/usr/bin/zypper' ]; then
-	                DISPLAY=:1 /usr/bin/dbus-launch /usr/bin/startxfce4 --replace &
+	                DISPLAY=:1 /usr/bin/dbus-launch /usr/bin/startxfce4 --replace &>/dev/null &
 		        else
-																/usr/bin/startxfce4 --replace &
+																/usr/bin/startxfce4 --replace &>/dev/null &
 															     fi
 		
 		fi
@@ -112,8 +112,8 @@ function start_audio_out_websocket (){
 }
 
 function start_nginx (){
-    sudo -i sed 's/worker_processes auto;/worker_processes 4;/' /etc/nginx/nginx.conf
-    sudo -i  sed 's/user.*;/user kasm-user;/' /etc/nginx/nginx.conf	
+    sudo  sed -i 's/worker_processes auto;/worker_processes 4;/' /etc/nginx/nginx.conf
+    #sudo   sed -i  's/user.*;/user kasm-user;/' /etc/nginx/nginx.conf	
     nginx -g "daemon off;" &>/dev/null &
     KASM_PROCS['nginx']=$!
 }

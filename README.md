@@ -1,6 +1,6 @@
 # build,启用build kit
 
-1. DOCKER_BUILDKIT=1  docker build -t kasmweb/core-ubuntu-focal:develop -f /root/kasm_vnc/workspaces-core-images/dockerfile-kasm-ubuntu   /root/kasm_vnc/workspaces-core-images && docker build -t changhui/ubuntu:cuda-11.3  -f /root/kasm_vnc/workspaces-images/dockerfile-kasm-desktop /root/kasm_vnc/workspaces-image
+1. `DOCKER_BUILDKIT=1  docker build -t kasmweb/core-ubuntu-focal:develop -f /root/kasm_vnc/workspaces-core-images/dockerfile-kasm-ubuntu   /root/kasm_vnc/workspaces-core-images && docker build -t changhui/ubuntu:cuda-11.3  -f /root/kasm_vnc/workspaces-images/dockerfile-kasm-desktop /root/kasm_vnc/workspaces-image`
 
 # run
  docker run --rm -it --shm-size=512m --name ubuntu -p 6901:443  -e VNC_PW=password changhui/ubuntu:11.3
@@ -17,10 +17,9 @@ apt-get install synaptic
 gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 
 # 开启gpu加速
-去这里下载  https://rawcdn.githack.com/VirtualGL/virtualgl/3.0.2/doc/index.html
-https://sourceforge.net/projects/virtualgl/files/
-
-apt install --fix-broken  ./virtualgl.deb
-export VGL_DISPLAY=/dev/dri/card2
-chmod a+rw /dev/dri/renderD129
-vglrun /opt/VirtualGL/bin/glxspheres64
+1. 去这里下载  https://rawcdn.githack.com/VirtualGL/virtualgl/3.0.2/doc/index.html
+2. 文档 https://sourceforge.net/projects/virtualgl/files/
+3. apt install --fix-broken  ./virtualgl.deb
+4. export VGL_DISPLAY=/dev/dri/card2
+5. chmod a+rw /dev/dri/renderD129
+6. vglrun /opt/VirtualGL/bin/glxspheres64
