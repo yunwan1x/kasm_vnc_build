@@ -100,7 +100,7 @@ function start_window_manager (){
 function start_audio_out_websocket (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
 		echo 'Starting audio websocket server'
-		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 8081 4901   &
+		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 8081 4901   &>/dev/null &
 
 		KASM_PROCS['kasm_audio_out_websocket']=$!
 
@@ -112,8 +112,9 @@ function start_audio_out_websocket (){
 }
 
 function start_nginx (){
+    sudo -i sed 's/worker_processes auto;/worker_processes 4;/' /etc/nginx/nginx.conf
     sudo -i  sed 's/user.*;/user kasm-user;/' /etc/nginx/nginx.conf	
-    nginx -g "daemon off;" &
+    nginx -g "daemon off;" &>/dev/null &
     KASM_PROCS['nginx']=$!
 }
 
