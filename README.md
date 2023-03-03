@@ -23,3 +23,6 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 4. export VGL_DISPLAY=/dev/dri/card2
 5. chmod a+rw /dev/dri/renderD129
 6. vglrun /opt/VirtualGL/bin/glxspheres64
+
+# 使用fileserver
+1. 命令行upload  `curl -k --user user:password  -v  -F "path=@$FILE" 'https://host:port/upload/upload?path=/'`
