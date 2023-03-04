@@ -64,7 +64,7 @@ function start_kasmvnc (){
     if [[ "${BUILD_ARCH}" =~ ^aarch64$ ]] && [[ -f /lib/aarch64-linux-gnu/libgcc_s.so.1 ]] ; then
 		LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 0.0.0.0 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT
 	else
-		vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 0.0.0.0 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:0
+		vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 0.0.0.0 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:0 &>/dev/null
 	fi
 
 	KASM_PROCS['kasmvnc']=$(cat $HOME/.vnc/*${DISPLAY_NUM}.pid)
@@ -111,12 +111,7 @@ function start_audio_out_websocket (){
 	fi
 }
 
-function start_nginx (){
-    sudo  sed -i 's/worker_processes auto;/worker_processes 4;/' /etc/nginx/nginx.conf
-    #sudo   sed -i  's/user.*;/user kasm-user;/' /etc/nginx/nginx.conf	
-    nginx -g "daemon off;" &>/dev/null &
-    KASM_PROCS['nginx']=$!
-}
+
 
 function start_audio_out (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
@@ -148,7 +143,11 @@ function start_upload (){
 
 }
 
+function start_nginx (){
 
+  sudo chmod 777 -R /var/lib/nginx  /var/log/nginx /run
+  nginx   
+}
 
 function custom_startup (){
 	custom_startup_script=/dockerstartup/custom_startup.sh
@@ -158,7 +157,7 @@ function custom_startup (){
 			exit 1
 		fi
 
-		"$custom_startup_script" &
+	  sudo 	"$custom_startup_script" &>/dev/null 
 		KASM_PROCS['custom_startup']=$!
 	fi
 }
@@ -235,7 +234,7 @@ sleep 3
 while :
 do
 	for process in "${!KASM_PROCS[@]}"; do
-		if ! kill -0 "${KASM_PROCS[$process]}" ; then
+		if  ps -p   "${KASM_PROCS[$process]}" &>/dev/null ; then
 
 			# If DLP Policy is set to fail secure, default is to be resilient
 			if [[ ${DLP_PROCESS_FAIL_SECURE:-0} == 1 ]]; then
@@ -265,10 +264,7 @@ do
 					start_audio_out
 					;;
 				
-			         nginx)
-                                        echo "Restarting nginx"
-                                        start_nginx
-                                        ;;	
+
 				upload_server)
 					echo "Restarting Upload Service"
 					# TODO: This will only work if both processes are killed, requires more work
@@ -285,7 +281,7 @@ do
 			esac
 		fi
 	done
-	sleep 3
+	sleep 10
 done
 
 
