@@ -462,6 +462,7 @@ select:active {
 .noVNC_button_div {
     display: block;
     color: #fff;
+    max-height: 50px;
     font-size: 13px
 }
 

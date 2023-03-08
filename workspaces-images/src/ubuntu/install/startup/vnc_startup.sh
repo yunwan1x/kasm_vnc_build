@@ -62,9 +62,9 @@ function start_kasmvnc (){
 
 		VNCOPTIONS="$VNCOPTIONS -select-de manual"
     if [[ "${BUILD_ARCH}" =~ ^aarch64$ ]] && [[ -f /lib/aarch64-linux-gnu/libgcc_s.so.1 ]] ; then
-		LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 0.0.0.0 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT
+		LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 127.0.0.1 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT
 	else
-		vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 0.0.0.0 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:0 &>/dev/null
+		vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 127.0.0.1 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:0  &>/dev/null 
 	fi
 
 	KASM_PROCS['kasmvnc']=$(cat $HOME/.vnc/*${DISPLAY_NUM}.pid)
@@ -81,13 +81,13 @@ function start_window_manager (){
 	if [ "${START_XFCE4}" == "1" ] ; then
 		if [ -f /opt/VirtualGL/bin/vglrun ] && [ ! -z "${KASM_EGL_CARD}" ] && [ ! -z "${KASM_RENDERD}" ] && [ -O "${KASM_RENDERD}" ] && [ -O "${KASM_EGL_CARD}" ] ; then
 		echo "Starting XFCE with VirtualGL using EGL device ${KASM_EGL_CARD}"
-			DISPLAY=:1 /opt/VirtualGL/bin/vglrun -d "${KASM_EGL_CARD}" /usr/bin/startxfce4 --replace &>/dev/null &
+			DISPLAY=:1 /opt/VirtualGL/bin/vglrun -d "${KASM_EGL_CARD}" /usr/bin/startxfce4 --replace   &>/dev/null  &
 		else    
 			echo "Starting XFCE"
 			if [ -f '/usr/bin/zypper' ]; then
-	                DISPLAY=:1 /usr/bin/dbus-launch /usr/bin/startxfce4 --replace &>/dev/null &
+	                DISPLAY=:1 /usr/bin/dbus-launch /usr/bin/startxfce4 --replace  &>/dev/null  &
 		        else
-																/usr/bin/startxfce4 --replace &>/dev/null &
+																/usr/bin/startxfce4 --replace  &>/dev/null  &
 															     fi
 		
 		fi
@@ -100,7 +100,7 @@ function start_window_manager (){
 function start_audio_out_websocket (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
 		echo 'Starting audio websocket server'
-		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 8081 4901   &>/dev/null &
+		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 8081 4901 &>/dev/null   &
 
 		KASM_PROCS['kasm_audio_out_websocket']=$!
 
@@ -125,11 +125,11 @@ function start_audio_out (){
 
 		if [[ $DEBUG == true ]]; then
 			echo 'Starting audio service in debug mode'
-			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:8081/kasmaudio &
+			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:8081/kasmaudio  &>/dev/null  &
 			KASM_PROCS['kasm_audio_out']=$!
 		else
 			echo 'Starting audio service'
-			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -v verbose -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:8081/kasmaudio > /dev/null 2>&1 &
+			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -v verbose -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:8081/kasmaudio &>/dev/null  &
 			KASM_PROCS['kasm_audio_out']=$!
 			echo -e "\n------------------ Started Audio Out  ----------------------------"
 			echo "Kasm Audio Out PID: ${KASM_PROCS['kasm_audio_out']}";
@@ -138,14 +138,14 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads &  
+        miniserve -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads  &>/dev/null  &  
         KASM_PROCS['upload_server']=$!
 
 }
 
 function start_nginx (){
 
-  sudo nginx   
+  sudo nginx    &>/dev/null 
 }
 
 function custom_startup (){
@@ -156,7 +156,7 @@ function custom_startup (){
 			exit 1
 		fi
 
-	  sudo 	"$custom_startup_script" &>/dev/null 
+	  sudo 	"$custom_startup_script"  &>/dev/null
 		KASM_PROCS['custom_startup']=$!
 	fi
 }
@@ -217,6 +217,7 @@ start_nginx
 STARTUP_COMPLETE=1
 xhost +
 
+
 ## log connect options
 echo -e "\n\n------------------ KasmVNC environment started ------------------"
 
@@ -228,7 +229,8 @@ echo "Kasm User ${KASM_USER}(${KASM_USER_ID}) started container id ${HOSTNAME} w
 
 # start custom startup script
 custom_startup
-
+exec 1 >/dev/null
+exec 2 >/dev/null
 # Monitor Kasm Services
 sleep 3
 while :
