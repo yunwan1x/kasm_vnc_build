@@ -118,7 +118,7 @@
                 </div>
             </div>
             <div class="noVNC_button_div noVNC_hide_on_disconnect"><input type=image alt=Fullscreen src=app/images/download.gif
-                id=noVNC_fileserver_button class=noVNC_button title=FileServer> <a target="_blank" style="color: white;" href="/upload/">FileServer</a></div>
+                id=noVNC_fileserver_button class=noVNC_button title=FileServer>FileServer</div>
             <div class="noVNC_button_div noVNC_hidden"><input type=image alt=Fullscreen src=app/images/fullscreen.svg
                     id=noVNC_fullscreen_button class=noVNC_button title=Fullscreen> Fullscreen</div>
             <div class="noVNC_button_div noVNC_hidden noVNC_hide_on_disconnect"><input type=image alt="Game Mode"
@@ -385,4 +385,15 @@
 <script src=dist/main.bundle.js></script>
 <script src=dist/error_handler.bundle.js></script>
 <script src=dist/promise.bundle.js></script>
-<script src=dist/style.bundle.js>
+<script src=dist/style.bundle.js></script>
+<script>
+
+document.getElementById("noVNC_fileserver_button").addEventListener('click', ()=>{
+        let a = document.createElement('a')
+        a.href =window.location.origin+ "/upload/"
+        a.target = "_blank"
+        document.body.appendChild(a)
+        a.click()
+        a.remove()
+})	
+</script>	

@@ -466,6 +466,12 @@ select:active {
     font-size: 13px
 }
 
+@media (max-width: 480px) {
+  .noVNC_button_div {
+    font-size: 0px;
+  }
+}
+
 .noVNC_button {
     display: inline;
     padding: 4px;

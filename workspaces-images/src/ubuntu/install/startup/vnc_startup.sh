@@ -100,7 +100,7 @@ function start_window_manager (){
 function start_audio_out_websocket (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
 		echo 'Starting audio websocket server'
-		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 8081 4901 &>/dev/null   &
+		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 58001 54901 &>/dev/null   &
 
 		KASM_PROCS['kasm_audio_out_websocket']=$!
 
@@ -125,11 +125,11 @@ function start_audio_out (){
 
 		if [[ $DEBUG == true ]]; then
 			echo 'Starting audio service in debug mode'
-			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:8081/kasmaudio  &>/dev/null  &
+			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:58001/kasmaudio  &>/dev/null  &
 			KASM_PROCS['kasm_audio_out']=$!
 		else
 			echo 'Starting audio service'
-			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -v verbose -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:8081/kasmaudio &>/dev/null  &
+			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -v verbose -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:58001/kasmaudio &>/dev/null  &
 			KASM_PROCS['kasm_audio_out']=$!
 			echo -e "\n------------------ Started Audio Out  ----------------------------"
 			echo "Kasm Audio Out PID: ${KASM_PROCS['kasm_audio_out']}";
@@ -138,7 +138,7 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads  &>/dev/null  &  
+        miniserve -p 58080  -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads  &>/dev/null  &  
         KASM_PROCS['upload_server']=$!
 
 }
