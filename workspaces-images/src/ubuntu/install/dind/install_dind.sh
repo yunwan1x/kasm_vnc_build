@@ -7,7 +7,6 @@ apt-get update  && apt-get install -y \
     curl \
     uidmap \
     openssh-client \
-    sudo \
     lxc \
     iptables
 rm -rf /var/lib/apt/list/*

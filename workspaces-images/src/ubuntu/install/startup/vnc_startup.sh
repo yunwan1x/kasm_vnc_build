@@ -62,9 +62,9 @@ function start_kasmvnc (){
 
 		VNCOPTIONS="$VNCOPTIONS -select-de manual"
     if [[ "${BUILD_ARCH}" =~ ^aarch64$ ]] && [[ -f /lib/aarch64-linux-gnu/libgcc_s.so.1 ]] ; then
-		LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 127.0.0.1 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:100
+		LD_PRELOAD=/lib/aarch64-linux-gnu/libgcc_s.so.1 vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 127.0.0.1 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT
 	else
-		vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 127.0.0.1 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:100   
+		vncserver $DISPLAY -depth $VNC_COL_DEPTH -geometry $VNC_RESOLUTION -websocketPort $NO_VNC_PORT -httpd ${KASM_VNC_PATH}/www -sslOnly -FrameRate=$MAX_FRAME_RATE -interface 127.0.0.1 -BlacklistThreshold=0 -FreeKeyMappings $VNCOPTIONS $KASM_SVC_SEND_CUT_TEXT $KASM_SVC_ACCEPT_CUT_TEXT -Log *:stdout:0 
 	fi
 
 	KASM_PROCS['kasmvnc']=$(cat $HOME/.vnc/*${DISPLAY_NUM}.pid)
@@ -81,13 +81,13 @@ function start_window_manager (){
 	if [ "${START_XFCE4}" == "1" ] ; then
 		if [ -f /opt/VirtualGL/bin/vglrun ] && [ ! -z "${KASM_EGL_CARD}" ] && [ ! -z "${KASM_RENDERD}" ] && [ -O "${KASM_RENDERD}" ] && [ -O "${KASM_EGL_CARD}" ] ; then
 		echo "Starting XFCE with VirtualGL using EGL device ${KASM_EGL_CARD}"
-			DISPLAY=:1 /opt/VirtualGL/bin/vglrun -d "${KASM_EGL_CARD}" /usr/bin/startxfce4 --replace   &>/dev/null  &
+			DISPLAY=:1 /opt/VirtualGL/bin/vglrun -d "${KASM_EGL_CARD}" /usr/bin/startxfce4 --replace  &
 		else    
 			echo "Starting XFCE"
 			if [ -f '/usr/bin/zypper' ]; then
-	                DISPLAY=:1 /usr/bin/dbus-launch /usr/bin/startxfce4 --replace   &
+	                DISPLAY=:1 /usr/bin/dbus-launch /usr/bin/startxfce4 --replace &>/dev/null &
 		        else
-																/usr/bin/startxfce4 --replace    &
+																/usr/bin/startxfce4 --replace  &
 															     fi
 		
 		fi
@@ -100,7 +100,7 @@ function start_window_manager (){
 function start_audio_out_websocket (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
 		echo 'Starting audio websocket server'
-		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 58001 54901 &>/dev/null   &
+		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 58081 54901    &
 
 		KASM_PROCS['kasm_audio_out_websocket']=$!
 
@@ -125,11 +125,11 @@ function start_audio_out (){
 
 		if [[ $DEBUG == true ]]; then
 			echo 'Starting audio service in debug mode'
-			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:58001/kasmaudio    &
+			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:58081/kasmaudio &>/dev/null  &
 			KASM_PROCS['kasm_audio_out']=$!
 		else
 			echo 'Starting audio service'
-			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -v verbose -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:58001/kasmaudio   &
+			HOME=/var/run/pulse no_proxy=127.0.0.1 ffmpeg -v verbose -f pulse -fragment_size ${PULSEAUDIO_FRAGMENT_SIZE:-2000} -ar 44100 -i default -f mpegts -correct_ts_overflow 0 -codec:a mp2 -b:a 128k -ac 1 -muxdelay 0.001 http://127.0.0.1:58081/kasmaudio  &>/dev/null &
 			KASM_PROCS['kasm_audio_out']=$!
 			echo -e "\n------------------ Started Audio Out  ----------------------------"
 			echo "Kasm Audio Out PID: ${KASM_PROCS['kasm_audio_out']}";
@@ -138,14 +138,14 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -p 58080  -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads    &  
+        miniserve -p 58080 -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads &  
         KASM_PROCS['upload_server']=$!
 
 }
 
 function start_nginx (){
 
-  sudo nginx    
+  sudo nginx   
 }
 
 function custom_startup (){
@@ -156,8 +156,7 @@ function custom_startup (){
 			exit 1
 		fi
 
-	  sudo 	"$custom_startup_script"  
-		KASM_PROCS['custom_startup']=$!
+	  sudo 	"$custom_startup_script" & 
 	fi
 }
 
@@ -205,14 +204,14 @@ echo "kasm-user:${VNC_PW_HASH}:ow" > $PASSWD_PATH
 echo "kasm_viewer:${VNC_VIEW_PW_HASH}:" >> $PASSWD_PATH
 chmod 600 $PASSWD_PATH
 
+if [[ "$DEBUG" != true ]]; then
+ echo -e "\n------------------ Start VNC  Server ------------------------"
+ exec 1>/dev/null
+ exec 2>/dev/null 
+fi
 sudo service dbus start
-echo -e "\033[32m start inited \033[0m"
 # sudo service  network-manager start
 # start processes
-if [[ $DEBUG != true ]]; then
-exec 1>/dev/null
-exec 2>/dev/null
-fi
 start_kasmvnc
 start_window_manager
 start_audio_out_websocket
@@ -221,7 +220,6 @@ start_upload
 start_nginx
 STARTUP_COMPLETE=1
 xhost +
-custom_startup
 
 ## log connect options
 echo -e "\n\n------------------ KasmVNC environment started ------------------"
@@ -233,13 +231,15 @@ KASMIP=$(hostname -i)
 echo "Kasm User ${KASM_USER}(${KASM_USER_ID}) started container id ${HOSTNAME} with local IP address ${KASMIP}"
 
 # start custom startup script
+custom_startup
+
 # Monitor Kasm Services
 sleep 3
 while :
 do
 	for process in "${!KASM_PROCS[@]}"; do
-		if  ps -p   "${KASM_PROCS[$process]}" &>/dev/null ; then
-
+		if ! kill -0   "${KASM_PROCS[$process]}"  ; then
+			echo restart $process
 			# If DLP Policy is set to fail secure, default is to be resilient
 			if [[ ${DLP_PROCESS_FAIL_SECURE:-0} == 1 ]]; then
 				exit 1
@@ -274,11 +274,7 @@ do
 					# TODO: This will only work if both processes are killed, requires more work
 					start_upload
 					;;
-				custom_script)
-					echo "The custom startup script exited."
-					# custom startup scripts track the target process on their own, they should not exit
-					custom_startup
-					;;
+
 				*)
 					echo "Unknown Service: $process"
 					;;

@@ -1,14 +1,6 @@
 #!/usr/bin/env bash
 set -ex
-
-if [ "$DISTRO" = centos ]; then
-  yum install -y nano zip wget
-  yum install epel-release -y
-  yum install xdotool -y
-else
-  apt-get update
-  apt-get install -y nano zip   xdotool  synaptic
-fi
+rm -rf /etc/nginx/sites-enabled/default
 rm -rf $HOME/jsmpeg
 mv $STARTUPDIR/jsmpeg $HOME/
 mv $HOME/jsmpeg/index.html /usr/share/kasmvnc/www

@@ -9,6 +9,8 @@ ENV STARTUPDIR /dockerstartup
 WORKDIR $HOME
 ######### Install docker ###########
 
+
+
 COPY ./src/ubuntu/install/dind $INST_SCRIPTS/dind
 
 
@@ -19,6 +21,9 @@ RUN mkdir -p  /etc/docker  &&  mv $INST_SCRIPTS/dind/daemon.json /etc/docker/dae
 
 VOLUME /var/lib/docker
 
+# Install Utilities
+COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
+RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
 
 # Add Kasm Branding
 #RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
@@ -80,8 +85,8 @@ RUN --mount=type=bind,from=builder,source=/tmp,target=/tmp \
 cp -r /tmp/idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
 
 COPY  ./src/ubuntu/install/startup  $STARTUPDIR/ 
-# Install Utilities
-RUN bash $STARTUPDIR/install_tools.sh 
+# Install startup
+RUN bash $STARTUPDIR/install_startup.sh 
 
 
 USER 1000
