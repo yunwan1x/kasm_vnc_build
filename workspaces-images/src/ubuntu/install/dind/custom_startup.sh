@@ -1,6 +1,11 @@
 #!/bin/bash
 
 # Ensure that all nodes in /dev/mapper correspond to mapped devices currently loaded by the device-mapper kernel driver
+iptables -L
+if [ $? -ne 0 ]; then
+   echo -e "\033[31m not  Privileged mode, jump docker install !   \033[0m"
+        exit 0
+fi	
 dmsetup mknodes
 
 # First, make sure that cgroups are mounted correctly.

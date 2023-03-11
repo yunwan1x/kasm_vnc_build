@@ -25,10 +25,6 @@ VOLUME /var/lib/docker
 #RUN cp /usr/share/extra/icons/icon_kasm.png /usr/share/extra/icons/icon_default.png
 RUN sed -i 's/ubuntu-mono-dark/elementary-xfce/g' $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
 
-# Install Utilities
-COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
-RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
-
 
 # Install Custom Certificate Authority
 # COPY ./src/ubuntu/install/certificates $INST_SCRIPTS/certificates/
@@ -84,5 +80,8 @@ WORKDIR $HOME
 #cp -r /tmp/idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
 
 COPY  ./src/ubuntu/install/startup  $STARTUPDIR/ 
+# Install Utilities
+RUN bash $STARTUPDIR/install_tools.sh 
+
 
 USER 1000
