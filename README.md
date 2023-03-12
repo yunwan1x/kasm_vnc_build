@@ -33,3 +33,4 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 	* apt install binutils; strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 2. apt install xmodmap，修改按键映射，比如中键切换到右键，实现terminal右键粘贴。[linux下输入映射](https://www.cnblogs.com/yinheyi/p/10146900.html)
 3. idea 关闭升级提示 ,files->settings->Apperance&Behavior ->system settings->updates
+4. chrome 以app模式运行  chrome --app url 
