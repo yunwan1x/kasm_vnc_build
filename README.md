@@ -30,5 +30,5 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 
 # 使用帮助
 1. libQt5Core.so.5: cannot open shared object file: No such file or directory 。
-
-  apt install binutils; strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+  * apt install binutils; strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+2. apt install xmodmap，修改按键映射，比如中键切换到右键，实现terminal右键粘贴
