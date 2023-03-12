@@ -213,13 +213,13 @@ sudo service dbus start
 # sudo service  network-manager start
 # start processes
 start_kasmvnc
+xhost +
 start_window_manager
 start_audio_out_websocket
 start_audio_out
 start_upload
 start_nginx
 STARTUP_COMPLETE=1
-xhost +
 
 ## log connect options
 echo -e "\n\n------------------ KasmVNC environment started ------------------"

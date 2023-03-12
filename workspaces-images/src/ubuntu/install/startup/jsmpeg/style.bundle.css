@@ -421,7 +421,7 @@ select:active {
     display: flex;
     justify-content: center;
     overflow-x: hidden;
-    overflow-y: auto;
+    overflow-y: hidden;
     padding: 0 10px 0 5px
 }
 
