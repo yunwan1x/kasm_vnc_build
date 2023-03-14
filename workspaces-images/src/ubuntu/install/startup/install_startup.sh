@@ -11,3 +11,8 @@ mkdir -p /etc/nginx/conf.d
 mv -f  $HOME/jsmpeg/websocket.conf /etc/nginx/conf.d
 mv -f  $HOME/jsmpeg/nginx.conf /etc/nginx
 
+
+
+# 安装文件
+apt update &&  apt install -y  fonts-noto-color-emoji
+apt-get clean
