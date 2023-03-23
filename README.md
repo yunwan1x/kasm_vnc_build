@@ -25,3 +25,5 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 	* apt install binutils; strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 2. apt install xmodmap，修改按键映射，比如中键切换到右键，实现terminal右键粘贴。[linux下输入映射](https://www.cnblogs.com/yinheyi/p/10146900.html)
 4. chrome 以app模式运行  chrome --app url 
+5. 如何解决IntelliJ IDEA一直弹出Server‘s certificate is not trusted 弹窗？
+	1. file->settings 搜索【Server Certificates】 ,取消勾选 Accept non-trusted certificates automatically
