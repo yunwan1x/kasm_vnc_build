@@ -3,7 +3,7 @@
 1. `DOCKER_BUILDKIT=1  bash build.sh`
 
 # run
-1. docker run --rm -it --shm-size=512m --name ubuntu -p 6901:443  -e VNC_PW=password changhui/ubuntu:20.04-ide
+1. docker run --rm -it --shm-size=512m --name ubuntu -p 6901:443 --hostname=mycomputer  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:20.04-ide
 2. 可以挂载访问证书到${HOME}/.vnc/self.pem
 
 

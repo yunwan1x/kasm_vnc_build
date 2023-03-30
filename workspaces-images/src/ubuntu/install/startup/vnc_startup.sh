@@ -200,7 +200,7 @@ if [[ -f $PASSWD_PATH ]]; then
 fi
 VNC_PW_HASH=$(python3 -c "import crypt; print(crypt.crypt('${VNC_PW}', '\$5\$kasm\$'));")
 VNC_VIEW_PW_HASH=$(python3 -c "import crypt; print(crypt.crypt('${VNC_VIEW_ONLY_PW}', '\$5\$kasm\$'));")
-echo "kasm-user:${VNC_PW_HASH}:ow" > $PASSWD_PATH
+echo "${USER_NAME-kasm-user}:${VNC_PW_HASH}:ow" > $PASSWD_PATH
 echo "kasm_viewer:${VNC_VIEW_PW_HASH}:" >> $PASSWD_PATH
 chmod 600 $PASSWD_PATH
 
