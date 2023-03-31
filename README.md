@@ -27,3 +27,4 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 4. chrome 以app模式运行  chrome --app url 
 5. 如何解决IntelliJ IDEA一直弹出Server‘s certificate is not trusted 弹窗？
 	1. file->settings 搜索【Server Certificates】 ,取消勾选 Accept non-trusted certificates automatically
+6. 如果xfce4复制粘贴不好使用, 可以关掉剪切板权限
