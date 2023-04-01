@@ -21147,7 +21147,7 @@ window.updateSetting = function (name, value) {
 
 
 
-var PAGE_TITLE = "KasmVNC";
+var PAGE_TITLE = "虚拟桌面";
 var currentEventCount = -1;
 var idleCounter = 0;
 var UI = {

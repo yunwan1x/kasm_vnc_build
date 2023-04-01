@@ -138,14 +138,15 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -p 58080 -o -u -W -q -a kasm-user:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads &  
+        miniserve -p 58080 -o -u -W -q -a ${USER_NAME-kasm-user}:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads &  
         KASM_PROCS['upload_server']=$!
 
 }
 
 function start_nginx (){
 
-  sudo nginx   
+  sudo nginx -g "daemon off;" &
+ KASM_PROCS['nginx']=$!  
 }
 
 function custom_startup (){
@@ -157,6 +158,7 @@ function custom_startup (){
 		fi
 
 	  sudo 	"$custom_startup_script" & 
+	   KASM_PROCS['custom']=$!
 	fi
 }
 
@@ -238,8 +240,7 @@ sleep 3
 while :
 do
 	for process in "${!KASM_PROCS[@]}"; do
-		if ! kill -0   "${KASM_PROCS[$process]}"  ; then
-			echo restart $process
+		if ! ps -p   "${KASM_PROCS[$process]}"  ; then
 			# If DLP Policy is set to fail secure, default is to be resilient
 			if [[ ${DLP_PROCESS_FAIL_SECURE:-0} == 1 ]]; then
 				exit 1
@@ -267,7 +268,14 @@ do
 					echo "Restarting Audio Out Service"
 					start_audio_out
 					;;
-				
+			        nginx)
+                                        echo "Restarting nginx Service"
+                                        start_nginx
+                                        ;;
+                                custom)
+                                        echo "Restarting custom Service"
+                                        custom_startup
+                                        ;; 	
 
 				upload_server)
 					echo "Restarting Upload Service"
@@ -281,7 +289,7 @@ do
 			esac
 		fi
 	done
-	sleep 10
+	sleep 5
 done
 
 
