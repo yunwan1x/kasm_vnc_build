@@ -138,7 +138,7 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -p 58080 -o -u -W -q -a ${USER_NAME-kasm-user}:$VNC_PW   --route-prefix  upload   $HOME/Desktop/Uploads &  
+        miniserve -p 58080 -o -u -W -q    --route-prefix  upload   $HOME/Desktop/Uploads &  
         KASM_PROCS['upload_server']=$!
 
 }
@@ -200,10 +200,10 @@ if [[ -f $PASSWD_PATH ]]; then
     echo -e "\n---------  purging existing VNC password settings  ---------"
     rm -f $PASSWD_PATH
 fi
-VNC_PW_HASH=$(python3 -c "import crypt; print(crypt.crypt('${VNC_PW}', '\$5\$kasm\$'));")
-VNC_VIEW_PW_HASH=$(python3 -c "import crypt; print(crypt.crypt('${VNC_VIEW_ONLY_PW}', '\$5\$kasm\$'));")
-echo "${USER_NAME-kasm-user}:${VNC_PW_HASH}:ow" > $PASSWD_PATH
-echo "kasm_viewer:${VNC_VIEW_PW_HASH}:" >> $PASSWD_PATH
+VNC_PW_HASH=$(python3 -c "import crypt; print(crypt.crypt('123456', '\$5\$kasm\$'));")
+VNC_VIEW_PW_HASH=$(python3 -c "import crypt; print(crypt.crypt('123456', '\$5\$kasm\$'));")
+echo "kasm-user:${VNC_PW_HASH}:ow" > $PASSWD_PATH
+echo "kasm-viewer:${VNC_VIEW_PW_HASH}:" >> $PASSWD_PATH
 chmod 600 $PASSWD_PATH
 
 if [[ "$DEBUG" != true ]]; then
