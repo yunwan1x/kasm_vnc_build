@@ -13452,7 +13452,16 @@ var websock_Websock = /*#__PURE__*/function () {
         // _this.player.play()
         _this._eventHandlers.open();
 
-        _this.player = new JSMpeg.Player(soundurl, {  });
+        _this.player = new JSMpeg.Player(soundurl, { maxAudioLag:5, onPlay: function (player) {
+                  var decoded = false;
+                  do {
+                    player.audioOut.resetEnqueuedTime();
+                    player.audioOut.enabled = false;
+                    decoded = player.audio.decode();
+                  } while (decoded);
+                  player.audioOut.enabled = true;
+                }
+	});
       //  _this.player.play()
         Debug("<< WebSock.onopen");
       }; // If the readyState cannot be found this defaults to assuming it's not open.
