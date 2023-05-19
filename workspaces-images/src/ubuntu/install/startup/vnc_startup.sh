@@ -3,7 +3,7 @@
 set -e
 
 no_proxy="localhost,127.0.0.1"
-
+sudo sysctl -w fs.inotify.max_user_watches="524288"
 # dict to store processes
 declare -A KASM_PROCS
 
