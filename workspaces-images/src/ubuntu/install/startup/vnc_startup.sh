@@ -138,27 +138,32 @@ function start_audio_out (){
 }
 
 function start_upload (){
-        miniserve -p 58080 -o -u -W -q    --route-prefix  upload   $HOME/Desktop/Uploads &  
-        KASM_PROCS['upload_server']=$!
+    miniserve -p 58080 -o -u -W -q    --route-prefix  upload   $HOME/Desktop/Uploads &
+    KASM_PROCS['upload_server']=$!
 
 }
 
 function start_nginx (){
 
   sudo nginx -g "daemon off;" &
- KASM_PROCS['nginx']=$!  
+  KASM_PROCS['nginx']=$!
+}
+
+function start_vscode() {
+    /usr/share/vscode-server-linux-x64-web/bin/code-server --port 58000  --without-connection-token --accept-server-license-terms &
+    KASM_PROCS['vscode']=$!
 }
 
 function custom_startup (){
-	custom_startup_script=/dockerstartup/custom_startup.sh
-	if [ -f "$custom_startup_script" ]; then
-		if [ ! -x "$custom_startup_script" ]; then
-			echo "${custom_startup_script}: not executable, exiting"
-			exit 1
-		fi
+    custom_startup_script=/dockerstartup/custom_startup.sh
+    if [ -f "$custom_startup_script" ]; then
+      if [ ! -x "$custom_startup_script" ]; then
+        echo "${custom_startup_script}: not executable, exiting"
+        exit 1
+      fi
 
-	  sudo 	"$custom_startup_script" & 
-	   KASM_PROCS['custom']=$!
+      sudo 	"$custom_startup_script" &
+      KASM_PROCS['custom']=$!
 	fi
 }
 
@@ -220,6 +225,7 @@ start_window_manager
 start_audio_out_websocket
 start_audio_out
 start_upload
+start_vscode
 start_nginx
 STARTUP_COMPLETE=1
 
@@ -268,21 +274,23 @@ do
 					echo "Restarting Audio Out Service"
 					start_audio_out
 					;;
-			        nginx)
-                                        echo "Restarting nginx Service"
-                                        start_nginx
-                                        ;;
-                                custom)
-                                        echo "Restarting custom Service"
-                                        custom_startup
-                                        ;; 	
-
+        nginx)
+          echo "Restarting nginx Service"
+          start_nginx
+          ;;
+        vscode)
+          echo "Restarting nginx Service"
+          start_vscode
+          ;;
+        custom)
+          echo "Restarting custom Service"
+          custom_startup
+          ;;
 				upload_server)
 					echo "Restarting Upload Service"
 					# TODO: This will only work if both processes are killed, requires more work
 					start_upload
 					;;
-
 				*)
 					echo "Unknown Service: $process"
 					;;

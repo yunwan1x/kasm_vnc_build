@@ -1,70 +1,21 @@
 
 FROM changhui/ubuntu:20.04-ide as builder
 
-FROM kasmweb/core-ubuntu-focal:develop
+FROM changhui/ubuntu:20.04-base
 USER root
 
-ENV HOME /home/kasm-default-profile
-ENV STARTUPDIR /dockerstartup
-WORKDIR $HOME
-######### Install docker ###########
 
-
-
-COPY ./src/ubuntu/install/dind $INST_SCRIPTS/dind
-
-
-RUN mkdir -p  /etc/docker  &&  mv $INST_SCRIPTS/dind/daemon.json /etc/docker/daemon.json \
-&& mv  $INST_SCRIPTS/dind/custom_startup.sh  $STARTUPDIR/custom_startup.sh \
-&&  chmod +x $STARTUPDIR/custom_startup.sh &&  chmod 755 $STARTUPDIR/custom_startup.sh \
-&& bash $INST_SCRIPTS/dind/install_dind.sh  && rm -rf $INST_SCRIPTS/dind/
-
-VOLUME /var/lib/docker
-
-# Install Utilities
-COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
-RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
-
-# Add Kasm Branding
-#RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
-#RUN cp /usr/share/extra/icons/icon_kasm.png /usr/share/extra/icons/icon_default.png
-RUN sed -i 's/ubuntu-mono-dark/elementary-xfce/g' $HOME/.config/xfce4/xfconf/xfce-perchannel-xml/xsettings.xml
-
-
-# Install Custom Certificate Authority
-# COPY ./src/ubuntu/install/certificates $INST_SCRIPTS/certificates/
-# RUN bash $INST_SCRIPTS/certificates/install_ca_cert.sh && rm -rf $INST_SCRIPTS/certificates/
- # Install Google Chrome
-COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
-RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
-# Install Microsoft Edge
-COPY ./src/ubuntu/install/edge $INST_SCRIPTS/edge/
-RUN bash $INST_SCRIPTS/edge/install_edge.sh  && rm -rf $INST_SCRIPTS/edge/
-
-
- COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
- RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh  && rm -rf $INST_SCRIPTS/vs_code/
-
-# nvidia-container-runtime
-ENV NVIDIA_VISIBLE_DEVICES all
-ENV NVIDIA_DRIVER_CAPABILITIES all
-######## End cuda #####################
-
-ENV HOME /home/kasm-user
-WORKDIR $HOME
 
 # copy idea
 RUN --mount=type=bind,from=builder,source=/home/kasm-user,target=/tmp \
 cd /tmp \
 && cp -r --path -p   clion-2022.2.4 activate_files activate.html jetbra Desktop/*.desktop .config/JetBrains \
-.cache/JetBrains .java .jdks .local/share/JetBrains    /home/kasm-user &&  chown -R 1000:0 $HOME 
+.cache/JetBrains .java .jdks .local/share/JetBrains    /home/kasm-user && rm -rf *code* *edge* &&  chown -R 1000:0 $HOME
  
 RUN --mount=type=bind,from=builder,source=/home/kasm-user,target=/tmp \
 cd /tmp && cp  -r --path -p  idea-IU-222.4459.24 /home/kasm-user && chown -R 1000:0 $HOME/idea-IU-222.4459.24 && ln -s $HOME/.config /root/.config
 
-COPY  ./src/ubuntu/install/startup  $STARTUPDIR/ 
-# Install startup
-RUN bash $STARTUPDIR/install_startup.sh 
+
 
 
 USER 1000

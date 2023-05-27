@@ -119,6 +119,8 @@
             </div>
             <div class="noVNC_button_div noVNC_hide_on_disconnect"><input type=image alt=Fullscreen src=app/images/download.gif
                 id=noVNC_fileserver_button class=noVNC_button title=FileServer>FileServer</div>
+            <div class="noVNC_button_div noVNC_hide_on_disconnect"><input type=image alt=Fullscreen src=app/images/windows.svg
+                                                                          id=noVNC_vscode_button class=noVNC_button title=vscode>vscode</div>
             <div class="noVNC_button_div noVNC_hidden"><input type=image alt=Fullscreen src=app/images/fullscreen.svg
                     id=noVNC_fullscreen_button class=noVNC_button title=Fullscreen> Fullscreen</div>
             <div class="noVNC_button_div noVNC_hidden noVNC_hide_on_disconnect"><input type=image alt="Game Mode"
@@ -395,5 +397,13 @@ document.getElementById("noVNC_fileserver_button").addEventListener('click', ()=
         document.body.appendChild(a)
         a.click()
         a.remove()
-})	
+})
+document.getElementById("noVNC_vscode_button").addEventListener('click', ()=>{
+    let a = document.createElement('a')
+    a.href =window.location.origin+ "/vscode/"
+    a.target = "_blank"
+    document.body.appendChild(a)
+    a.click()
+    a.remove()
+})
 </script>	

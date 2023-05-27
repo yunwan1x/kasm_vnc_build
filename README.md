@@ -6,6 +6,10 @@
 1. docker run --rm -it --shm-size=512m --name ubuntu -p 6901:443 --hostname=mycomputer  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:20.04-ide
 2. 可以挂载访问证书到${HOME}/.vnc/self.pem
 
+```shell
+docker run --rm -it --shm-size=512m  -e DEBUG=true --name ubuntu -p 6903:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:20.04-base
+```
+
 
 
 
