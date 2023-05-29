@@ -246,7 +246,7 @@ sleep 3
 while :
 do
 	for process in "${!KASM_PROCS[@]}"; do
-		if ! ps -p   "${KASM_PROCS[$process]}"  ; then
+		if ! ps -p   "${KASM_PROCS[$process]}" > /dev/null ; then
 			# If DLP Policy is set to fail secure, default is to be resilient
 			if [[ ${DLP_PROCESS_FAIL_SECURE:-0} == 1 ]]; then
 				exit 1
