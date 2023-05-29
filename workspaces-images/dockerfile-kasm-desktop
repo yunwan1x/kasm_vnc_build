@@ -1,5 +1,5 @@
 
-FROM changhui/ubuntu:20.04-ide as builder
+FROM changhui/ubuntu:20.04-base as builder
 
 FROM kasmweb/core-ubuntu-focal:develop
 USER root
