@@ -1,5 +1,4 @@
 
-FROM changhui/ubuntu:20.04-base as builder
 
 FROM kasmweb/core-ubuntu-focal:develop
 USER root
@@ -50,12 +49,10 @@ ENV HOME /home/kasm-user
 WORKDIR $HOME
 
 # copy idea
-RUN --mount=type=bind,from=builder,source=/home/kasm-user,target=/tmp \
-cd /tmp &&  cp -r -p   .vscode-server  /home/kasm-user
+#RUN --mount=type=bind,from=builder,source=/home/kasm-user,target=/tmp \
+#cd /tmp &&  cp -r -p   .vscode-server  /home/kasm-user
  
-#RUN --mount=type=bind,source=/home/kasm-user,target=/tmp \
-#cp -r /tmp/.vscode-server $DEFAULT_PROFILE_HOME
-COPY  ./src/ubuntu/install/startup  $STARTUPDIR/
+COPY ./src/ubuntu/install/startup $STARTUPDIR
 # Install startup
 RUN  bash $STARTUPDIR/install_tools.sh
 RUN  bash $STARTUPDIR/install_startup.sh  && chown -R 1000:0 $HOME
