@@ -1,3 +1,6 @@
+# 发布说明
+1. 20.04-base 包含vscode-web, chrome . 20.04-ide 增加idea pro 2022.4 ,clion 2022.4
+
 # build,启用build kit
 
 1. `DOCKER_BUILDKIT=1  bash build.sh`
