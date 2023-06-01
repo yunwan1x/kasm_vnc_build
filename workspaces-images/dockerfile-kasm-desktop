@@ -21,9 +21,7 @@ RUN mkdir -p  /etc/docker  &&  mv $INST_SCRIPTS/dind/daemon.json /etc/docker/dae
 
 VOLUME /var/lib/docker
 
-# Install Utilities
-COPY ./src/ubuntu/install/misc $INST_SCRIPTS/misc/
-RUN bash $INST_SCRIPTS/misc/install_tools.sh && rm -rf $INST_SCRIPTS/misc/
+
 
 # Add Kasm Branding
 #RUN cp /usr/share/extra/backgrounds/bg_kasm.png /usr/share/extra/backgrounds/bg_default.png
@@ -37,7 +35,6 @@ RUN sed -i 's/ubuntu-mono-dark/elementary-xfce/g' $HOME/.config/xfce4/xfconf/xfc
  # Install Google Chrome
 COPY ./src/ubuntu/install/chrome $INST_SCRIPTS/chrome/
 RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
-# Install Microsoft Edge
 
 
 
@@ -60,7 +57,8 @@ cd /tmp &&  cp -r -p   .vscode-server  /home/kasm-user
 #cp -r /tmp/.vscode-server $DEFAULT_PROFILE_HOME
 COPY  ./src/ubuntu/install/startup  $STARTUPDIR/
 # Install startup
-RUN bash $STARTUPDIR/install_startup.sh  && chown -R 1000:0 $HOME
+RUN  bash $STARTUPDIR/install_tools.sh
+RUN  bash $STARTUPDIR/install_startup.sh  && chown -R 1000:0 $HOME
 
 
 USER 1000

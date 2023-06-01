@@ -13,9 +13,7 @@ mv -f  $HOME/jsmpeg/nginx.conf /etc/nginx
 # 修复新立得安装包以root权限运行
 mv -f $STARTUPDIR/synaptic.desktop /usr/share/applications && chown 1000:0 $STARTUPDIR/synaptic.desktop /usr/share/applications && chmod +x $STARTUPDIR/synaptic.desktop /usr/share/applications/synaptic.desktop
 rm -f /usr/share/kasmvnc/www/dist/images/782e6b34fd46a00744786246a454ed11.png
-# 安装文件
-apt update &&  apt install -y python3-pip  fonts-noto-color-emoji
-pip3 install  ipykernel
-apt-get clean
+
+
 
 
