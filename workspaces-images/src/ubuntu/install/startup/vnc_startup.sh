@@ -6,7 +6,7 @@ no_proxy="localhost,127.0.0.1"
 sudo sysctl -w fs.inotify.max_user_watches="524288"
 # dict to store processes
 declare -A KASM_PROCS
-
+export PATH=/usr/share/vscode-server-linux-x64-web:$PATH
 # switch passwords to local variables
 tmpval=$VNC_VIEW_ONLY_PW
 unset VNC_VIEW_ONLY_PW
@@ -100,10 +100,8 @@ function start_window_manager (){
 function start_audio_out_websocket (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
 		echo 'Starting audio websocket server'
-		node $HOME/jsmpeg/websocket-relay.js   kasmaudio 58081 54901    &
-
+		/usr/share/vscode-server-linux-x64-web/node $HOME/jsmpeg/websocket-relay.js   kasmaudio 58081 54901    &
 		KASM_PROCS['kasm_audio_out_websocket']=$!
-
 		if [[ $DEBUG == true ]]; then
 		  echo -e "\n------------------ Started Audio Out Websocket  ----------------------------"
 		  echo "Kasm Audio Out Websocket PID: ${KASM_PROCS['kasm_audio_out_websocket']}";
