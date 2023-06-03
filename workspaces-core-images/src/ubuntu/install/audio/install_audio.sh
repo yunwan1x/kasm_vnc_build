@@ -30,14 +30,3 @@ fi
 
 mkdir -p /var/run/pulse
 
-cd $STARTUPDIR
-mkdir jsmpeg
-#wget -qO- https://kasmweb-build-artifacts.s3.amazonaws.com/kasm_websocket_relay/f173f72a9faa6239e43f2efcb48aabe8a984d443/kasm_websocket_relay_${DISTRO/kali/ubuntu}_${ARCH}_develop.f173f7.tar.gz | tar xz --strip 1 -C $STARTUPDIR/jsmpeg
-#chmod +x $STARTUPDIR/jsmpeg/kasm_audio_out-linux
-mkdir -p /usr/share/kasmvnc/www
-mv $HOME/jsmpeg/index.html /usr/share/kasmvnc/www
-mv $HOME/jsmpeg/main.bundle.js  /usr/share/kasmvnc/www/dist
-mv $HOME/jsmpeg/jsmpeg.min.js /usr/share/kasmvnc/www/dist
-mv $HOME/jsmpeg/style.bundle.css /usr/share/kasmvnc/www/dist
-mkdir -p /etc/nginx/conf.d
-mv $HOME/jsmpeg/websocket.conf /etc/nginx/conf.d
