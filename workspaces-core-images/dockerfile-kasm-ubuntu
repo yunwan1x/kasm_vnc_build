@@ -85,7 +85,6 @@ COPY ./src/common/install/kasm_vnc/kasmvnc.yaml /etc/kasmvnc/
 
 
 ### Install Audio
-COPY ./src/jsmpeg  $HOME/jsmpeg
 COPY ./src/ubuntu/install/audio $INST_SCRIPTS/audio/
 RUN bash $INST_SCRIPTS/audio/install_audio.sh  && rm -rf $INST_SCRIPTS/audio/
 
