@@ -14,4 +14,4 @@ build-ide:
 push-ide:
 	docker push changhui/ubuntu:${ide_tag}
 run:
-	docker run --rm -it --shm-size=512m  -e DEBUG=true --name ubuntu -p 6903:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${ide_tag} 
+	docker run --rm -it --shm-size=512m  -e DEBUG=true --name ubuntu -p 6912:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${ide_tag} 
