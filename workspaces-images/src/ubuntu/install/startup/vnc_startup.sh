@@ -3,6 +3,8 @@
 set -e
 rm -rf $HOME/jsmpeg
 no_proxy="localhost,127.0.0.1"
+ln -s /usr/share/jsmpeg/cert/ca.crt /home/kasm-user/Downloads/ca.crt
+ln -s /usr/share/jsmpeg/cert/ca.key /home/kasm-user/Downloads/ca.key
 sudo sysctl -w fs.inotify.max_user_watches="524288"
 # dict to store processes
 declare -A KASM_PROCS
@@ -194,7 +196,9 @@ fi
 # Create cert for KasmVNC
 mkdir -p ${HOME}/.vnc
 
-test -f ${HOME}/.vnc/self.pem  ||  openssl req -x509 -nodes -extensions EXT -config <( printf "[dn]\nCN=localhost\n[req]\ndistinguished_name = dn\n[EXT]\nsubjectAltName=DNS:localhost\nkeyUsage=digitalSignature\nextendedKeyUsage=serverAuth")  -days 36500 -newkey rsa:2048 -keyout ${HOME}/.vnc/self.pem -out ${HOME}/.vnc/self.pem -subj "/C=US/ST=VA/L=None/O=None/OU=DoFu/CN=kasm/emailAddress=none@none.none"
+test -f ${HOME}/.vnc/self.pem  ||  (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out server.csr ; openssl x509 -req -in server.csr -CA /usr/share/jsmpeg/cert/ca.crt -CAkey /usr/share/jsmpeg/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile <(printf "subjectAltName=DNS:${DOMAIN_NAME-mydomain.com},DNS:*.${DOMAIN_NAME-mydomain.com}");rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
+
+
 
 # first entry is control, second is view (if only one is valid for both)
 mkdir -p "$HOME/.vnc"
