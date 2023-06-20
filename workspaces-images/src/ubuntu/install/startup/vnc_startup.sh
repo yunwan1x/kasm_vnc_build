@@ -3,8 +3,8 @@
 set -e
 rm -rf $HOME/jsmpeg
 no_proxy="localhost,127.0.0.1"
-ln -s /usr/share/jsmpeg/cert/ca.crt /home/kasm-user/Downloads/ca.crt
-ln -s /usr/share/jsmpeg/cert/ca.key /home/kasm-user/Downloads/ca.key
+cp /usr/share/jsmpeg/cert/ca.crt /home/kasm-user/Uploads/ca.crt
+cp /usr/share/jsmpeg/cert/ca.key /home/kasm-user/Uploads/ca.key
 sudo sysctl -w fs.inotify.max_user_watches="524288"
 # dict to store processes
 declare -A KASM_PROCS
