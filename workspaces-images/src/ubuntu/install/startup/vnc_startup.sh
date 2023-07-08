@@ -197,7 +197,20 @@ fi
 mkdir -p ${HOME}/.vnc
 IP1=${IP-10.10.10.1}
 IP2=$(echo $IP1 | cut -d "." -f 1-3).254
-test -f ${HOME}/.vnc/self.pem  ||  (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out server.csr ; openssl x509 -req -in server.csr -CA /usr/share/jsmpeg/cert/ca.crt -CAkey /usr/share/jsmpeg/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile <(printf "subjectAltName=DNS:${DOMAIN_NAME-mydomain.com},DNS:*.${DOMAIN_NAME-mydomain.com}"),IP.1 =${IP1},IP.2=${IP2};rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
+
+cat <<EOF > ${HOME}/.vnc/certificate.cfg
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = ${DOMAIN_NAME-mydomain.com}
+DNS.2 = *.${DOMAIN_NAME-mydomain.com}
+IP.1 = ${IP1}
+IP.2 = ${IP2}
+EOF
+test -f ${HOME}/.vnc/self.pem  ||  (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out server.csr ; openssl x509 -req -in server.csr -CA /usr/share/jsmpeg/cert/ca.crt -CAkey /usr/share/jsmpeg/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile certificate.cfg ;rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
 
 
 
