@@ -246,9 +246,6 @@ echo -e "\n\n------------------ KasmVNC environment started ------------------"
 # tail vncserver logs
 tail -f $HOME/.vnc/*$DISPLAY.log &
 
-KASMIP=$(hostname -i)
-echo "Kasm User ${KASM_USER}(${KASM_USER_ID}) started container id ${HOSTNAME} with local IP address ${KASMIP}"
-
 # start custom startup script
 custom_startup
 
