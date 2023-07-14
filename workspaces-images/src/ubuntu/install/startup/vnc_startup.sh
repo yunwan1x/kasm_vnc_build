@@ -187,11 +187,6 @@ fi
 
 trap cleanup SIGINT SIGTERM
 
-## resolve_vnc_connection
-VNC_IP=$(hostname -i)
-if [[ $DEBUG == true ]]; then
-    echo "IP Address used for external bind: $VNC_IP"
-fi
 
 # Create cert for KasmVNC
 mkdir -p ${HOME}/.vnc
