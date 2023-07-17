@@ -62,7 +62,8 @@ else
     elif [ "${UBUNTU_CODENAME}" == "bionic" ] ; then
         BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_libjpeg-turbo-latest_amd64.deb"
     else
-        BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_amd64.deb"
+        # BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_amd64.deb"
+        BUILD_URL="https://github.com/kasmtech/KasmVNC/releases/download/v1.1.0/kasmvncserver_focal_1.1.0_amd64.deb"
     fi
 fi
 
@@ -102,4 +103,4 @@ chown -R 0:0 $KASM_VNC_PATH
 chmod -R og-w $KASM_VNC_PATH
 #chown -R 1000:0 $KASM_VNC_PATH/certs
 chown -R 1000:0 $KASM_VNC_PATH/www/Downloads
-ln -s $KASM_VNC_PATH/www/index.html $KASM_VNC_PATH/www/vnc.html
+test -f $KASM_VNC_PATH/www/vnc.html || ln -s $KASM_VNC_PATH/www/index.html $KASM_VNC_PATH/www/vnc.html
