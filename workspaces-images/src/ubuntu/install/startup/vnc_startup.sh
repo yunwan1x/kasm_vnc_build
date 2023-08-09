@@ -248,6 +248,9 @@ tail -f $HOME/.vnc/*$DISPLAY.log &
 
 # start custom startup script
 custom_startup
+# start ssh server
+dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+# dropbear -E -p 2111
 
 # Monitor Kasm Services
 sleep 3
