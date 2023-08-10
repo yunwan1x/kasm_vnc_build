@@ -29,9 +29,9 @@ dropbear 是静态编译的
 
 mkdir -p /etc/dropbear
 
-/usr/local/bin/dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+/usr/bin/dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
 
-/usr/local/bin/dropbear -E -p 2111
+/usr/bin/dropbear -E -p 2111
 
 # 开启gpu加速
 
