@@ -250,9 +250,14 @@ tail -f $HOME/.vnc/*$DISPLAY.log &
 # start custom startup script
 custom_startup
 # start ssh server
+<<<<<<< HEAD
 sudo mkdir -p /etc/dropbear
 sudo dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
 sudo dropbear -E -p 22
+=======
+sudo mkdir -p /etc/dropbear && sudo dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key && sudo chmod a+r /etc/dropbear/dropbear_ecdsa_host_key
+# dropbear -E -p 2111
+>>>>>>> 84622620ccabe8e4849e637706446a850f5c4c7d
 
 # Monitor Kasm Services
 sleep 3
