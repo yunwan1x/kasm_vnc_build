@@ -14,10 +14,11 @@
 docker run  -it -d  --restart always --shm-size=512m --name ubuntu -p 6901:443 --hostname=mycomputer --privileged -e IP1=10.10.10.1 -e DOMAIN_NAME=mydomain.com   -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:20.04-ide
 ```
 
-3. ip1和domain_name是自签证书的subjectaltname。
-4. ca证书放在~/Uploads下面，可加入本地信任证书位置
-5. 可以挂载访问证书到${HOME}/.vnc/self.pem
-6. 调试
+3. 镜像开启了22端口的ssh端口是用dropbear。 需要root账户，root账户密码和kasm-user的一致
+4. ip1和domain_name是自签证书的subjectaltname。
+5. ca证书放在~/Uploads下面，可加入本地信任证书位置
+6. 可以挂载访问证书到${HOME}/.vnc/self.pem
+7. 调试
 
 # 开启代理
 

@@ -14,6 +14,7 @@ tmpval=$VNC_VIEW_ONLY_PW
 unset VNC_VIEW_ONLY_PW
 VNC_VIEW_ONLY_PW=$tmpval
 tmpval=$VNC_PW
+echo "root:$VNC_PW"|sudo chpasswd
 unset VNC_PW
 VNC_PW=$tmpval
 BUILD_ARCH=$(uname -p)
@@ -249,8 +250,9 @@ tail -f $HOME/.vnc/*$DISPLAY.log &
 # start custom startup script
 custom_startup
 # start ssh server
-dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
-# dropbear -E -p 2111
+sudo mkdir -p /etc/dropbear
+sudo dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
+sudo dropbear -E -p 22
 
 # Monitor Kasm Services
 sleep 3
