@@ -73,8 +73,8 @@ fi
 verify_profile_config
 
 sudo rm -rf $HOME/.config/pulse
-mkdir -p /home/kasm-user/.vnc
-echo "${USER_NAME-kasm-user}:$(openssl passwd $VNC_PW)" > /home/kasm-user/.vnc/.htpasswd
+mkdir -p $HOME/.vnc
+echo "${USER_NAME-kasm-user}:$(openssl passwd $VNC_PW)" > $HOME/.vnc/.htpasswd
 sudo sed -i 's/@basicauth@/proxy_set_header Authorization "Basic a2FzbS11c2VyOjEyMzQ1Ng==";/g'  /etc/nginx/conf.d/websocket.conf
 echo "Removing Default Profile Directory"
 rm -rf $DEFAULT_PROFILE_HOME/*

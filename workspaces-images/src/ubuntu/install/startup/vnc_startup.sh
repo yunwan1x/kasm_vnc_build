@@ -3,8 +3,8 @@
 set -e
 rm -rf $HOME/jsmpeg
 no_proxy="localhost,127.0.0.1"
-cp /usr/share/jsmpeg/cert/ca.crt /home/kasm-user/Uploads/ca.crt
-cp /usr/share/jsmpeg/cert/ca.key /home/kasm-user/Uploads/ca.key
+cp /usr/share/jsmpeg/cert/ca.crt $HOME/Uploads/ca.crt
+cp /usr/share/jsmpeg/cert/ca.key $HOME/Uploads/ca.key
 sudo sysctl -w fs.inotify.max_user_watches="524288"
 # dict to store processes
 declare -A KASM_PROCS
@@ -18,7 +18,7 @@ echo "root:$VNC_PW"|sudo chpasswd
 unset VNC_PW
 VNC_PW=$tmpval
 BUILD_ARCH=$(uname -p)
-
+mkdir -p $HOME/.vscode && ln -s $HOME/.vscode-server/extensions $HOME/.vscode/extensions
 STARTUP_COMPLETE=0
 
 ######## FUNCTION DECLARATIONS ##########
