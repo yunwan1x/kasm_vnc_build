@@ -6,6 +6,7 @@ no_proxy="localhost,127.0.0.1"
 cp /usr/share/jsmpeg/cert/ca.crt $HOME/Uploads/ca.crt
 cp /usr/share/jsmpeg/cert/ca.key $HOME/Uploads/ca.key
 sudo sysctl -w fs.inotify.max_user_watches="524288"
+sudo service ssh start 
 # dict to store processes
 declare -A KASM_PROCS
 export PATH=/usr/share/vscode-server-linux-x64-web:$PATH
@@ -250,9 +251,7 @@ tail -f $HOME/.vnc/*$DISPLAY.log &
 # start custom startup script
 custom_startup
 # start ssh server
-sudo mkdir -p /etc/dropbear
-sudo dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
-sudo dropbear -E -p 22
+
 # Monitor Kasm Services
 sleep 3
 while :

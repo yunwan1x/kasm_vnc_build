@@ -138,8 +138,7 @@ RUN touch $STARTUPDIR/wm.log \
     && chown 1000:root /var/run/pulse \
     && echo "kasm-user ALL=(ALL) NOPASSWD: NOPASSWD: ALL" >> /etc/sudoers \
     && rm -Rf /home/kasm-default-profile/.launchpadlib
-COPY ./src/dropbear /usr/bin/
-RUN chmod +x /usr/bin/dropbear* /usr/bin/dbclient
+
 USER 1000
 
 ENTRYPOINT ["tini","--","/dockerstartup/kasm_default_profile.sh", "/dockerstartup/vnc_startup.sh", "/dockerstartup/kasm_startup.sh"]

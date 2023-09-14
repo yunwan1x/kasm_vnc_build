@@ -21,8 +21,6 @@ function copy_default_profile_to_home {
     fi
 
     sudo  cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/
-    #sudo chown -R 1000:0 $HOME/
-       #ls -la $HOME
 }
 
 
@@ -61,24 +59,25 @@ function verify_profile_config {
 
 }
 
+
+
 if  [ -f "$HOME/.bashrc" ]; then
     echo "Profile already exists. Will not copy default contents"
 else
     echo "Profile Sync Directory Does Not Exist. No Sync will occur"
     copy_default_profile_to_home
     set_user_permission $HOME
-
 fi
-
+cp -pr /etc/skel/.bash* $HOME
+echo "source $STARTUPDIR/generate_container_user" >> $HOME/.bashrc
 verify_profile_config
-
 sudo rm -rf $HOME/.config/pulse
 mkdir -p $HOME/.vnc
 echo "${USER_NAME-kasm-user}:$(openssl passwd $VNC_PW)" > $HOME/.vnc/.htpasswd
 sudo sed -i 's/@basicauth@/proxy_set_header Authorization "Basic a2FzbS11c2VyOjEyMzQ1Ng==";/g'  /etc/nginx/conf.d/websocket.conf
 echo "Removing Default Profile Directory"
 rm -rf $DEFAULT_PROFILE_HOME/*
-
+sudo usermod $USER_NAME -s /bin/bash
 # unknown option ==> call command
 echo -e "\n\n------------------ EXECUTE COMMAND ------------------"
 echo "Executing command: '$@'"
