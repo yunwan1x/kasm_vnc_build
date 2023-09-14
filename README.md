@@ -26,13 +26,7 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 
 # 开启sshserver
 
-dropbear 是静态编译的
-
-mkdir -p /etc/dropbear
-
-/usr/bin/dropbearkey  -t ecdsa -f /etc/dropbear/dropbear_ecdsa_host_key
-
-/usr/bin/dropbear -E -p 2111
+sshd 
 
 # 开启gpu加速
 
