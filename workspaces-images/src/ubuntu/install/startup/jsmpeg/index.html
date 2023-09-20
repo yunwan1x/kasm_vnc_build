@@ -406,14 +406,6 @@ document.getElementById("noVNC_vscode_button").addEventListener('click', ()=>{
     a.click()
     a.remove()
 })
-element = document.getElementById("noVNC_setting_enable_ime")
-element.checked = true
-if ("createEvent" in document) {
-    var evt = document.createEvent("HTMLEvents");
-    evt.initEvent("change", false, true);
-    element.dispatchEvent(evt);
-}else{
-    element.fireEvent("onchange");
-}
+
 
 </script>	

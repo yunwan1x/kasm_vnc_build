@@ -21239,7 +21239,7 @@ var UI = {
     UI.updateVisualState('init');
     document.documentElement.classList.remove("noVNC_loading");
     var autoconnect = getConfigVar('autoconnect', false);
-
+    
     if (autoconnect === 'true' || autoconnect == '1') {
       autoconnect = true;
       UI.connect();
@@ -21337,7 +21337,7 @@ var UI = {
     UI.initSetting('toggle_control_panel', false);
     UI.initSetting('enable_perf_stats', false);
     UI.initSetting('virtual_keyboard_visible', false);
-    UI.initSetting('enable_ime', false);
+    UI.initSetting('enable_ime', true);
     UI.initSetting('enable_webrtc', false);
     UI.toggleKeyboardControls();
 
