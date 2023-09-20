@@ -26,7 +26,7 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 
 # 开启sshserver
 
-sshd 
+sshd 监听在22端口
 
 # 开启gpu加速
 
