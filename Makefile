@@ -11,7 +11,7 @@ push-base:
 	docker push changhui/ubuntu:${base_tag}
 
 commit:
-	git commit -am 'add' && git push
+	git commit -am 'add' ; git push
 build-ide:
 	docker build -t changhui/ubuntu:${ide_tag} -f ./workspaces-images/dockerfile-kasm-desktop-idea ./workspaces-images  
 push-ide:
