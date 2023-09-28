@@ -11,7 +11,7 @@
 1. 启动命令
 
 ```shell
-docker run  -it -d  --restart always --shm-size=512m --name ubuntu -p 6901:443 --hostname=mycomputer --privileged -e IP1=10.10.10.1 -e DOMAIN_NAME=mydomain.com   -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:20.04-ide
+docker run  -it -d  --restart always --shm-size=512m --name ubuntu -p 6901:443 -p 22:5802d2 --hostname=mycomputer --privileged -e IP1=10.10.10.1 -e DOMAIN_NAME=mydomain.com   -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:20.04-ide
 ```
 
 3. 镜像开启了22端口的ssh端口是用dropbear。 需要root账户，root账户密码和kasm-user的一致
@@ -26,7 +26,7 @@ gost -L 127.0.0.1:7666 -F  sshd://user:password@ip:port
 
 # 开启sshserver
 
-sshd 监听在22端口
+sshd 监听在58022端口
 
 # 开启gpu加速
 
