@@ -6,7 +6,8 @@ no_proxy="localhost,127.0.0.1"
 cp /usr/share/jsmpeg/cert/ca.crt $HOME/Uploads/ca.crt
 cp /usr/share/jsmpeg/cert/ca.key $HOME/Uploads/ca.key
 sudo sysctl -w fs.inotify.max_user_watches="524288"
-sudo service ssh start 
+sudo sed -i 's/#Port 22/Port 58022/' /etc/ssh/sshd_config &&  service ssh start 
+
 # dict to store processes
 declare -A KASM_PROCS
 export PATH=/usr/share/vscode-server-linux-x64-web:$PATH
