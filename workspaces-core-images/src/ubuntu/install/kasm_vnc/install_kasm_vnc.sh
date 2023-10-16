@@ -63,7 +63,7 @@ else
         BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_libjpeg-turbo-latest_amd64.deb"
     else
         # BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_amd64.deb"
-        BUILD_URL="https://github.com/kasmtech/KasmVNC/releases/download/v1.1.0/kasmvncserver_focal_1.1.0_amd64.deb"
+        BUILD_URL="https://github.com/kasmtech/KasmVNC/releases/download/v1.2.0/kasmvncserver_focal_1.2.0_amd64.deb"
     fi
 fi
 
