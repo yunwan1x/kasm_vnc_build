@@ -22,6 +22,9 @@ else
   locale-gen en_US.UTF-8
   wget -O /usr/local/bin/miniserve https://github.com/svenstaro/miniserve/releases/download/v0.24.0/miniserve-0.24.0-x86_64-unknown-linux-musl
   chmod +x /usr/local/bin/miniserve
+
+  # install  linux brew 
+  echo "/home/linuxbrew/.linuxbrew/lib" >> /etc/ld.so.conf.d/brew.conf
 fi
 
 if [ "$DISTRO" = "ubuntu" ]; then
