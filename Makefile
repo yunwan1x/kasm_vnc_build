@@ -26,3 +26,7 @@ run:
 run-test:
 	docker run  -it --rm  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${ide_tag_only}
 
+
+## vscode-server
+build-vscode-server:
+	docker build -t changhui/vscode-server -f ./workspaces-images/dockerfile-kasm-vscode-server   ./workspaces-images 
