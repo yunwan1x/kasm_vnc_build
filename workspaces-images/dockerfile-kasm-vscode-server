@@ -1,12 +1,13 @@
-FROM ubuntu:jammy
+FROM ubuntu:23.04
 USER root
 
 WORKDIR /root
+ENV CERT_DIR /root/.cert
 COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
+COPY src/ubuntu/install/startup/jsmpeg/cert  $CERT_DIR
 RUN bash $INST_SCRIPTS/vs_code/install_package.sh  
  RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh  \
  && rm -rf $INST_SCRIPTS/vs_code/
-
 
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES all
