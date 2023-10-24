@@ -29,4 +29,4 @@ run-test:
 
 ## vscode-server
 build-vscode-server:
-	docker build -t changhui/vscode-server -f ./workspaces-images/dockerfile-kasm-vscode-server   ./workspaces-images 
+	docker build --progress plain  -t changhui/vscode-server -f ./workspaces-images/dockerfile-kasm-vscode-server   ./workspaces-images 

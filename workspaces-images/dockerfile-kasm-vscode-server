@@ -1,20 +1,24 @@
-FROM ubuntu:23.04
+FROM ubuntu:22.04
 USER root
 
 WORKDIR /root
 ENV CERT_DIR /root/.cert
-COPY ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/
+ENV INST_SCRIPTS /INST_SCRIPTS
 COPY src/ubuntu/install/startup/jsmpeg/cert  $CERT_DIR
-RUN bash $INST_SCRIPTS/vs_code/install_package.sh  
- RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh  \
- && rm -rf $INST_SCRIPTS/vs_code/
+COPY src/ubuntu/install/vs_code/install_vs_code_web.sh $INST_SCRIPTS/
+COPY src/ubuntu/install/vs_code/install_package.sh $INST_SCRIPTS/ 
+RUN  bash $INST_SCRIPTS/install_package.sh 
+RUN  bash $INST_SCRIPTS/install_vs_code_web.sh
+
+COPY src/ubuntu/install/vs_code/nginx.conf  src/ubuntu/install/vs_code/custom_startup.sh  /etc/nginx/
+COPY src/ubuntu/install/vs_code/vscode.conf /etc/nginx/conf.d/
 
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES all
 ######## End cuda #####################
 
-
+ENTRYPOINT [ "/bin/bash","/etc/nginx/custom_startup.sh" ]
 
  
 

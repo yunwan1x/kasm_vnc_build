@@ -1,84 +1,66 @@
 #!/usr/bin/env bash
-set -ex
-START_COMMAND="code"
-PGREP="code"
-export MAXIMIZE="true"
-export MAXIMIZE_NAME="Visual Studio Code"
-MAXIMIZE_SCRIPT=$STARTUPDIR/maximize_window.sh
-DEFAULT_ARGS="--no-sandbox"
-ARGS=${APP_ARGS:-$DEFAULT_ARGS}
+set -e
+declare -A KASM_PROCS
 
-options=$(getopt -o gau: -l go,assign,url: -n "$0" -- "$@") || exit
-eval set -- "$options"
+# 生成证书
+CERT_DIR=${CERT_DIR:=/root/.cert}
 
-while [[ $1 != -- ]]; do
-    case $1 in
-        -g|--go) GO='true'; shift 1;;
-        -a|--assign) ASSIGN='true'; shift 1;;
-        -u|--url) OPT_URL=$2; shift 2;;
-        *) echo "bad option: $1" >&2; exit 1;;
-    esac
-done
-shift
+mkdir -p ${CERT_DIR}
+cat <<EOF > ${CERT_DIR}/certificate.cfg
+authorityKeyIdentifier=keyid,issuer
+basicConstraints=CA:FALSE
+keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
+subjectAltName = @alt_names
 
-# Process non-option arguments.
-for arg; do
-    echo "arg! $arg"
-done
+[alt_names]
+DNS.1 = ${DOMAIN_NAME-mydomain.com}
+DNS.2 = *.${DOMAIN_NAME-mydomain.com}
+IP.1 = ${IP1:=10.10.10.1}
+IP.2 = ${IP2:=10.10.10.255}
+EOF
 
-FORCE=$2
+if [ ! -f ${CERT_DIR}/self.pem ];then
+    openssl genrsa -out ${CERT_DIR}/self.key 2048
+    openssl req -new -sha256 -key ${CERT_DIR}/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out ${CERT_DIR}/server.csr 
+    openssl x509 -req -in ${CERT_DIR}/server.csr -CA ${CERT_DIR}/ca.crt -CAkey ${CERT_DIR}/ca.key -CAcreateserial -out ${CERT_DIR}/self.crt -days 3650 -sha256 -extfile ${CERT_DIR}/certificate.cfg
+    rm ${CERT_DIR}/server.csr
+    cat ${CERT_DIR}/self.crt  ${CERT_DIR}/self.key > ${CERT_DIR}/self.pem
+fi
 
-kasm_exec() {
-    if [ -n "$OPT_URL" ] ; then
-        URL=$OPT_URL
-    elif [ -n "$1" ] ; then
-        URL=$1
-    fi 
-    
-    # Since we are execing into a container that already has the browser running from startup, 
-    #  when we don't have a URL to open we want to do nothing. Otherwise a second browser instance would open. 
-    if [ -n "$URL" ] ; then
-        /usr/bin/filter_ready
-        /usr/bin/desktop_ready
-        bash ${MAXIMIZE_SCRIPT} &
-        $START_COMMAND $ARGS $OPT_URL
-    else
-        echo "No URL specified for exec command. Doing nothing."
-    fi
+function start_nginx (){
+  nginx -g "daemon off;" &
+  KASM_PROCS['nginx']=$!
 }
 
-kasm_startup() {
-    if [ -n "$KASM_URL" ] ; then
-        URL=$KASM_URL
-    elif [ -z "$URL" ] ; then
-        URL=$LAUNCH_URL
-    fi
+function start_vscode() {
+    mkdir -p /root/project
+    /usr/share/vscode-server-linux-x64-web/bin/code-server --port 58000 --host 127.0.0.1  --without-connection-token --accept-server-license-terms  &
+    KASM_PROCS['vscode']=$!
+}
+start_nginx
+start_vscode
+while :
+do
+	for process in "${!KASM_PROCS[@]}"; do
+		if ! ps -p   "${KASM_PROCS[$process]}" > /dev/null ; then
+			case $process in
+		
+        nginx)
+          echo "Restarting nginx Service"
+          start_nginx
+          ;;
+        vscode)
+          echo "Restarting nginx Service"
+          start_vscode
+          ;;
+        *)
+            echo "Unknown Service: $process"
+            ;;
+			esac
+		fi
+	done
+	sleep 5
+done
 
-    if [ -z "$DISABLE_CUSTOM_STARTUP" ] ||  [ -n "$FORCE" ] ; then
 
-        echo "Entering process startup loop"
-        set +x
-        while true
-        do
-            if ! pgrep -x $PGREP > /dev/null
-            then
-                /usr/bin/filter_ready
-                /usr/bin/desktop_ready
-                set +e
-                bash ${MAXIMIZE_SCRIPT} &
-                $START_COMMAND $ARGS $URL
-                set -e
-            fi
-            sleep 1
-        done
-        set -x
-    
-    fi
-
-} 
-
-if [ -n "$GO" ] || [ -n "$ASSIGN" ] ; then
-    kasm_exec
-else
-    kasm_startup
-fi
+echo "Exiting Kasm container"
