@@ -10,7 +10,8 @@ sudo sed -i 's/#Port 22/Port 58022/' /etc/ssh/sshd_config && sudo  service ssh s
 
 # dict to store processes
 declare -A KASM_PROCS
-export PATH=/usr/share/vscode-server-linux-x64-web:$PATH
+# export PATH=/usr/share/vscode-server-linux-x64-web:$PATH
+echo 'export PATH=/usr/local/node-v20.10.0-linux-x64/bin:$PATH' >> ~/.bashrc
 # switch passwords to local variables
 tmpval=$VNC_VIEW_ONLY_PW
 unset VNC_VIEW_ONLY_PW
@@ -22,7 +23,8 @@ VNC_PW=$tmpval
 BUILD_ARCH=$(uname -p)
 mkdir -p $HOME/.vscode && ln -s $HOME/.vscode-server/extensions $HOME/.vscode/extensions
 STARTUP_COMPLETE=0
-
+# 开启debug方式
+sed -i 's/^Exec.*/Exec=\/usr\/bin\/google-chrome --remote-debugging-port=9222 %U/' /home/kasm-user/Desktop/google-chrome.desktop
 ######## FUNCTION DECLARATIONS ##########
 
 ## print out help

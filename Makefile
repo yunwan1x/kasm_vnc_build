@@ -12,6 +12,9 @@ push-base:
 
 commit:
 	git commit -am 'add' ; git push
+
+
+
 build-ide:
 	docker build -t changhui/ubuntu:${ide_tag} -f ./workspaces-images/dockerfile-kasm-desktop-idea ./workspaces-images  
 push-ide:
@@ -24,7 +27,7 @@ push-ide-only:
 run:
 	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${ide_tag}	
 run-test:
-	docker run  -it --rm  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${ide_tag_only}
+	docker run  -it --rm  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${base_tag}
 
 
 ## vscode-server

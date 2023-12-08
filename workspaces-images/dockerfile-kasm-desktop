@@ -43,6 +43,8 @@ RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
  RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh \
  && rm -rf $INST_SCRIPTS/vs_code/
 
+COPY ./src/ubuntu/install/puppeteer $INST_SCRIPTS/puppeteer/
+RUN bash $INST_SCRIPTS/puppeteer/install_puppeteer.sh  && rm -rf $INST_SCRIPTS/puppeteer/
 
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES all
