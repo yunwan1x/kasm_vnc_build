@@ -1,17 +1,14 @@
-/**
- * File: sqlite.js
- * 对 文件数据库-sqlite3 的封装
- * 
- * 22-10-12 KUN
- * 
- * 回调参数统一{code,res} code:状态码 500/200 热水:如果有需要返回的内容则在二参
- */
+var createTable = `CREATE TABLE books (
+    id INTEGER PRIMARY KEY,
+    title TEXT NOT NULL,
+    url TEXT NOT NULL,
+    ext TEXT NOT NULL
+);`
 
 var fs = require('fs');
 var sqlite3 = require('sqlite3').verbose();
 var DB = DB || {};
-
-DB.SqliteDB = function (file) {
+var SqliteDB = function (file) {
     DB.db = new sqlite3.Database(file);
     DB.exist = fs.existsSync(file);
     if (!DB.exist) {
@@ -19,83 +16,70 @@ DB.SqliteDB = function (file) {
     };
 };
 
-DB.printErrorInfo = function (err, callback = () => { }) {
-    callback(500)
-    console.log("Error Message:" + err.message);
-};
+var file = "books.db";
+new SqliteDB(file);
 
-//创建数据表
-DB.SqliteDB.prototype.createTable = function (sql) {
-    DB.db.serialize(function () {
-        DB.db.run(sql, function (err) {
-            if (null != err) {
-                DB.printErrorInfo(err);
-                return;
+
+// tableName = 'books'
+// var params = [['计算机技术', 'https://www.baid.com',"pdf"]];//这里是数组可以批量增,key可重复
+function insert(sql,params){
+    return new Promise((resolve, reject)=>{
+        DB.db.run(sql, params, function (err) {
+            if (err) {
+                reject(err)
             }
-        });
-    });
-};
+            console.log("insert data:",this)
+            resolve(1)
+        })
+    })
+}
 
-//新增
-DB.SqliteDB.prototype.insertData = function (sql, objects) {
-    DB.db.serialize(function () {
-        var stmt = DB.db.prepare(sql);
-        for (var i = 0; i < objects.length; ++i) {
-            stmt.run(objects[i]);
-        }
-        stmt.finalize();
-    });
-};
 
-//查询
-DB.SqliteDB.prototype.queryData = function (sql, callback = () => { }) {
-    DB.db.all(sql, function (err, rows) {
-        if (null != err) {
-            DB.printErrorInfo(err, callback);
-            return;
-        }
-        if (callback) {
-            callback(200, rows);
-        }
-    });
-};
 
-//修改 "update 表名 set 修改项 where 条件"
-DB.SqliteDB.prototype.upData = function (sql, callback = () => { }) {
-    DB.db.run(sql, function (err) {
-        if (null != err) {
-            DB.printErrorInfo(err, callback);
-            return
-        }
-        callback(200);
-    });
-};
+function update(sql,params){
+    return new Promise((resolve, reject)=>{
+        DB.db.run(sql, params, function(err){
+            if (err) {
+                reject(err)
+            }
+            resolve(1)
+          });
+    })
+}
 
-//删除 "delete from 表名 where 条件"
-DB.SqliteDB.prototype.delData = function (sql, callback = () => { }) {
-    DB.db.run(sql, function (err) {
-        if (null != err) {
-            DB.printErrorInfo(err, callback);
-            return
-        }
-        callback(200);
-    });
-};
 
-//其他sql    与删改相同-只是便于区分
-DB.SqliteDB.prototype.onSql = function (sql, callback = () => { }) {
-    DB.db.run(sql, function (err) {
-        if (null != err) {
-            DB.printErrorInfo(err, callback);
-            return
-        }
-        callback(200);
-    });
-};
 
-//关闭连接
-DB.SqliteDB.prototype.close = function () {
-    DB.db.close();
-};
+function queryAll(sql,params){
+    return new Promise((resolve, reject)=>{
+        DB.db.all(sql, params, function (err,rows) {
+            if (err) {
+                reject(err)
+            }
+            resolve(rows)
+        })
+    })
+}
 
-exports.SqliteDB = DB.SqliteDB;
+function query(sql,params){
+    return new Promise((resolve, reject)=>{
+        DB.db.get(sql, params, function (err,row) {
+            if (err) {
+                reject(err)
+            }
+            resolve(row)
+        })
+    })
+}
+
+function del(sql,params){
+    return new Promise((resolve, reject)=>{
+        DB.db.run(sql, params, function (err,row) {
+            if (err) {
+                reject(err)
+            }
+            resolve(row)
+        })
+    })
+}
+
+module.exports={del,query,queryAll,update,insert}
