@@ -11,7 +11,7 @@ push-base:
 	docker push changhui/ubuntu:${base_tag}
 
 commit:
-	git commit -am 'add' ; git push
+	git add .;git commit -am 'add' ; git push
 
 
 
