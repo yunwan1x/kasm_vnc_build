@@ -1,6 +1,6 @@
 set -e
 apt-get update
-apt-get install -y wget curl nginx openssl git 
+apt-get install -y wget curl nginx openssl git tini
 echo install tools successful  
 apt install -y python3-setuptools \
                    python3-venv \

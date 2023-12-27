@@ -12,13 +12,14 @@ RUN  bash $INST_SCRIPTS/install_vs_code_web.sh
 
 COPY src/ubuntu/install/vs_code/nginx.conf  src/ubuntu/install/vs_code/custom_startup.sh  /etc/nginx/
 COPY src/ubuntu/install/vs_code/vscode.conf /etc/nginx/conf.d/
+RUN chmod +x /etc/nginx/custom_startup.sh
 
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES all
 ######## End cuda #####################
 
-ENTRYPOINT [ "/bin/bash","/etc/nginx/custom_startup.sh" ]
+ENTRYPOINT ["tini","--","/etc/nginx/custom_startup.sh" ]
 
  
 

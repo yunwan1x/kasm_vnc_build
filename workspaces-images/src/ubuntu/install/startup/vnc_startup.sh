@@ -21,6 +21,7 @@ echo "root:$VNC_PW"|sudo chpasswd
 unset VNC_PW
 VNC_PW=$tmpval
 BUILD_ARCH=$(uname -p)
+rm -rf $HOME/.vscode/extensions
 mkdir -p $HOME/.vscode && ln -s $HOME/.vscode-server/extensions $HOME/.vscode/extensions
 STARTUP_COMPLETE=0
 # 开启debug方式

@@ -1,10 +1,11 @@
 #!/usr/bin/env bash
 set -e
 declare -A KASM_PROCS
-
+echo "${USER_NAME-kasm-user}:$(openssl passwd ${VNC_PW-password})" > /tmp/.htpasswd
+chmod a+r /tmp/.htpasswd
+chmod a-w /tmp/.htpasswd
 # 生成证书
 CERT_DIR=${CERT_DIR:=/root/.cert}
-
 mkdir -p ${CERT_DIR}
 cat <<EOF > ${CERT_DIR}/certificate.cfg
 authorityKeyIdentifier=keyid,issuer
@@ -19,7 +20,7 @@ IP.1 = ${IP1:=10.10.10.1}
 IP.2 = ${IP2:=10.10.10.255}
 EOF
 
-if [ ! -f ${CERT_DIR}/self.pem ];then
+if [ ! -f ${CERT_DIR}/self.key ];then
     openssl genrsa -out ${CERT_DIR}/self.key 2048
     openssl req -new -sha256 -key ${CERT_DIR}/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out ${CERT_DIR}/server.csr 
     openssl x509 -req -in ${CERT_DIR}/server.csr -CA ${CERT_DIR}/ca.crt -CAkey ${CERT_DIR}/ca.key -CAcreateserial -out ${CERT_DIR}/self.crt -days 3650 -sha256 -extfile ${CERT_DIR}/certificate.cfg
@@ -32,11 +33,19 @@ function start_nginx (){
   KASM_PROCS['nginx']=$!
 }
 
+function cleanup () {
+    kill -s SIGTERM $!
+    exit 0
+}
+
 function start_vscode() {
     mkdir -p /root/project
     /usr/share/vscode-server-linux-x64-web/bin/code-server --port 58000 --host 127.0.0.1  --without-connection-token --accept-server-license-terms  &
     KASM_PROCS['vscode']=$!
 }
+
+trap cleanup SIGINT SIGTERM
+
 start_nginx
 start_vscode
 while :
