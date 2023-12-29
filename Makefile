@@ -1,6 +1,8 @@
 base_tag=20.04-base
 ide_tag=20.04-ide
 ide_tag_only=20.04-ide-only
+copy:
+	docker cp ubuntu-desktop:/home/kasm-user/Desktop/puppeteer/ /root/changhui/poc/kasm_vnc_build/workspaces-images/src/ubuntu/install/puppeteer
 build: build-focal build-base build-ide build-ide-only
 push: push-base push-ide push-ide-only
 build-focal:
