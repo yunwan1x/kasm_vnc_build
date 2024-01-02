@@ -1,10 +1,10 @@
 base_tag=20.04-base
-ide_tag=20.04-ide
-ide_tag_only=20.04-ide-only
+idea=20.04-idea
+clion=20.04-clion
 copy:
 	docker cp ubuntu-desktop:/home/kasm-user/Desktop/puppeteer/ /root/changhui/poc/kasm_vnc_build/workspaces-images/src/ubuntu/install/puppeteer
-build: build-focal build-base build-ide build-ide-only
-push: push-base push-ide push-ide-only
+build: build-focal build-base build-idea build-clion
+push: push-base push-idea push-clion
 build-focal:
 	docker build -t kasmweb/core-ubuntu-focal:develop -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
 build-base:
@@ -17,19 +17,19 @@ commit:
 
 
 
-build-ide:
-	docker build -t changhui/ubuntu:${ide_tag} -f ./workspaces-images/dockerfile-kasm-desktop-idea ./workspaces-images  
-push-ide:
-	docker push changhui/ubuntu:${ide_tag}
+build-idea:
+	docker build -t changhui/ubuntu:${idea} -f ./workspaces-images/dockerfile-kasm-desktop-idea ./workspaces-images  
+push-idea:
+	docker push changhui/ubuntu:${idea}
 
-build-ide-only:
-	docker build -t changhui/ubuntu:${ide_tag_only} -f ./workspaces-images/dockerfile-kasm-desktop-idea-only ./workspaces-images  
-push-ide-only:
-	docker push changhui/ubuntu:${ide_tag_only}
+build-clion:
+	docker build -t changhui/ubuntu:${clion} -f ./workspaces-images/dockerfile-kasm-desktop-clion ./workspaces-images  
+push-clion:
+	docker push changhui/ubuntu:${clion}
 run:
-	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${ide_tag}	
+	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}	
 run-test:
-	docker run  -it   --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${base_tag}
+	docker rm -f ubuntu1 ; docker run  -it   --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${clion}
 
 
 ## vscode-server
