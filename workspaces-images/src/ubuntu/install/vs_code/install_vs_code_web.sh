@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 set -ex
-wget -O /usr/share/vscode-server-linux-x64-web.tar.gz  https://update.code.visualstudio.com/commit:$(curl https://update.code.visualstudio.com/api/commits/stable/server-linux-x64-web | cut -d '"' -f 2)/server-linux-x64/stable
+wget -O /usr/share/vscode-server-linux-x64-web.tar.gz https://az764295.vo.msecnd.net/stable/903b1e9d8990623e3d7da1df3d33db3e42d80eda/vscode-server-linux-x64-web.tar.gz
+# wget -O /usr/share/vscode-server-linux-x64-web.tar.gz  https://update.code.visualstudio.com/commit:$(curl https://update.code.visualstudio.com/api/commits/stable/server-linux-x64-web | cut -d '"' -f 2)/server-linux-x64/stable
 cd /usr/share
 tar xvzf vscode-server-linux-x64-web.tar.gz
 rm -rf /usr/share/vscode-server-linux-x64-web.tar.gz
