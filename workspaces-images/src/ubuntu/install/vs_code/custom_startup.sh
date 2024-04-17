@@ -40,7 +40,7 @@ function cleanup () {
 
 function start_vscode() {
     mkdir -p /root/project
-    /usr/share/vscode-server-linux-x64-web/bin/code-server --port 58000 --host 127.0.0.1  --without-connection-token --accept-server-license-terms  &
+    /usr/share/vscode-server-linux-x64/bin/code-server --port 58000 --host 127.0.0.1  --without-connection-token --accept-server-license-terms  &
     KASM_PROCS['vscode']=$!
 }
 
