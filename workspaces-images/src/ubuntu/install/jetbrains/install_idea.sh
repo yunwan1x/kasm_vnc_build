@@ -15,4 +15,4 @@ mv $STARTUPDIR/activate.html $DST_DIR
 mkdir -p $HOME/.config/JetBrains/IntelliJIdea2023.3
 mv $STARTUPDIR/IntelliJIdea2023.3/idea.key $HOME/.config/JetBrains/IntelliJIdea2023.3/idea.key
 chown -R 1000:1000 $HOME/.config
-chown -R 1000:1000 $HOME
+chown -R 1000:1000 $HOME/Desktop
