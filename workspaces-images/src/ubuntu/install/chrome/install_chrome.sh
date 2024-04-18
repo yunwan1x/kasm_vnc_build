@@ -85,12 +85,8 @@ else
   exec -a "\$0" "\$HERE/chrome" "${CHROME_ARGS}"  "\$@"
 EOL
 fi
-# install gost 
-chmod +x $INST_SCRIPTS/chrome/gost  
-cp $INST_SCRIPTS/chrome/gost /usr/local/bin
-# install SwitchyOmega
-mkdir -p $HOME/.config
-cp -r $INST_SCRIPTS/chrome/google-chrome $HOME/.config
+
+
 
 #mkdir -p /etc/opt/chrome/policies/managed/
 #cat >>/etc/opt/chrome/policies/managed/default_managed_policy.json <<EOL

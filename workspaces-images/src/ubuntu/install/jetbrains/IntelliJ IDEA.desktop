@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=IntelliJ IDEA
+Comment=
+Exec=/usr/share/idea/bin/idea.sh
+Icon=/usr/share/idea/bin/idea.svg
+Path=/home/kasm-user
+Terminal=false
+StartupNotify=true
