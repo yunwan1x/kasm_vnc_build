@@ -29,4 +29,4 @@ else
 fi
 
 mkdir -p /var/run/pulse
-
+apt-get clean -y

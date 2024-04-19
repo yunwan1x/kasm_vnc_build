@@ -8,12 +8,13 @@ USER root
 
 
 
-COPY ./src/ubuntu/install/jetbrains $STARTUPDIR
+COPY ./src/ubuntu/install/jetbrains/download_idea.sh $INST_SCRIPTS
 # Install startup
-RUN  bash $STARTUPDIR/download_idea.sh
-RUN  bash $STARTUPDIR/install_idea.sh
+RUN  bash $INST_SCRIPTS/download_idea.sh
 
 
+COPY ./src/ubuntu/install/jetbrains $INST_SCRIPTS
+RUN  bash $INST_SCRIPTS/install_idea.sh
 
 
 USER 1000

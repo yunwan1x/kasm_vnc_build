@@ -139,3 +139,4 @@ cat >>/etc/xdg/Thunar/accels.scm<<EOL
 (gtk_accel_path "<Actions>/ThunarLauncher/trash-delete-2" "")
 (gtk_accel_path "<Actions>/ThunarLauncher/trash-delete" "")
 EOL
+apt-get clean -y

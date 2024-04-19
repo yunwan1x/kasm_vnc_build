@@ -43,8 +43,8 @@ RUN bash $INST_SCRIPTS/chrome/install_chrome.sh  && rm -rf $INST_SCRIPTS/chrome/
 #  RUN bash $INST_SCRIPTS/vs_code/install_vs_code.sh \
  && rm -rf $INST_SCRIPTS/vs_code/
 
-COPY ./src/ubuntu/install/puppeteer $INST_SCRIPTS/puppeteer/
-RUN bash $INST_SCRIPTS/puppeteer/install_puppeteer.sh  && rm -rf $INST_SCRIPTS/puppeteer/
+# COPY ./src/ubuntu/install/puppeteer $INST_SCRIPTS/puppeteer/
+# RUN bash $INST_SCRIPTS/puppeteer/install_puppeteer.sh  && rm -rf $INST_SCRIPTS/puppeteer/
 
 # nvidia-container-runtime
 ENV NVIDIA_VISIBLE_DEVICES all
@@ -54,10 +54,6 @@ ENV NVIDIA_DRIVER_CAPABILITIES all
 ENV HOME /home/kasm-user
 ENV DEFAULT_PROFILE_HOME=/home/kasm-default-profile
 WORKDIR $HOME
-
-# copy idea
-#RUN --mount=type=bind,from=builder,source=/home/kasm-user,target=/tmp \
-#cd /tmp &&  cp -r -p   .vscode-server  /home/kasm-user
  
 COPY ./src/ubuntu/install/startup $STARTUPDIR
 # Install startup

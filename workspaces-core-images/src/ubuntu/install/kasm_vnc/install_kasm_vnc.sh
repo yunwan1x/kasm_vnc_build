@@ -104,3 +104,4 @@ chmod -R og-w $KASM_VNC_PATH
 #chown -R 1000:0 $KASM_VNC_PATH/certs
 chown -R 1000:0 $KASM_VNC_PATH/www/Downloads
 test -f $KASM_VNC_PATH/www/vnc.html || ln -s $KASM_VNC_PATH/www/index.html $KASM_VNC_PATH/www/vnc.html
+apt-get clean -y

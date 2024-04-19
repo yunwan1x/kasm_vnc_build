@@ -10,7 +10,7 @@ apt-get update  && apt-get install -y \
     lxc \
     iptables
 rm -rf /var/lib/apt/list/*
-
+apt-get clean -y
 
 curl -sSL https://get.docker.com/ | sh
 echo "kasm-user:${VNC_PW-password}" | chpasswd

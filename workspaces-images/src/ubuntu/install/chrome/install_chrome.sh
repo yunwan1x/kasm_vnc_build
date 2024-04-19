@@ -10,38 +10,17 @@ if [ "$ARCH" == "arm64" ] ; then
   exit 0
 fi	
 
-if [[ "${DISTRO}" == @(centos|oracle7|oracle8) ]]; then
-  if [ ! -z "${CHROME_VERSION}" ]; then
-    wget https://dl.google.com/linux/chrome/rpm/stable/x86_64/google-chrome-stable-${CHROME_VERSION}.x86_64.rpm -O chrome.rpm
-  else
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_x86_64.rpm -O chrome.rpm
-  fi
-  if [ "${DISTRO}" == "oracle8" ]; then
-    dnf localinstall -y chrome.rpm
-    dnf clean all
-  else
-    yum localinstall -y chrome.rpm
-    yum clean all
-  fi
-  rm chrome.rpm
-elif [ "${DISTRO}" == "opensuse" ]; then
-  zypper ar http://dl.google.com/linux/chrome/rpm/stable/x86_64 Google-Chrome
-  wget https://dl.google.com/linux/linux_signing_key.pub
-  rpm --import linux_signing_key.pub
-  rm linux_signing_key.pub
-  zypper install -yn google-chrome-stable
-  zypper clean --all
+
+apt-get update
+apt-get remove -y chromium-browser-l10n chromium-codecs-ffmpeg chromium-browser
+if [ ! -z "${CHROME_VERSION}" ]; then
+  wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb -O chrome.deb
 else
-  apt-get update
-  apt-get remove -y chromium-browser-l10n chromium-codecs-ffmpeg chromium-browser
-  if [ ! -z "${CHROME_VERSION}" ]; then
-    wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb -O chrome.deb
-  else
-    wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O chrome.deb
-  fi
-  apt-get install -y ./chrome.deb
-  rm chrome.deb
+  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb -O chrome.deb
 fi
+apt-get install -y ./chrome.deb
+rm chrome.deb
+
 sed -i 's/-stable//g' /usr/share/applications/google-chrome.desktop
 mkdir -p  $HOME/Desktop/
 cp /usr/share/applications/google-chrome.desktop $HOME/Desktop/
@@ -92,3 +71,4 @@ fi
 #cat >>/etc/opt/chrome/policies/managed/default_managed_policy.json <<EOL
 #{"CommandLineFlagSecurityWarningsEnabled": false, "DefaultBrowserSettingEnabled": false}
 #EOL
+apt-get clean -y
