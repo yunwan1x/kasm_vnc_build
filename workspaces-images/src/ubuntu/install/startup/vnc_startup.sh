@@ -47,7 +47,7 @@ function help (){
 
 ## correct forwarding of shutdown signal
 function cleanup () {
-    kill -s SIGTERM $!
+    sudo kill -s SIGTERM $!
     exit 0
 }
 
