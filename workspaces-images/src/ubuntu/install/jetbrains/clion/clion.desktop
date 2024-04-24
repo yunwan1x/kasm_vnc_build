@@ -1,10 +1,10 @@
 [Desktop Entry]
 Version=1.0
 Type=Application
-Name=IntelliJ IDEA
+Name=CLion
 Comment=
-Exec=/usr/share/idea/bin/clion.sh
-Icon=/usr/share/idea/bin/clion.svg
+Exec=/usr/share/clion/bin/clion.sh
+Icon=/usr/share/clion/bin/clion.svg
 Path=/home/kasm-user
 Terminal=false
 StartupNotify=true
