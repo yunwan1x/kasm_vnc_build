@@ -24,7 +24,7 @@ elif [ "${DISTRO}" == "opensuse" ]; then
   zypper install -yn ffmpeg pulseaudio-utils
   zypper clean --all
 else
-  apt-get update
+  apt-get update 
   apt-get install -y curl git ffmpeg
 fi
 

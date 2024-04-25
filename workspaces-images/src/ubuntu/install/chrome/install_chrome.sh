@@ -11,7 +11,7 @@ if [ "$ARCH" == "arm64" ] ; then
 fi	
 
 
-apt-get update
+
 apt-get remove -y chromium-browser-l10n chromium-codecs-ffmpeg chromium-browser
 if [ ! -z "${CHROME_VERSION}" ]; then
   wget https://dl.google.com/linux/chrome/deb/pool/main/g/google-chrome-stable/google-chrome-stable_${CHROME_VERSION}_amd64.deb -O chrome.deb

@@ -6,7 +6,6 @@ if [ "$DISTRO" = centos ]; then
   yum install epel-release -y
   yum install xdotool -y
 else
-  apt-get update
   apt-get install -y nano zip   xdotool  synaptic
   apt install -y   fonts-noto-color-emoji
 
@@ -16,4 +15,5 @@ else
       /tmp/*
 fi
 
+mkdir -p /usr/lib/dconf && chown 1000:0  /usr/lib/dconf
 

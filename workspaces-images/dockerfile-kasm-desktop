@@ -63,7 +63,7 @@ RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh  \
 && cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/ \
 && rm -rf $DEFAULT_PROFILE_HOME \
 && chown -R 1000:0 $HOME  
-
+ENV  XDG_RUNTIME_DIR=/usr/lib/
 
 USER 1000
 

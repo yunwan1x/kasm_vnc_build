@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -ex
-apt-get update
+
 apt-get install -y libnss3-tools
 
 CERT_FILE="${INST_SCRIPTS}/certificates/ca.crt"

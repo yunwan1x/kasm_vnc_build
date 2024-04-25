@@ -20,7 +20,6 @@ elif [ "${DISTRO}" == "opensuse" ]; then
   SQUID_DISTRO=opensuse
 fi
 if  $(grep -q Jammy /etc/os-release) || $(grep -q Kali /etc/os-release) ; then
-  apt-get update
   apt-get install -y squid-openssl
   mkdir -p /usr/local/squid/sbin
   mkdir -p /usr/local/squid/var/logs/

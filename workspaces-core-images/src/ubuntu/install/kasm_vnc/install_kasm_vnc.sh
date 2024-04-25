@@ -34,7 +34,6 @@ fi
 
 if [ "${DISTRO}" == "kali" ]  ;
 then
-    apt-get update
     apt-get install -y sgml-base
     if [[ "$(arch)" =~ ^x86_64$ ]] ; then
         BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_kali-rolling_${KASM_VER_NAME_PART}_amd64.deb"
@@ -92,7 +91,6 @@ else
 
     wget "${BUILD_URL}" -O kasmvncserver.deb
 
-    apt-get update
     apt-get install -y gettext ssl-cert libxfont2
     apt-get install -y /tmp/kasmvncserver.deb
     rm -f /tmp/kasmvncserver.deb
