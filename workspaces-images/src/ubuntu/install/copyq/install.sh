@@ -10,6 +10,7 @@ mkdir -p /home/kasm-user/Desktop
 mv $INST_SCRIPTS/copyq/{CopyQ.desktop,VSCode.desktop} /home/kasm-user/Desktop/
 
 
+
 #e170252f762678dec6ca2cc69aba1570769a5d39/
 
 #https://update.code.visualstudio.com/commit:e170252f762678dec6ca2cc69aba1570769a5d39/server-linux-x64/stable

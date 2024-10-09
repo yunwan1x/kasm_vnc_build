@@ -17,4 +17,4 @@ else
 fi
 
 mkdir -p /usr/lib/dconf && chown 1000:0  /usr/lib/dconf
-
+strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
