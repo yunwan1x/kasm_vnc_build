@@ -1,0 +1,30 @@
+{
+	"__internal__": {
+		"migrations": {
+			"version": "6.5.0"
+		}
+	},
+	"preferences": {
+		"allowUntrustedCAs": true,
+		"colorTheme": "Light",
+		"downloadKubectlBinaries": false,
+		"editorConfiguration": {
+			"tabSize": 2,
+			"lineNumbers": "on",
+			"fontSize": 12,
+			"fontFamily": "RobotoMono",
+			"minimap": {
+				"enabled": false,
+				"side": "right"
+			}
+		},
+		"localeTimezone": "Asia/Shanghai",
+		"shell": "/bin/bash",
+		"terminalConfig": {
+			"fontSize": 12,
+			"fontFamily": "RobotoMono"
+		},
+		"terminalCopyOnSelect": true,
+		"updateChannel": "latest"
+	}
+}

@@ -10,8 +10,10 @@ mv $INST_SCRIPTS/openlens/OpenLens.desktop /home/kasm-user/Desktop/
 mv $INST_SCRIPTS/openlens/.k8slens /home/kasm-user/
 mv $INST_SCRIPTS/openlens/kubectl /usr/local/bin/
 mv $INST_SCRIPTS/openlens/helm /usr/local/bin/
-mkdir -p /home/kasm-user/.config/OpenLens/
-mv $INST_SCRIPTS/openlens/lens-extensions.json /home/kasm-user/.config/OpenLens/
+mkdir -p /home/kasm-user/.config/OpenLens/node_modules/
+ln -s /home/kasm-user/.k8slens/extensions/openlens-plugins-integration-suite /home/kasm-user/.config/OpenLens/node_modules/openlens-plugins-integration-suite
+mv $INST_SCRIPTS/openlens/lens-user-store.json   /home/kasm-user/.config/OpenLens/
+mv $INST_SCRIPTS/openlens/lens-extensions.json   /home/kasm-user/.config/OpenLens/ 
 # Cleanup
 
 #e170252f762678dec6ca2cc69aba1570769a5d39/
