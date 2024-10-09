@@ -42,7 +42,7 @@ push-vscode-server:
 run-vscode-server:
 	docker run --rm --name  vscode -p 6905:443 changhui/vscode-server
 run-desktop:
-	docker rm -f vscodedesktop ;docker run --shm-size=512m --rm -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04-base	
+	docker rm -f vscodedesktop ;docker run --shm-size=512m --rm -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:20.04-base	
 
 # slim:
 # 	docker-slim build  --http-probe=false   --target  changhui/ubuntu:20.04-idea
