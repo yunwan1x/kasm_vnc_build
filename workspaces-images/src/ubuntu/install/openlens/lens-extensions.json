@@ -1,0 +1,16 @@
+{
+	"__internal__": {
+		"migrations": {
+			"version": "6.5.0"
+		}
+	},
+	"extensions": [
+		[
+			"/home/kasm-user/.config/OpenLens/node_modules/openlens-plugins-integration-suite/package.json",
+			{
+				"enabled": true,
+				"name": "openlens-plugins-integration-suite"
+			}
+		]
+	]
+}
