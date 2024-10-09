@@ -108,7 +108,7 @@ function start_window_manager (){
 function start_audio_out_websocket (){
 	if [[ ${KASM_SVC_AUDIO:-1} == 1 ]]; then
 		echo 'Starting audio websocket server'
-		/usr/share/vscode-server-linux-x64-web/node /usr/share/jsmpeg/websocket-relay.js   kasmaudio 58081 54901    &
+		/usr/lib/code-server/lib/node /usr/share/jsmpeg/websocket-relay.js   kasmaudio 58081 54901    &
 		KASM_PROCS['kasm_audio_out_websocket']=$!
 		if [[ $DEBUG == true ]]; then
 		  echo -e "\n------------------ Started Audio Out Websocket  ----------------------------"
@@ -156,7 +156,7 @@ function start_nginx (){
 }
 
 function start_vscode() {
-    /usr/share/vscode-server-linux-x64-web/bin/code-server --port 58000 --host 127.0.0.1  --without-connection-token --accept-server-license-terms &
+    code-server  /home/kasm-user/Desktop/Uploads/ --port 58000 --host 127.0.0.1 --auth none  &
     KASM_PROCS['vscode']=$!
 }
 

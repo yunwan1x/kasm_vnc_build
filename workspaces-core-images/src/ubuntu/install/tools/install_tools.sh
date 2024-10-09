@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -e
 
-mv $INST_SCRIPTS/tools/sources.list /etc/apt
+# mv $INST_SCRIPTS/tools/sources.list /etc/apt
 echo "Install some common tools for further installation"
 if [[ "${DISTRO}" == @(centos|oracle7) ]] ; then
   yum install -y vim wget net-tools bzip2 python3 ca-certificates
@@ -28,8 +28,8 @@ else
   echo "/home/linuxbrew/.linuxbrew/lib" >> /etc/ld.so.conf.d/brew.conf
 fi
 
-if [ "$DISTRO" = "ubuntu" ]; then
-  #update mesa to latest
-  add-apt-repository ppa:kisak/turtle
-  apt full-upgrade -y
-fi
+# if [ "$DISTRO" = "ubuntu" ]; then
+#   #update mesa to latest
+#   add-apt-repository ppa:kisak/turtle
+#   apt full-upgrade -y
+# fi

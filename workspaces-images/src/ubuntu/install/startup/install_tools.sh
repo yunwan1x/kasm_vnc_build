@@ -6,7 +6,8 @@ if [ "$DISTRO" = centos ]; then
   yum install epel-release -y
   yum install xdotool -y
 else
-  apt-get install -y nano zip   xdotool  synaptic
+  apt update 
+  apt-get install -y nano zip 
   apt install -y   fonts-noto-color-emoji
 
   apt-get clean -y

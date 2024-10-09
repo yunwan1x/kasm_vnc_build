@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=CopyQ
+Comment=A cut & paste history utility
+Exec=copyq --start-server show
+Icon=copyq
+Path=
+Terminal=false
+StartupNotify=false

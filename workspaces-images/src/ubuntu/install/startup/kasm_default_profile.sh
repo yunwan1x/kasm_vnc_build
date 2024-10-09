@@ -77,7 +77,7 @@ echo "${USER_NAME-kasm-user}:$(openssl passwd $VNC_PW)" > $HOME/.vnc/.htpasswd
 sudo sed -i 's/@basicauth@/proxy_set_header Authorization "Basic a2FzbS11c2VyOjEyMzQ1Ng==";/g'  /etc/nginx/conf.d/websocket.conf
 echo "Removing Default Profile Directory"
 rm -rf $DEFAULT_PROFILE_HOME/*
-sudo usermod ${USER_NAME-kasm-user} -s /bin/bash
+sudo usermod kasm-user -s /bin/bash
 # unknown option ==> call command
 echo -e "\n\n------------------ EXECUTE COMMAND ------------------"
 echo "Executing command: '$@'"

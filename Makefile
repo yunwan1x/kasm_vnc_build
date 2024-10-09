@@ -29,7 +29,7 @@ build-clion:
 push-clion:
 	docker push changhui/ubuntu:${clion}
 run:
-	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}	
+	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password -v /root/changhui/poc:/home/kasm-user/Desktop/poc  changhui/ubuntu:${idea}	
 run-test:
 	docker rm -f ubuntu1 ; docker run  -it   --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}
 
@@ -41,6 +41,8 @@ push-vscode-server:
 	docker push  changhui/vscode-server
 run-vscode-server:
 	docker run --rm --name  vscode -p 6905:443 changhui/vscode-server
+run-desktop:
+	docker rm -f vscodedesktop ;docker run --rm -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04-base	
 
 # slim:
 # 	docker-slim build  --http-probe=false   --target  changhui/ubuntu:20.04-idea

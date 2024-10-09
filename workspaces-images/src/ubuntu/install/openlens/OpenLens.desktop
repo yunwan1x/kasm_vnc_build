@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=OpenLens
+Comment=OpenLens - Open Source IDE for Kubernetes
+Exec=/opt/OpenLens/open-lens %U --no-sandbox
+Icon=open-lens
+Path=
+Terminal=false
+StartupNotify=false
