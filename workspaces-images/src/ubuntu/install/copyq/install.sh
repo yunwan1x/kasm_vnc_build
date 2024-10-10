@@ -6,8 +6,8 @@ wget -O /tmp/copyq.deb https://github.com/hluk/CopyQ/releases/download/v9.0.0/co
 apt update
 apt install -y /tmp/copyq.deb
 rm -rf /tmp/copyq.deb
-mkdir -p /home/kasm-user/Desktop
-mv $INST_SCRIPTS/copyq/{CopyQ.desktop,VSCode.desktop} /home/kasm-user/Desktop/
+mkdir -p $HOME/Desktop
+mv $INST_SCRIPTS/copyq/CopyQ.desktop $HOME/Desktop/
 
 
 

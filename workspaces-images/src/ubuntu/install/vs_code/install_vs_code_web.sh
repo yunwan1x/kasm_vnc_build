@@ -7,14 +7,15 @@ wget -O /tmp/code.deb https://github.com/coder/code-server/releases/download/v4.
 apt install -y /tmp/code.deb
 rm -rf /tmp/code.deb
 
-for plugin in ms-python.python ms-toolsai.jupyter ms-toolsai.jupyter-renderers ms-python.debugpy alefragnani.project-manager PKief.material-icon-theme redhat.vscode-yaml cweijan.vscode-mysql-client2    ms-kubernetes-tools.vscode-kubernetes-tools cweijan.dbclient-jdbc ipedrazas.kubernetes-snippets ;do
+for plugin in ms-python.python ms-toolsai.jupyter ms-toolsai.jupyter-renderers ms-python.debugpy alefragnani.project-manager PKief.material-icon-theme redhat.vscode-yaml cweijan.vscode-mysql-client2    ms-kubernetes-tools.vscode-kubernetes-tools cweijan.dbclient-jdbc ipedrazas.kubernetes-snippets  hediet.vscode-drawio;do
 code-server   --install-extension $plugin
 done
 
 
 
-# Cleanup
+mkdir -p $HOME/Desktop
+mv $INST_SCRIPTS/vs_code/VSCode.desktop $HOME/Desktop/
 
-#e170252f762678dec6ca2cc69aba1570769a5d39/
+
 
 

@@ -3,9 +3,10 @@ set -ex
 
 apt-get install -y libnss3-tools
 
-CERT_FILE="${INST_SCRIPTS}/certificates/ca.crt"
+CERT_FILE="${STARTUPDIR}/cert/ca.crt"
 CERT_NAME="Custom Root CA"
-
+cp -rf ${STARTUPDIR}/cert/ /usr/share/
+chmod -R a+rw /usr/share/cert/
 # Install the cert into the system cert store
 cp ${CERT_FILE} /usr/local/share/ca-certificates/
 update-ca-certificates

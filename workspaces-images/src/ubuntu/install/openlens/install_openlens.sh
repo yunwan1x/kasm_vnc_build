@@ -5,15 +5,15 @@ set -ex
 wget -O /tmp/openlens.deb https://github.com/MuhammedKalkan/OpenLens/releases/download/v6.5.2-366/OpenLens-6.5.2-366.amd64.deb
 dpkg -i /tmp/openlens.deb
 rm -rf /tmp/openlens.deb
-mkdir -p /home/kasm-user/Desktop
-mv $INST_SCRIPTS/openlens/OpenLens.desktop /home/kasm-user/Desktop/
-mv $INST_SCRIPTS/openlens/.k8slens /home/kasm-user/
+mkdir -p $HOME/Desktop
+mv $INST_SCRIPTS/openlens/OpenLens.desktop $HOME/Desktop/
+mv $INST_SCRIPTS/openlens/.k8slens $HOME
 mv $INST_SCRIPTS/openlens/kubectl /usr/local/bin/
 mv $INST_SCRIPTS/openlens/helm /usr/local/bin/
-mkdir -p /home/kasm-user/.config/OpenLens/node_modules/
-ln -s /home/kasm-user/.k8slens/extensions/openlens-plugins-integration-suite /home/kasm-user/.config/OpenLens/node_modules/openlens-plugins-integration-suite
-mv $INST_SCRIPTS/openlens/lens-user-store.json   /home/kasm-user/.config/OpenLens/
-mv $INST_SCRIPTS/openlens/lens-extensions.json   /home/kasm-user/.config/OpenLens/ 
+mkdir -p $HOME/.config/OpenLens/node_modules/
+ln -s $HOME/.k8slens/extensions/openlens-plugins-integration-suite $HOME/.config/OpenLens/node_modules/openlens-plugins-integration-suite
+mv $INST_SCRIPTS/openlens/lens-user-store.json   $HOME/.config/OpenLens/
+mv $INST_SCRIPTS/openlens/lens-extensions.json   $HOME/.config/OpenLens/ 
 # Cleanup
 
 #e170252f762678dec6ca2cc69aba1570769a5d39/

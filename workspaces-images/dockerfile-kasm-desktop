@@ -47,9 +47,7 @@ ENV NVIDIA_VISIBLE_DEVICES all
 ENV NVIDIA_DRIVER_CAPABILITIES all
 ######## End cuda #####################
 
-ENV HOME /home/kasm-user
-ENV DEFAULT_PROFILE_HOME=/home/kasm-default-profile
-WORKDIR $HOME
+
  
  
 
@@ -70,14 +68,13 @@ COPY ./src/ubuntu/install/startup $STARTUPDIR
 # Install startup
 RUN  bash $STARTUPDIR/install_tools.sh
 RUN  bash $STARTUPDIR/install_startup.sh 
+RUN bash $STARTUPDIR/install_ca_cert.sh
 
 
-RUN cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/ \
-&& rm -rf $DEFAULT_PROFILE_HOME \
-&& chown -R 1000:0 $HOME 
+
  
 
-
+ENV HOME /home/kasm-user
 USER 1000
 
 

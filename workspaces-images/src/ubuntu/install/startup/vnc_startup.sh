@@ -14,6 +14,7 @@ echo 'export PATH=/usr/local/node-v20.10.0-linux-x64/bin:$PATH' >> ~/.bashrc
 tmpval=$VNC_VIEW_ONLY_PW
 unset VNC_VIEW_ONLY_PW
 VNC_VIEW_ONLY_PW=$tmpval
+DOMAIN_NAME=${DOMAIN_NAME-mydomain.com}
 tmpval=$VNC_PW
 echo "root:$VNC_PW"|sudo chpasswd
 unset VNC_PW
@@ -154,7 +155,7 @@ function start_nginx (){
 }
 
 function start_vscode() {
-    code-server  /home/kasm-user/Desktop/Uploads/ --port 58000 --host 127.0.0.1 --auth none  &
+    code-server  --proxy-domain $DOMAIN_NAME /home/kasm-user/Desktop/Uploads/ --port 58000 --host 127.0.0.1 --auth none  &
     KASM_PROCS['vscode']=$!
 }
 
@@ -209,7 +210,7 @@ DNS.2 = *.${DOMAIN_NAME-mydomain.com}
 IP.1 = ${IP1}
 IP.2 = ${IP2}
 EOF
-test -f ${HOME}/.vnc/self.pem  ||  (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out server.csr ; openssl x509 -req -in server.csr -CA /usr/share/jsmpeg/cert/ca.crt -CAkey /usr/share/jsmpeg/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile ${HOME}/.vnc/certificate.cfg ;rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
+test -f ${HOME}/.vnc/self.pem  ||  (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out server.csr ; openssl x509 -req -in server.csr -CA /usr/share/cert/ca.crt -CAkey /usr/share/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile ${HOME}/.vnc/certificate.cfg ;rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
 
 
 

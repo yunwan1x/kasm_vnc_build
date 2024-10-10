@@ -15,12 +15,12 @@ function set_user_permission {
 
 function copy_default_profile_to_home {
     echo "Copying default profile to home directory"
-    # sudo chown -R 1000:0  $DEFAULT_PROFILE_HOME/ 
+    sudo chown -R 1000:0  $DEFAULT_PROFILE_HOME/ 
     if [  -d "$HOME/.vnc" ]; then
         sudo chown -R 1000:0  $HOME/.vnc
     fi
 
-    # sudo  cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/
+    sudo  cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/
 }
 
 
@@ -37,25 +37,12 @@ function verify_profile_config {
         ln -sf $HOME/Uploads $HOME/Desktop/Uploads
     fi
 
-
-    mkdir -p $HOME/Downloads
-
-    if [ -d "$HOME/Desktop/Downloads" ]; then
-        echo "Downloads Desktop Symlink Exists"
-    else
-        echo "Creating Download Desktop Symlink"
-        ln -sf $HOME/Downloads $HOME/Desktop/Downloads
-    fi
-
-
     if [ -d "$KASM_VNC_PATH/Downloads/Downloads" ]; then
         echo "Downloads RX Symlink Exists"
     else
         echo "Creating Downloads RX Symlink"
         ln -sf $HOME/Downloads $KASM_VNC_PATH/www/Downloads/Downloads
     fi
-
-    ls -la $HOME/Desktop
 
 }
 
@@ -77,7 +64,7 @@ echo "${USER_NAME-kasm-user}:$(openssl passwd $VNC_PW)" > $HOME/.vnc/.htpasswd
 sudo sed -i 's/@basicauth@/proxy_set_header Authorization "Basic a2FzbS11c2VyOjEyMzQ1Ng==";/g'  /etc/nginx/conf.d/websocket.conf
 echo "Removing Default Profile Directory"
 rm -rf $DEFAULT_PROFILE_HOME/*
-sudo usermod kasm-user -s /bin/bash
+sudo usermod kasm-user -s $(which zsh)
 # unknown option ==> call command
 echo -e "\n\n------------------ EXECUTE COMMAND ------------------"
 echo "Executing command: '$@'"

@@ -12,7 +12,7 @@ mv -f  $HOME/jsmpeg/nginx.conf /etc/nginx
 mv $HOME/jsmpeg /usr/share
 mkdir -p $HOME/Uploads/
 mv -f $STARTUPDIR/readme.md $HOME/Uploads/
-chmod a+w /usr/share/jsmpeg/cert
+
 
 # 修复新立得安装包以root权限运行
 rm -f /usr/share/kasmvnc/www/dist/images/782e6b34fd46a00744786246a454ed11.png
