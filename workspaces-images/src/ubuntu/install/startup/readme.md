@@ -1,2 +1,2 @@
 1. CA文件在/usr/share/cert/
-2. 可使用 `docker run --rm --shm-size=512m  -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04-base` 来测试本镜像
+2. 可使用 `docker run --rm --shm-size=512m -v HOSTPATH:/home/kasm-user/  -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04-base` 来测试本镜像
