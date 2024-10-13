@@ -68,7 +68,6 @@ RUN bash $INST_SCRIPTS/deepin_terminal/install.sh \
 rm -rf $INST_SCRIPTS/deepin_terminal/
 
 COPY  ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/ 
-RUN bash $INST_SCRIPTS/vs_code/install_package.sh 
 RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh \
 rm -rf $INST_SCRIPTS/vs_code/
 
@@ -78,14 +77,13 @@ rm -rf $INST_SCRIPTS/vs_code/
 
 COPY ./src/ubuntu/install/startup $STARTUPDIR
 # Install startup
-RUN  bash $STARTUPDIR/install_tools.sh
-RUN  bash $STARTUPDIR/install_startup.sh 
-RUN bash $STARTUPDIR/install_ca_cert.sh
+RUN  bash $STARTUPDIR/install_vscode_extensions.sh \
+&& bash $STARTUPDIR/install_tools.sh \
+&& bash $STARTUPDIR/install_startup.sh \
+&& bash $STARTUPDIR/install_ca_cert.sh \
+&& bash $STARTUPDIR/change_owner.sh
 
-
-
- 
-
+COPY ./src/ubuntu/install/xstartup $STARTUPDIR
 ENV HOME /home/kasm-user
 USER 1000
 

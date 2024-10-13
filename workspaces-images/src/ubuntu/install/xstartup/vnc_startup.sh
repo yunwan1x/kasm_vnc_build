@@ -20,8 +20,14 @@ echo "root:$VNC_PW"|sudo chpasswd
 unset VNC_PW
 VNC_PW=$tmpval
 BUILD_ARCH=$(uname -p)
-rm -rf $HOME/.vscode/extensions
-mkdir -p $HOME/.vscode && ln -s $HOME/.vscode-server/extensions $HOME/.vscode/extensions
+
+
+
+echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
+tldr reindex
+
+## end
+
 STARTUP_COMPLETE=0
 # 开启debug方式
 sed -i 's/^Exec.*/Exec=\/usr\/bin\/google-chrome --remote-debugging-port=9222 %U/' /home/kasm-user/Desktop/google-chrome.desktop
@@ -155,7 +161,7 @@ function start_nginx (){
 }
 
 function start_vscode() {
-    code-server  --proxy-domain $DOMAIN_NAME /home/kasm-user/Desktop/Uploads/ --port 58000 --host 127.0.0.1 --auth none  &
+    code-server  --abs-proxy-base-path /vscode /home/kasm-user/Desktop/Uploads/ --port 58000 --host 127.0.0.1 --auth none  &
     KASM_PROCS['vscode']=$!
 }
 

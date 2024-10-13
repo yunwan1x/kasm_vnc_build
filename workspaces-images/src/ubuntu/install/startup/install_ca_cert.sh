@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -ex
 
-apt-get install -y libnss3-tools
+
 
 CERT_FILE="${STARTUPDIR}/cert/ca.crt"
 CERT_NAME="Custom Root CA"

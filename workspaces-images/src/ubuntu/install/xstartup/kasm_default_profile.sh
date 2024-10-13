@@ -15,7 +15,6 @@ function set_user_permission {
 
 function copy_default_profile_to_home {
     echo "Copying default profile to home directory"
-    sudo chown -R 1000:0  $DEFAULT_PROFILE_HOME/ 
     if [  -d "$HOME/.vnc" ]; then
         sudo chown -R 1000:0  $HOME/.vnc
     fi
