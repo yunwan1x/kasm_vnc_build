@@ -59,10 +59,22 @@ COPY ./src/ubuntu/install/copyq $INST_SCRIPTS/copyq/
 RUN bash $INST_SCRIPTS/copyq/install.sh \
 rm -rf $INST_SCRIPTS/copyq/
 
+COPY  ./src/ubuntu/install/sqldatabase $INST_SCRIPTS/sqldatabase/ 
+RUN bash $INST_SCRIPTS/sqldatabase/install.sh \
+rm -rf $INST_SCRIPTS/sqldatabase/
+
+COPY  ./src/ubuntu/install/deepin_terminal $INST_SCRIPTS/deepin_terminal/ 
+RUN bash $INST_SCRIPTS/deepin_terminal/install.sh \
+rm -rf $INST_SCRIPTS/deepin_terminal/
+
 COPY  ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/ 
 RUN bash $INST_SCRIPTS/vs_code/install_package.sh 
 RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh \
-rm -rf $INST_SCRIPTS/vs_code/ 
+rm -rf $INST_SCRIPTS/vs_code/
+
+
+
+
 
 COPY ./src/ubuntu/install/startup $STARTUPDIR
 # Install startup

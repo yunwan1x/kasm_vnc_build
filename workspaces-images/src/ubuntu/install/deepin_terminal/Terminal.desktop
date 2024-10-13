@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Deepin Terminal
+Comment=Use the command line
+Exec=deepin-terminal -l breeze
+Icon=deepin-terminal
+Path=/home/kasm-user
+Terminal=false
+StartupNotify=true

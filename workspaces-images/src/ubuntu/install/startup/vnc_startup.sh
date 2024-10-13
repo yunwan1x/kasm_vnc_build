@@ -174,7 +174,7 @@ function custom_startup (){
 
 ############ END FUNCTION DECLARATIONS ###########
 
-if [[ $1 =~ -h|--help ]]; then
+if [[ $1 =~ "-h|--help" ]]; then
     help
     exit 0
 fi

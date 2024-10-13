@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-set -ex
+
 
 if [ "$DISTRO" = centos ]; then
   yum install -y nano zip wget
@@ -10,7 +10,10 @@ else
   apt-get install -y nano zip  zsh
   apt install -y   fonts-noto-color-emoji
 
+ 
+ 
   apt-get clean -y
+ 
   rm -rf \
       /var/tmp/* \
       /tmp/*

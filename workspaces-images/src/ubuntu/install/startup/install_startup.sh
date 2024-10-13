@@ -11,7 +11,7 @@ mv -f  $HOME/jsmpeg/websocket.conf /etc/nginx/conf.d
 mv -f  $HOME/jsmpeg/nginx.conf /etc/nginx
 mv $HOME/jsmpeg /usr/share
 mkdir -p $HOME/Uploads/
-mv -f $STARTUPDIR/readme.md $HOME/Uploads/
+mv -f $STARTUPDIR/examples $HOME/Uploads/
 
 
 # 修复新立得安装包以root权限运行
