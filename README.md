@@ -48,3 +48,9 @@ sshd 监听在58022端口
 5. 如果xfce4复制粘贴不好使用, 可以关掉剪切板权限
 6. Unlock Login Keyring时忘记密码解决办法：
    rm -rf ~/.gnome2/keyrings/defaults.keyring
+
+
+
+# kasm仓库
+https://github.com/kasmtech/workspaces-core-images
+https://github.com/kasmtech/workspaces-images
