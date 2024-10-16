@@ -1,6 +1,6 @@
 #!/bin/bash
 ### every exit != 0 fails the script
-set -e
+set -ex
 rm -rf $HOME/jsmpeg
 no_proxy="localhost,127.0.0.1"
 sudo sysctl -w fs.inotify.max_user_watches="524288"
@@ -21,7 +21,8 @@ unset VNC_PW
 VNC_PW=$tmpval
 BUILD_ARCH=$(uname -p)
 
-
+# 删除chrome的用户锁文件
+sudo rm -rf $HOME/.config/google-chrome/Singleton*
 
 echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
 tldr reindex
