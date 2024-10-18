@@ -27,6 +27,12 @@ sudo chmod +x $HOME/Desktop/*.desktop
 
 echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
 tldr reindex
+cat << EOF >>$HOME/.bashrc
+source /etc/profile.d/bash_completion.sh 
+source <(kubectl completion bash)
+source <(helm completion bash) 
+EOF
+
 
 ## end
 
@@ -265,6 +271,7 @@ custom_startup
 
 # Monitor Kasm Services
 sleep 3
+set +x 
 while :
 do
 	for process in "${!KASM_PROCS[@]}"; do

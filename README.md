@@ -11,7 +11,7 @@
 1. 启动命令
 
 ```shell
-	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1 -e DEBUG=true --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}	
+	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1 -e DEBUG=true --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}
 ```
 
 3. 镜像开启了22端口的ssh端口是用dropbear。 需要root账户，root账户密码和kasm-user的一致
@@ -49,8 +49,7 @@ sshd 监听在58022端口
 6. Unlock Login Keyring时忘记密码解决办法：
    rm -rf ~/.gnome2/keyrings/defaults.keyring
 
-
-
 # kasm仓库
+
 https://github.com/kasmtech/workspaces-core-images
 https://github.com/kasmtech/workspaces-images

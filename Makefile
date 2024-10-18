@@ -1,6 +1,6 @@
 
 #  dive can be found here https://github.com/wagoodman/dive
-base_tag=20.04-base
+base_tag=20.04
 idea=20.04-idea
 clion=20.04-clion
 copy:

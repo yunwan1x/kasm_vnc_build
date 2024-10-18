@@ -1,15 +1,18 @@
 #!/usr/bin/env bash
 set -e
 apt update 
-apt-get install -y nano zip  zsh wget curl  openssl git tini fonts-noto-color-emoji libnss3-tools
+apt-get install -y nano zip  zsh wget curl  bash-completion  openssl git tini fonts-noto-color-emoji libnss3-tools
 
 echo install tools successful  
+
 apt install -y python3-setuptools \
                    python3-venv \
                    python3-virtualenv \
                    python3-pip
 pip3 install  ipykernel --no-cache-dir
 ln -s /usr/bin/python3 /usr/bin/python
+# pip3 install uv -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
+# uv python install 3.12
 apt-get autoclean
 rm -rf \
     /var/lib/apt/lists/* \
