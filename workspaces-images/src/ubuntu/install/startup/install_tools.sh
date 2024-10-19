@@ -10,6 +10,7 @@ apt install -y python3-setuptools \
                    python3-virtualenv \
                    python3-pip
 pip3 install  ipykernel --no-cache-dir
+pip3 install jinja2
 ln -s /usr/bin/python3 /usr/bin/python
 # pip3 install uv -i https://mirrors.tuna.tsinghua.edu.cn/pypi/web/simple
 # uv python install 3.12
