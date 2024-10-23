@@ -84,6 +84,8 @@ RUN  bash $STARTUPDIR/install_vscode_extensions.sh \
 && bash $STARTUPDIR/change_owner.sh
 
 COPY ./src/ubuntu/install/xstartup $STARTUPDIR
+RUN  bash $STARTUPDIR/install.sh
+
 ENV HOME /home/kasm-user
 USER 1000
 
