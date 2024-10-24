@@ -14,8 +14,6 @@ mkdir -p $HOME/Uploads/
 mv -f $STARTUPDIR/examples $HOME/Uploads/
 mv -f $STARTUPDIR/desktop/* $HOME/Desktop
 
-# 修复新立得安装包以root权限运行
-rm -f /usr/share/kasmvnc/www/dist/images/782e6b34fd46a00744786246a454ed11.png
 
 
 

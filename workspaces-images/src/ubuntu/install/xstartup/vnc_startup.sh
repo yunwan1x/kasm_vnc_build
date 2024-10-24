@@ -26,7 +26,7 @@ sudo rm -rf $HOME/.config/google-chrome/Singleton*
 sudo chmod +x $HOME/Desktop/*.desktop
 
 echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
-tldr reindex
+
 cat << EOF >>$HOME/.bashrc
 source /etc/profile.d/bash_completion.sh 
 source <(kubectl completion bash)

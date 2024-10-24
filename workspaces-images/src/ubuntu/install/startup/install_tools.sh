@@ -29,9 +29,7 @@ git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh/zs
 echo "source /home/kasm-user/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 echo "source /home/kasm-user/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 sed -i   's#plugins=(git.*)#plugins=(git z aliases common-aliases)#g'  ${ZDOTDIR:-$HOME}/.zshrc
-# 安装tldr
-pip install tldr.py
-git clone https://github.com/tldr-pages/tldr.git /usr/share/tldr
-mv -f $STARTUPDIR/.tldrrc $HOME/
+# 安装navi
+
 
 strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
