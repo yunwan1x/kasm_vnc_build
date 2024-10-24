@@ -13,4 +13,3 @@ done
 
 code-server   --install-extension $STARTUPDIR/vsix/ryu1kn.partial-diff-1.4.3.vsix
 code-server   --install-extension $STARTUPDIR/vsix/okteto.kubernetes-context-0.1.0.vsix
-code-server   --install-extension $STARTUPDIR/vsix/seepine.md-editor-0.0.5.vsix
