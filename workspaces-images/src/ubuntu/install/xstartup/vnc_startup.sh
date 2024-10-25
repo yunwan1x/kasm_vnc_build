@@ -9,8 +9,7 @@ sudo sed -i 's/#Port 22/Port 58022/' /etc/ssh/sshd_config && sudo  service ssh s
 # dict to store processes
 declare -A KASM_PROCS
 # export PATH=/usr/share/vscode-server-linux-x64-web:$PATH
-echo 'export PATH=/usr/local/node-v20.10.0-linux-x64/bin:$PATH' >> ~/.bashrc
-export NAVI_PATH="$HOME/Uploads/cheat"
+export NAVI_PATH="$HOME/Uploads/cheat:/usr/share/cheat"
 
 # switch passwords to local variables
 tmpval=$VNC_VIEW_ONLY_PW
