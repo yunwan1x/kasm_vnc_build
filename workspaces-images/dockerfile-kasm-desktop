@@ -79,6 +79,7 @@ COPY ./src/ubuntu/install/startup $STARTUPDIR
 # Install startup
 RUN  bash $STARTUPDIR/install_vscode_extensions.sh \
 && bash $STARTUPDIR/install_tools.sh \
+&& bash $STARTUPDIR/install_navi.sh \
 && bash $STARTUPDIR/install_startup.sh \
 && bash $STARTUPDIR/install_ca_cert.sh \
 && bash $STARTUPDIR/change_owner.sh
