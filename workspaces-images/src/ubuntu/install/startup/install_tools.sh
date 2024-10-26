@@ -3,6 +3,10 @@ set -e
 apt update 
 apt-get install -y nano zip  zsh wget curl  bash-completion  openssl git tini fonts-noto-color-emoji libnss3-tools
 
+wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-amd64.deb
+apt install /tmp/quarto.deb
+rm -f /tmp/quarto.deb
+
 echo install tools successful  
 
 apt install -y python3-setuptools \
@@ -30,6 +34,7 @@ echo "source /home/kasm-user/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh" >
 echo "source /home/kasm-user/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" >> ${ZDOTDIR:-$HOME}/.zshrc
 sed -i   's#plugins=(git.*)#plugins=(git z aliases common-aliases)#g'  ${ZDOTDIR:-$HOME}/.zshrc
 # 安装navi
+
 
 
 strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5

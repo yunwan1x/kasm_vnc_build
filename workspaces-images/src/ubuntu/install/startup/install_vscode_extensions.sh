@@ -3,7 +3,7 @@ for plugin in ms-python.python ms-toolsai.jupyter ms-toolsai.jupyter-renderers m
 code-server   --install-extension $plugin
 done
 
-for plugin in KevinRose.vsc-python-indent wholroyd.jinja cstrap.python-snippets njqdev.vscode-python-typehint  ;do
+for plugin in KevinRose.vsc-python-indent wholroyd.jinja cstrap.python-snippets njqdev.vscode-python-typehint quarto.quarto  ;do
 code-server   --install-extension $plugin
 done
 
