@@ -6,3 +6,4 @@
 4. 集成了drawio
 5. 集成了excel编辑器
 6. 集成了sample.http功能
+7. 集成了quarto 文档写作工具。参考 [galleray](https://quarto.org/docs/gallery/)
