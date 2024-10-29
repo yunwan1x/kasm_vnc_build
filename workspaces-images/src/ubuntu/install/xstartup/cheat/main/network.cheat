@@ -1,0 +1,7 @@
+% tcpdump,wy
+
+# nn表示不解析域名和端口，-s0不截取包 -A是ASCII 方式打印，方便grep包内容
+tcpdump -i eth0 -nn -s0 -A   -v port <portno>
+
+# -A是ASCII,也可以是-X表示十六进制
+tcpdump -A -s0 port 80

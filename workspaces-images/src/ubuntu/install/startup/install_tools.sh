@@ -3,6 +3,7 @@ set -e
 apt update 
 apt-get install -y nano zip  zsh wget curl  bash-completion  openssl git tini fonts-noto-color-emoji libnss3-tools
 
+apt install -y iputils-ping dnsutils  telnet
 wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-amd64.deb
 apt install /tmp/quarto.deb
 rm -f /tmp/quarto.deb
