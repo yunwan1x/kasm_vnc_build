@@ -17,5 +17,5 @@ code-server   --install-extension $STARTUPDIR/vsix/touchlab.touchlab-vscode-offi
 code-server   --install-extension $STARTUPDIR/vsix/rambit.highlight-counter-1.6.0.vsix
 code-server   --install-extension $STARTUPDIR/vsix/ebicochineal.select-highlight-cochineal-color-0.2.4.vsix
 
-code-server   --install-extension $STARTUPDIR/vsix/formulahendry.terminal-0.0.10.vsix
+
 
