@@ -8,5 +8,6 @@ chown -R 1000:0 $STARTUPDIR/cheat
 chown -R 1000:0 $STARTUPDIR/examples
 mv $STARTUPDIR/cheat/others /usr/share/cheat/
 mv $STARTUPDIR/cheat $HOME/Uploads/
+cp -rf /usr/share/cert $STARTUPDIR/examples
 mv $STARTUPDIR/examples $HOME/Uploads/
 
