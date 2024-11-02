@@ -2,6 +2,7 @@
 
 1. 集成了navi命令行，NAVI_PATH="$HOME/Uploads/cheat:/usr/share/cheat"
 2. CA签署证书指令
+
    ```bash
    DIR=/tmp
    DOMAIN_NAME=vs2010wy.top
@@ -27,22 +28,27 @@
    rm server.csr
    cat ${DIR}/self.crt ${DIR}/self.key > ${DIR}/self.pem
    ```
-4. 各系统安装证书
-    ```bash
-    # ubuntu
-    sudo cp ca.crt /usr/local/share/ca-certificates
-    sudo update-ca-certificates
+3. 各系统安装证书
 
-    # centos
-    sudo cp ca.crt  /etc/ssl/certs/ca.crt
-    sudo update-ca-trust
-    ```
-3. 运行本镜像
+   ```bash
+   # macos
+   sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ca.crt
+   sudo security delete-certificate -c ""
 
-    ```bash
-    docker run --rm --shm-size=512m -v HOSTPATH:/home/kasm-user/  -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -e IP1=xx.xx.xx.xx  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04
-    ```
-4. 集成了drawio
-5. 集成了excel编辑器
-6. 集成了sample.http功能
-7. 集成了quarto 文档写作工具。参考 [galleray](https://quarto.org/docs/gallery/)
+   # ubuntu,alpine,debian
+   sudo cp ca.crt /usr/local/share/ca-certificates
+   sudo update-ca-certificates
+
+   # centos
+   sudo cp ca.crt  /etc/ssl/certs/ca.crt
+   sudo update-ca-trust
+   ```
+4. 运行本镜像
+
+   ```bash
+   docker run --rm --shm-size=512m -v HOSTPATH:/home/kasm-user/  -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -e IP1=xx.xx.xx.xx  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04
+   ```
+5. 集成了drawio
+6. 集成了excel编辑器
+7. 集成了sample.http功能
+8. 集成了quarto 文档写作工具。参考 [galleray](https://quarto.org/docs/gallery/)
