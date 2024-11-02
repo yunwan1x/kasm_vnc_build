@@ -1,6 +1,15 @@
 
 #  dive can be found here https://github.com/wagoodman/dive
-base_tag=20.04
+ARCH := $(shell uname -p)
+
+# 根据不同架构设置不同的build_tag
+ifeq ($(ARCH),aarch64)
+    base_tag := 20.04_aarch64
+else
+    base_tag := 20.04
+endif
+
+
 idea=20.04-idea
 clion=20.04-clion
 copy:
@@ -44,7 +53,7 @@ push-vscode-server:
 run-vscode-server:
 	docker run --rm --name  vscode -p 6905:443 changhui/vscode-server
 run-desktop:
-	docker rm -f vscodedesktop ;docker run    --shm-size=512m --rm -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:${base_tag} \
+	docker rm -f vscodedesktop ;docker run    --shm-size=512m --rm   -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:${base_tag} \
 		
 
 # slim:

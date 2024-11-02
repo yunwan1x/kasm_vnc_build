@@ -11,7 +11,12 @@ mv -f  $HOME/jsmpeg/websocket.conf /etc/nginx/conf.d
 mv -f  $HOME/jsmpeg/nginx.conf /etc/nginx
 mv $HOME/jsmpeg /usr/share
 mkdir -p $HOME/Uploads/
-mv -f $STARTUPDIR/desktop/* $HOME/Desktop
+BUILD_ARCH=$(uname -m)
+chrome=chrome
+if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
+chrome=chromium
+fi
+mv -f $STARTUPDIR/desktop/google-${chrome}-unsafe.desktop $HOME/Desktop
 
 
 

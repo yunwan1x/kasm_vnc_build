@@ -4,7 +4,13 @@ apt update
 apt-get install -y nano zip  zsh wget curl  bash-completion  openssl git tini fonts-noto-color-emoji libnss3-tools
 
 apt install -y iputils-ping dnsutils  telnet tcpdump 
-wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-amd64.deb
+
+BUILD_ARCH=$(uname -m)
+arch=amd64
+if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
+arch=arm64
+fi
+wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-${arch}.deb
 apt install /tmp/quarto.deb
 rm -f /tmp/quarto.deb
 
@@ -36,6 +42,10 @@ echo "source /home/kasm-user/.zsh/zsh-syntax-highlighting/zsh-syntax-highlightin
 sed -i   's#plugins=(git.*)#plugins=(git z aliases common-aliases)#g'  ${ZDOTDIR:-$HOME}/.zshrc
 # 安装navi
 
+BUILD_ARCH=$(uname -m)
+arch=amd64
+if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
+exit 0
+fi
 
 
-strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5

@@ -39,7 +39,7 @@ EOF
 
 STARTUP_COMPLETE=0
 # 开启debug方式
-sed -i 's/^Exec.*/Exec=\/usr\/bin\/google-chrome --remote-debugging-port=9222 %U/' /home/kasm-user/Desktop/google-chrome.desktop
+# sed -i 's/^Exec.*/Exec=\/usr\/bin\/google-chrome --remote-debugging-port=9222 %U/' /home/kasm-user/Desktop/google-chrome.desktop
 ######## FUNCTION DECLARATIONS ##########
 
 ## print out help

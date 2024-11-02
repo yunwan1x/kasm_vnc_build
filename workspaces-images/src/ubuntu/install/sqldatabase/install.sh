@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 set -ex
 # wget -O /usr/share/vscode-server-linux-x64-web.tar.gz https://az764295.vo.msecnd.net/stable/8b3775030ed1a69b13e4f4c628c612102e30a681/vscode-server-linux-x64-web.tar.
-
-wget -O /tmp/beekeeper.deb https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v4.6.8/beekeeper-studio_4.6.8_amd64.deb
+BUILD_ARCH=$(uname -m)
+arch=amd64
+if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
+arch=arm64
+fi
+wget -O /tmp/beekeeper.deb https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v4.6.8/beekeeper-studio_4.6.8_${arch}.deb
 apt update
 apt install -y /tmp/beekeeper.deb
 rm -rf /tmp/beekeeper.deb

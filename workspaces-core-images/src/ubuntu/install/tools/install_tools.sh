@@ -21,7 +21,8 @@ else
 
   echo "generate locales für en_US.UTF-8"
   locale-gen en_US.UTF-8
-  wget -O /usr/local/bin/miniserve https://github.com/svenstaro/miniserve/releases/download/v0.24.0/miniserve-0.24.0-x86_64-unknown-linux-musl
+  arch=$(uname -m)
+  wget -O /usr/local/bin/miniserve https://github.com/svenstaro/miniserve/releases/download/v0.24.0/miniserve-0.24.0-${arch}-unknown-linux-musl
   chmod +x /usr/local/bin/miniserve
 
   # install  linux brew 

@@ -57,7 +57,7 @@ elif [[ "${DISTRO}" == "opensuse" ]] ; then
 else
     UBUNTU_CODENAME=$(grep -Po -m 1 "(?<=_CODENAME=)\w+" /etc/os-release)
     if [[ "${BUILD_ARCH}" =~ ^aarch64$ ]] ; then
-        BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_arm64.deb"
+        BUILD_URL="https://github.com/kasmtech/KasmVNC/releases/download/v1.3.2/kasmvncserver_focal_1.3.2_arm64.deb"
     elif [ "${UBUNTU_CODENAME}" == "bionic" ] ; then
         BUILD_URL="https://kasmweb-build-artifacts.s3.amazonaws.com/kasmvnc/${COMMIT_ID}/kasmvncserver_${UBUNTU_CODENAME}_${KASM_VER_NAME_PART}_libjpeg-turbo-latest_amd64.deb"
     else
