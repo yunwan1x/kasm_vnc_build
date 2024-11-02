@@ -10,7 +10,8 @@ mv $STARTUPDIR/cheat/others /usr/share/cheat/
 mv $STARTUPDIR/cheat $HOME/Uploads/
 cp -rf /usr/share/cert $STARTUPDIR/examples
 mv $STARTUPDIR/examples $HOME/Uploads/
-
+mkdir -p $HOME/.config/xfce4/terminal/
+mv $STARTUPDIR/terminalrc $HOME/.config/xfce4/terminal/
 BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
