@@ -22,6 +22,7 @@ build-base:
 	docker build -t changhui/ubuntu:${base_tag}    -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
 	docker tag changhui/ubuntu:${base_tag} registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag} 
 	docker push registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag}
+	docker push changhui/ubuntu:${base_tag}
 push-base:
 	docker push changhui/ubuntu:${base_tag}
 
