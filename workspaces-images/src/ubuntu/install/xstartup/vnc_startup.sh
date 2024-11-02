@@ -24,14 +24,23 @@ BUILD_ARCH=$(uname -p)
 
 # 删除chrome的用户锁文件
 sudo rm -rf $HOME/.config/google-chrome/Singleton*
+sudo rm -rf $HOME/.config/chromium/Singleton*
 sudo chmod +x $HOME/Desktop/*.desktop
 
-echo 'export PATH=$PATH:$HOME/.local/bin' >> $HOME/.bashrc
+
 
 cat << EOF >>$HOME/.bashrc
+export PATH=$PATH:$HOME/.local/bin
 source /etc/profile.d/bash_completion.sh 
 source <(kubectl completion bash)
 source <(helm completion bash) 
+EOF
+
+cat << EOF >>$HOME/.zshrc
+export PATH=$PATH:$HOME/.local/bin
+source /etc/profile.d/bash_completion.sh 
+source <(kubectl completion zsh)
+source <(helm completion zsh) 
 EOF
 
 
