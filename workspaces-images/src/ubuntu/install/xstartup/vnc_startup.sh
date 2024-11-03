@@ -221,7 +221,7 @@ trap cleanup SIGINT SIGTERM
 mkdir -p ${HOME}/.vnc
 IP1=${IP1-10.10.10.1}
 IP2=${IP2-10.10.10.254}
-IP3=${IP3-192.168.1.1}
+IP3=${IP3-127.0.0.1}
 cat <<EOF > ${HOME}/.vnc/certificate.cfg
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
