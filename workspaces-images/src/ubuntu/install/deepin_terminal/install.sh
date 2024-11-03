@@ -5,6 +5,8 @@ BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 exit 0
+else
+exit 0
 fi
 wget -O /tmp/deepin.deb http://archive.ubuntu.com/ubuntu/pool/universe/d/deepin-terminal/deepin-terminal_5.0.0+ds1-1_amd64.deb
 
