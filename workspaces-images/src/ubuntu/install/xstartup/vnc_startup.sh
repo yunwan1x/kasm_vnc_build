@@ -219,9 +219,9 @@ trap cleanup SIGINT SIGTERM
 
 # Create cert for KasmVNC
 mkdir -p ${HOME}/.vnc
-IP1=${IP-10.10.10.1}
-IP2=$(echo $IP1 | cut -d "." -f 1-3).254
-
+IP1=${IP1-10.10.10.1}
+IP2=${IP2-10.10.10.254}
+IP3=${IP3-192.168.1.1}
 cat <<EOF > ${HOME}/.vnc/certificate.cfg
 authorityKeyIdentifier=keyid,issuer
 basicConstraints=CA:FALSE
@@ -233,8 +233,38 @@ DNS.1 = ${DOMAIN_NAME-mydomain.com}
 DNS.2 = *.${DOMAIN_NAME-mydomain.com}
 IP.1 = ${IP1}
 IP.2 = ${IP2}
+IP.3 = ${IP3}
 EOF
-test -f ${HOME}/.vnc/self.pem  ||  (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -subj "/CN=*.${DOMAIN_NAME-mydomain.com}" -out server.csr ; openssl x509 -req -in server.csr -CA /usr/share/cert/ca.crt -CAkey /usr/share/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile ${HOME}/.vnc/certificate.cfg ;rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
+
+cat <<EOF > ${HOME}/.vnc/server.cnf
+[req]
+default_bits = 2048
+prompt = no
+default_md = sha256
+req_extensions = req_ext
+distinguished_name = dn
+
+[dn]
+C = CN
+ST = YourState
+L = YourCity
+O = YourOrganization
+OU = YourUnit
+CN = ${DOMAIN_NAME-mydomain.com}   
+
+[req_ext]
+subjectAltName = @alt_names
+
+[alt_names]
+DNS.1 = ${DOMAIN_NAME-mydomain.com}
+DNS.2 = *.${DOMAIN_NAME-mydomain.com}  
+DNS.3 = localhost          
+IP.1 = ${IP1}      
+IP.2 = ${IP2}
+IP.3 = ${IP3}        
+EOF
+
+test -f ${HOME}/.vnc/self.pem  || (openssl genrsa -out ${HOME}/.vnc/self.key 2048;openssl req -new -sha256 -key ${HOME}/.vnc/self.key -config ${HOME}/.vnc/server.cnf -out server.csr ;openssl x509 -req -in server.csr -CA /usr/share/cert/ca.crt -CAkey /usr/share/cert/ca.key -CAcreateserial -out ${HOME}/.vnc/self.crt -days 3650 -sha256 -extfile ${HOME}/.vnc/certificate.cfg ;rm server.csr;cat ${HOME}/.vnc/self.crt ${HOME}/.vnc/self.key > ${HOME}/.vnc/self.pem)
 
 
 

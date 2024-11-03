@@ -21,9 +21,35 @@
    IP.2 = ${IP2}
    EOF
 
+   cat <<EOF > ${DIR}/server.cnf
+   [req]
+   default_bits = 2048
+   prompt = no
+   default_md = sha256
+   req_extensions = req_ext
+   distinguished_name = dn
+
+   [dn]
+   C = CN
+   ST = YourState
+   L = YourCity
+   O = YourOrganization
+   OU = YourUnit
+   CN = ${DOMAIN_NAME-mydomain.com}   
+
+   [req_ext]
+   subjectAltName = @alt_names
+
+   [alt_names]
+   DNS.1 = ${DOMAIN_NAME-mydomain.com}
+   DNS.2 = *.${DOMAIN_NAME-mydomain.com}  
+   DNS.3 = localhost          
+   IP.1 = ${IP1}      
+   IP.2 = ${IP2}
+   EOF
 
    openssl genrsa -out ${DIR}/self.key 2048
-   openssl req -new -sha256 -key ${DIR}/self.key -subj "/CN=*.${DOMAIN_NAME}" -out server.csr 
+   openssl req -new -sha256 -key ${DIR}/self.key -config ${DIR}/server.cnf -out server.csr 
    openssl x509 -req -in server.csr -CA /usr/share/cert/ca.crt -CAkey /usr/share/cert/ca.key -CAcreateserial -out ${DIR}/self.crt -days 3650 -sha256 -extfile ${DIR}/certificate.cfg 
    rm server.csr
    cat ${DIR}/self.crt ${DIR}/self.key > ${DIR}/self.pem
