@@ -4,7 +4,7 @@ set -ex
 CHROME_ARGS="--password-store=basic --no-sandbox  --test-type --ignore-gpu-blocklist --user-data-dir --no-first-run --simulate-outdated-no-au='Tue, 31 Dec 2099 23:59:59 GMT'"
 ARCH=$(arch | sed 's/aarch64/arm64/g' | sed 's/x86_64/amd64/g')
 
-if [[ "${DISTRO}" == @(debian|opensuse|ubuntu) ]] && [ ${ARCH} = 'amd64' ] && [ ! -z ${SKIP_CLEAN+x} ]; then
+if  [ ${ARCH} = 'amd64' ] ; then
   echo "not installing chromium on x86_64 desktop build"
   exit 0
 fi

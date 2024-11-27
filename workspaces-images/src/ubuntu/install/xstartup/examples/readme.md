@@ -43,8 +43,8 @@
    [alt_names]
    DNS.1 = ${DOMAIN_NAME-mydomain.com}
    DNS.2 = *.${DOMAIN_NAME-mydomain.com}  
-   DNS.3 = localhost          
-   IP.1 = ${IP1}      
+   DNS.3 = localhost  
+   IP.1 = ${IP1}  
    IP.2 = ${IP2}
    EOF
 
@@ -78,3 +78,4 @@
 6. 集成了excel编辑器
 7. 集成了sample.http功能
 8. 集成了quarto 文档写作工具。参考 [galleray](https://quarto.org/docs/gallery/)
+9. 集成了[termscp](https://github.com/veeso/termscp)

@@ -14,6 +14,11 @@ wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/downlo
 apt install /tmp/quarto.deb
 rm -f /tmp/quarto.deb
 
+
+wget -O /tmp/termscp.deb https://github.com/veeso/termscp/releases/download/v0.16.1/termscp_0.16.1_${arch}.deb
+apt install /tmp/termscp.deb
+rm -f /tmp/termscp.deb
+
 echo install tools successful  
 
 apt install -y python3-setuptools \
