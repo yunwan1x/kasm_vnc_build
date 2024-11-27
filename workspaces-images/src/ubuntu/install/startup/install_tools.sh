@@ -19,6 +19,12 @@ wget -O /tmp/termscp.deb https://github.com/veeso/termscp/releases/download/v0.1
 apt install /tmp/termscp.deb
 rm -f /tmp/termscp.deb
 
+wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_${arch}.deb
+apt install /tmp/k9s.deb
+rm -f /tmp/k9s.deb
+
+
+
 echo install tools successful  
 
 apt install -y python3-setuptools \
