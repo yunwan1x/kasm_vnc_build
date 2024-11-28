@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<drivers>
+	<provider id="elasticsearch">
+		<driver id="elastic_search_jdbc" categories="fulltext" name="Elasticsearch" class="org.elasticsearch.xpack.sql.jdbc.EsDriver" url="jdbc:es://{host}:{port}/" port="9200" description="Elasticsearch JDBC driver" custom="false">
+			<library type="jar" path="maven:/org.elasticsearch.plugin:x-pack-sql-jdbc:8.12.1" custom="false">
+				<file id="org.elasticsearch.plugin:x-pack-sql-jdbc:8.12.1" version="8.16.1" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.elasticsearch.plugin/x-pack-sql-jdbc-8.16.1.jar"/>
+			</library>
+			<library type="license" path="https://raw.githubusercontent.com/elastic/elasticsearch/main/licenses/SSPL-1.0%2BELASTIC-LICENSE-2.0.txt" custom="false">
+				<file id="https://raw.githubusercontent.com/elastic/elasticsearch/main/licenses/SSPL-1.0%2BELASTIC-LICENSE-2.0.txt" path="${home}/.local/share/DBeaverData/drivers/remote/elastic/elasticsearch/main/licenses/SSPL-1.0%2BELASTIC-LICENSE-2.0.txt"/>
+			</library>
+		</driver>
+	</provider>
+	<provider id="mysql">
+		<driver id="mysql8" categories="sql" name="MySQL" class="com.mysql.cj.jdbc.Driver" url="jdbc:mysql://{host}[:{port}]/[{database}]" port="3306" defaultUser="root" description="Driver for MySQL 8 and later" custom="false">
+			<library type="jar" path="maven:/com.mysql:mysql-connector-j:RELEASE" custom="false" version="8.2.0">
+				<file id="com.mysql:mysql-connector-j:RELEASE" version="8.2.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.mysql/mysql-connector-j-8.2.0.jar"/>
+				<file id="com.google.protobuf:protobuf-java:3.21.9" version="3.21.9" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.google.protobuf/protobuf-java-3.21.9.jar"/>
+			</library>
+			<library type="license" path="https://www.gnu.org/licenses/old-licenses/lgpl-2.0.txt" custom="false">
+				<file id="https://www.gnu.org/licenses/old-licenses/lgpl-2.0.txt" path="${home}/.local/share/DBeaverData/drivers/remote/licenses/old-licenses/lgpl-2.0.txt"/>
+			</library>
+		</driver>
+		<driver id="mariaDB" categories="sql" name="MariaDB" class="org.mariadb.jdbc.Driver" url="jdbc:mariadb://{host}[:{port}]/[{database}]" port="3306" defaultUser="root" description="MariaDB JDBC driver" custom="false">
+			<library type="jar" path="maven:/org.mariadb.jdbc:mariadb-java-client:RELEASE" custom="false" version="3.3.2">
+				<file id="org.mariadb.jdbc:mariadb-java-client:RELEASE" version="3.3.2" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.mariadb.jdbc/mariadb-java-client-3.3.2.jar"/>
+				<file id="com.github.waffle:waffle-jna:3.3.0" version="3.3.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.github.waffle/waffle-jna-3.3.0.jar"/>
+				<file id="net.java.dev.jna:jna:5.13.0" version="5.13.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/net.java.dev.jna/jna-5.13.0.jar"/>
+				<file id="net.java.dev.jna:jna-platform:5.13.0" version="5.13.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/net.java.dev.jna/jna-platform-5.13.0.jar"/>
+				<file id="org.slf4j:jcl-over-slf4j:2.0.7" version="2.0.7" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.slf4j/jcl-over-slf4j-2.0.7.jar"/>
+				<file id="org.slf4j:slf4j-api:2.0.7" version="2.0.7" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.slf4j/slf4j-api-2.0.7.jar"/>
+				<file id="com.github.ben-manes.caffeine:caffeine:2.9.3" version="2.9.3" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.github.ben-manes.caffeine/caffeine-2.9.3.jar"/>
+				<file id="org.checkerframework:checker-qual:3.19.0" version="3.19.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.checkerframework/checker-qual-3.19.0.jar"/>
+				<file id="com.google.errorprone:error_prone_annotations:2.10.0" version="2.10.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.google.errorprone/error_prone_annotations-2.10.0.jar"/>
+				<file id="org.checkerframework:checker-qual:3.32.0" version="3.32.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.checkerframework/checker-qual-3.32.0.jar"/>
+			</library>
+			<library type="license" path="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" custom="false">
+				<file id="https://www.gnu.org/licenses/old-licenses/lgpl-2.1.txt" path="${home}/.local/share/DBeaverData/drivers/remote/licenses/old-licenses/lgpl-2.1.txt"/>
+			</library>
+		</driver>
+	</provider>
+	<provider id="postgresql">
+		<driver id="postgres-jdbc" categories="sql" name="PostgreSQL" class="org.postgresql.Driver" url="jdbc:postgresql://{host}[:{port}]/[{database}]" port="5432" defaultDatabase="postgres" defaultUser="postgres" description="PostgreSQL standard driver" custom="false">
+			<library type="jar" path="maven:/org.postgresql:postgresql:RELEASE" custom="false" version="42.7.2">
+				<file id="org.postgresql:postgresql:RELEASE" version="42.7.2" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.postgresql/postgresql-42.7.2.jar"/>
+				<file id="org.checkerframework:checker-qual:3.42.0" version="3.42.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.checkerframework/checker-qual-3.42.0.jar"/>
+			</library>
+			<library type="jar" path="maven:/net.postgis:postgis-jdbc:RELEASE" custom="false" version="2.5.0" ignore-dependencies="true">
+				<file id="net.postgis:postgis-jdbc:RELEASE" version="2.5.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/net.postgis/postgis-jdbc-2.5.0.jar"/>
+			</library>
+			<library type="jar" path="maven:/net.postgis:postgis-geometry:RELEASE" custom="false" version="2.5.0" ignore-dependencies="true">
+				<file id="net.postgis:postgis-geometry:RELEASE" version="2.5.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/net.postgis/postgis-geometry-2.5.0.jar"/>
+			</library>
+			<library type="jar" path="maven:/com.github.waffle:waffle-jna:RELEASE" custom="false" version="1.9.1">
+				<file id="com.github.waffle:waffle-jna:RELEASE" version="1.9.1" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.github.waffle/waffle-jna-1.9.1.jar"/>
+				<file id="net.java.dev.jna:jna:4.5.1" version="4.5.1" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/net.java.dev.jna/jna-4.5.1.jar"/>
+				<file id="net.java.dev.jna:jna-platform:4.5.1" version="4.5.1" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/net.java.dev.jna/jna-platform-4.5.1.jar"/>
+				<file id="org.slf4j:jcl-over-slf4j:1.7.25" version="1.7.25" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.slf4j/jcl-over-slf4j-1.7.25.jar"/>
+				<file id="org.slf4j:slf4j-api:1.7.25" version="1.7.25" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.slf4j/slf4j-api-1.7.25.jar"/>
+				<file id="com.github.ben-manes.caffeine:caffeine:2.6.2" version="2.6.2" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/com.github.ben-manes.caffeine/caffeine-2.6.2.jar"/>
+			</library>
+			<library type="license" path="https://raw.githubusercontent.com/pgjdbc/pgjdbc/master/LICENSE" custom="false">
+				<file id="https://raw.githubusercontent.com/pgjdbc/pgjdbc/master/LICENSE" path="${home}/.local/share/DBeaverData/drivers/remote/pgjdbc/pgjdbc/master/LICENSE"/>
+			</library>
+		</driver>
+	</provider>
+	<provider id="sqlite">
+		<driver id="sqlite_jdbc" categories="sql,embedded" name="SQLite" class="org.sqlite.JDBC" url="jdbc:sqlite:{file}" description="SQLite JDBC driver" custom="false" embedded="true" anonymous="true">
+			<library type="jar" path="maven:/org.xerial:sqlite-jdbc:RELEASE" custom="false">
+				<file id="org.xerial:sqlite-jdbc:RELEASE" version="3.47.1.0" path="${home}/.local/share/DBeaverData/drivers/maven/maven-central/org.xerial/sqlite-jdbc-3.47.1.0.jar"/>
+			</library>
+			<library type="license" path="https://www.apache.org/licenses/LICENSE-2.0.txt" custom="false">
+				<file id="https://www.apache.org/licenses/LICENSE-2.0.txt" path="${home}/.local/share/DBeaverData/drivers/remote/licenses/LICENSE-2.0.txt"/>
+			</library>
+			<parameter name="read-only-data" value="false"/>
+			<parameter name="all-objects-pattern" value="%"/>
+			<parameter name="quote-reserved-words" value="true"/>
+			<parameter name="omit-schema" value="false"/>
+			<parameter name="supports-table-constraints" value="true"/>
+			<parameter name="schema-filters-enabled" value="false"/>
+			<parameter name="supports-delimiter-in-views" value="true"/>
+			<parameter name="supports-embedded-database-creation" value="true"/>
+			<parameter name="read-only-meta-data" value="false"/>
+			<parameter name="omit-type-cache" value="false"/>
+			<parameter name="split-procedures-and-functions" value="false"/>
+			<parameter name="supports-multi-insert" value="false"/>
+			<parameter name="omit-catalog-name" value="false"/>
+			<parameter name="supports-catalog-selection" value="true"/>
+			<parameter name="omit-single-catalog" value="false"/>
+			<parameter name="ddl-drop-column-brackets" value="false"/>
+			<parameter name="omit-single-schema" value="false"/>
+			<parameter name="supports-scroll" value="false"/>
+			<parameter name="omit-catalog" value="false"/>
+			<parameter name="supports-views" value="true"/>
+			<parameter name="script-delimiter" value=";"/>
+			<parameter name="legacy-sql-dialect" value="false"/>
+			<parameter name="script-delimiter-after-query" value="false"/>
+			<parameter name="use-search-string-escape" value="false"/>
+			<parameter name="supports-multiple-results" value="false"/>
+			<parameter name="script-delimiter-after-block" value="false"/>
+			<parameter name="supports-schema-selection" value="true"/>
+			<parameter name="alter-table-add-column" value="false"/>
+			<parameter name="ddl-drop-column-short" value="false"/>
+			<parameter name="supports-limits" value="true"/>
+			<parameter name="supports-select-count" value="true"/>
+		</driver>
+	</provider>
+</drivers>

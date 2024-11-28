@@ -6,13 +6,15 @@ arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 arch=arm64
 fi
-wget -O /tmp/beekeeper.deb https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v4.6.8/beekeeper-studio_4.6.8_${arch}.deb
+wget -O /tmp/dbeaver.deb https://dbeaver.io/files/dbeaver-ce_latest_${arch}.deb
 apt update
-apt install -y /tmp/beekeeper.deb
-rm -rf /tmp/beekeeper.deb
+apt install -y /tmp/dbeaver.deb
+rm -rf /tmp/dbeaver.deb
 mkdir -p $HOME/Desktop
-mv $INST_SCRIPTS/sqldatabase/BeekeeperStudio.desktop $HOME/Desktop/
-
+mv $INST_SCRIPTS/sqldatabase/dbeaver-ce.desktop $HOME/Desktop/
+mkdir -p /home/kasm-user/.local/share
+mv $INST_SCRIPTS/sqldatabase/DBeaverData /home/kasm-user/.local/share/
+chown -R 1000:1000 /home/kasm-user/.local/share/DBeaverData
 
 
 #e170252f762678dec6ca2cc69aba1570769a5d39/
