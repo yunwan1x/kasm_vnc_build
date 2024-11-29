@@ -9,6 +9,8 @@ BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 arch=arm64
+apt upgrade libc6
+
 fi
 wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-${arch}.deb
 apt install /tmp/quarto.deb
