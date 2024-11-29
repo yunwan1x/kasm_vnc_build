@@ -9,7 +9,7 @@ BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 arch=arm64
-apt upgrade libc6
+# apt upgrade -y libc6
 
 fi
 wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-${arch}.deb
@@ -17,9 +17,13 @@ apt install /tmp/quarto.deb
 rm -f /tmp/quarto.deb
 
 
+if [ arm64 != "$arch"];then
+
 wget -O /tmp/termscp.deb https://github.com/veeso/termscp/releases/download/v0.16.1/termscp_0.16.1_${arch}.deb
 apt install /tmp/termscp.deb
 rm -f /tmp/termscp.deb
+fi
+
 
 wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_${arch}.deb
 apt install /tmp/k9s.deb
@@ -55,10 +59,6 @@ echo "source /home/kasm-user/.zsh/zsh-syntax-highlighting/zsh-syntax-highlightin
 sed -i   's#plugins=(git.*)#plugins=(git z aliases common-aliases)#g'  ${ZDOTDIR:-$HOME}/.zshrc
 # 安装navi
 
-BUILD_ARCH=$(uname -m)
-arch=amd64
-if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
-exit 0
-fi
+
 
 
