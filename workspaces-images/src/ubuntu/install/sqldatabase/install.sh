@@ -12,7 +12,7 @@ wget -O /tmp/java17.tgz https://download.oracle.com/java/17/archive/jdk-17.0.12_
 cd /tmp
 tar xvzf java17.tgz 
 mv  jdk-17.0.12 jre
-mv jre dbeaver
+mv jre /tmp/dbeaver/
 mv dbeaver dbeaver-ce
 mv dbeaver-ce /usr/share/
 rm -rf /tmp/java17.tgz
