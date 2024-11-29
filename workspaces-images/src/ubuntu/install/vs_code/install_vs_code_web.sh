@@ -7,7 +7,7 @@ if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 arch=arm64
 fi
 # cd /usr/share
-wget -O /tmp/code.deb https://github.com/coder/code-server/releases/download/v4.93.1/code-server_4.93.1_${arch}.deb
+wget -O /tmp/code.deb https://github.com/coder/code-server/releases/download/v4.95.3/code-server_4.95.3_${arch}.deb
 apt install -y /tmp/code.deb
 rm -rf /tmp/code.deb
 
