@@ -5,8 +5,20 @@ BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 arch=arm64
-exit 0
-fi
+
+wget -O /tmp/dbeaver.tgz https://dbeaver.io/files/dbeaver-ce-latest-linux.gtk.aarch64-nojdk.tar.gz 
+tar xvzf  /tmp/dbeaver.tgz
+wget -O /tmp/java17.tgz https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-aarch64_bin.tar.gz
+cd /tmp
+tar xvzf java17.tgz 
+mv  jdk-17.0.12 jre
+mv jre dbeaver
+mv dbeaver dbeaver-ce
+mv dbeaver-ce /usr/share/
+rm -rf /tmp/java17.tgz
+rm -rf /tmp/dbeaver.tgz
+sed -i 's/dbeaver.png/icon.xpm/' $INST_SCRIPTS/sqldatabase/dbeaver-ce.desktop
+else
 wget -O /tmp/dbeaver.deb https://dbeaver.io/files/dbeaver-ce_latest_${arch}.deb
 apt update
 apt install -y /tmp/dbeaver.deb
@@ -16,7 +28,7 @@ mv $INST_SCRIPTS/sqldatabase/dbeaver-ce.desktop $HOME/Desktop/
 mkdir -p /home/kasm-user/.local/share
 mv $INST_SCRIPTS/sqldatabase/DBeaverData /home/kasm-user/.local/share/
 chown -R 1000:1000 /home/kasm-user/.local/share/DBeaverData
-
+fi
 
 #e170252f762678dec6ca2cc69aba1570769a5d39/
 
