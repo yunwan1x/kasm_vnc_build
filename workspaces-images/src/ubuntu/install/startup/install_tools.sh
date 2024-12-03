@@ -21,6 +21,8 @@ wget -O /tmp/rclone.deb https://downloads.rclone.org/v1.68.2/rclone-v1.68.2-linu
 apt install /tmp/rclone.deb
 rm -f /tmp/rclone.deb
 
+mkdir -p  /home/kasm-user/.cache/
+mv $STARTUPDIR/rclone /home/kasm-user/.cache/
 
 wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_${arch}.deb
 apt install /tmp/k9s.deb
