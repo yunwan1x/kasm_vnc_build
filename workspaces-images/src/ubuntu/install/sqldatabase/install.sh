@@ -9,7 +9,6 @@ cd /tmp
 wget -O /tmp/dbeaver.tgz https://dbeaver.io/files/dbeaver-ce-latest-linux.gtk.aarch64-nojdk.tar.gz 
 tar xvzf  /tmp/dbeaver.tgz
 wget -O /tmp/java17.tgz https://download.oracle.com/java/17/archive/jdk-17.0.12_linux-aarch64_bin.tar.gz
-
 tar xvzf java17.tgz 
 mv  jdk-17.0.12 jre
 mv jre /tmp/dbeaver/
@@ -19,6 +18,8 @@ rm -rf /tmp/java17.tgz
 rm -rf /tmp/dbeaver.tgz
 sed -i 's/dbeaver.png/icon.xpm/' $INST_SCRIPTS/sqldatabase/dbeaver-ce.desktop
 else
+
+
 wget -O /tmp/dbeaver.deb https://dbeaver.io/files/dbeaver-ce_latest_${arch}.deb
 apt update
 apt install -y /tmp/dbeaver.deb

@@ -78,4 +78,43 @@
 6. 集成了excel编辑器
 7. 集成了sample.http功能
 8. 集成了quarto 文档写作工具。参考 [galleray](https://quarto.org/docs/gallery/)
-9. 集成了[termscp](https://github.com/veeso/termscp) , [k9s](https://github.com/derailed/k9s)
+9. 集成了[rclone](https://rclone.org/docs/), [k9s](https://github.com/derailed/k9s)
+
+   ```bash
+    # gui模式
+   rclone rcd --rc-web-gui
+   rclone rcd  --rc-pass admin  --rc-user gui --rc-serve --rc-addr :5572
+   # shell 模式
+   rclone config - Enter an interactive configuration session.
+   rclone copy - Copy files from source to dest, skipping already copied.
+   rclone sync - Make source and dest identical, modifying destination only.
+   rclone bisync - Bidirectional synchronization between two paths.
+   rclone move - Move files from source to dest.
+   rclone delete - Remove the contents of path.
+   rclone purge - Remove the path and all of its contents.
+   rclone mkdir - Make the path if it doesn't already exist.
+   rclone rmdir - Remove the path.
+   rclone rmdirs - Remove any empty directories under the path.
+   rclone check - Check if the files in the source and destination match.
+   rclone ls - List all the objects in the path with size and path.
+   rclone lsd - List all directories/containers/buckets in the path.
+   rclone lsl - List all the objects in the path with size, modification time and path.
+   rclone md5sum - Produce an md5sum file for all the objects in the path.
+   rclone sha1sum - Produce a sha1sum file for all the objects in the path.
+   rclone size - Return the total size and number of objects in remote:path.
+   rclone version - Show the version number.
+   rclone cleanup - Clean up the remote if possible.
+   rclone dedupe - Interactively find duplicate files and delete/rename them.
+   rclone authorize - Remote authorization.
+   rclone cat - Concatenate any files and send them to stdout.
+   rclone copyto - Copy files from source to dest, skipping already copied.
+   rclone completion - Output shell completion scripts for rclone.
+   rclone gendocs - Output markdown docs for rclone to the directory supplied.
+   rclone listremotes - List all the remotes in the config file.
+   rclone mount - Mount the remote as a mountpoint.
+   rclone moveto - Move file or directory from source to dest.
+   rclone obscure - Obscure password for use in the rclone.conf
+   rclone cryptcheck - Check the integrity of an encrypted remote.
+   rclone about - Get quota information from the remote.
+
+   ```

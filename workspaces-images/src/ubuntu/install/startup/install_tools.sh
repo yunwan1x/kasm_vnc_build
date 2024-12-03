@@ -17,12 +17,9 @@ apt install /tmp/quarto.deb
 rm -f /tmp/quarto.deb
 
 
-if [ arm64 != "$arch"];then
-
-wget -O /tmp/termscp.deb https://github.com/veeso/termscp/releases/download/v0.16.1/termscp_0.16.1_${arch}.deb
-apt install /tmp/termscp.deb
-rm -f /tmp/termscp.deb
-fi
+wget -O /tmp/rclone.deb https://downloads.rclone.org/v1.68.2/rclone-v1.68.2-linux-${arch}.deb
+apt install /tmp/rclone.deb
+rm -f /tmp/rclone.deb
 
 
 wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_${arch}.deb

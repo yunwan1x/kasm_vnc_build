@@ -18,7 +18,9 @@ build: build-focal build-base build-idea build-clion
 push: push-base push-idea push-clion
 build-focal:
 	docker build -t kasmweb/core-ubuntu-focal:develop -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
-build-base:
+build-base: build-focal
+	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password mP@@S4Aliyun2021375A
+	docker login --username=changhui  --password wy3426231987
 	docker build -t changhui/ubuntu:${base_tag}    -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
 	docker tag changhui/ubuntu:${base_tag} registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag} 
 	docker push registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag}
