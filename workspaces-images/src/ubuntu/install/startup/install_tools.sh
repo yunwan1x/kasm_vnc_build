@@ -3,7 +3,7 @@ set -e
 apt update 
 apt-get install -y nano zip  zsh wget curl  bash-completion  openssl git tini fonts-noto-color-emoji libnss3-tools
 
-apt install -y iputils-ping dnsutils  telnet tcpdump 
+apt install -y iputils-ping dnsutils  telnet tcpdump  fuse3
 
 BUILD_ARCH=$(uname -m)
 arch=amd64
