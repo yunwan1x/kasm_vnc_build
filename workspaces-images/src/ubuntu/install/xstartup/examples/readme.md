@@ -81,7 +81,7 @@
 9. 集成了[rclone](https://rclone.org/docs/), [k9s](https://github.com/derailed/k9s)
 
    ```bash
-   
+
     # gui模式
    rclone rcd  --rc-pass admin  --rc-user admin --rc-web-gui  --rc-serve --rc-addr :5572
    rclone rcd  --rc-no-auth --rc-web-gui --rc-serve --rc-addr :5572 
@@ -126,8 +126,9 @@ rclone的配置文件在 ~/.config/rclone/rclone.conf。rclone config 添加配�
 # 挂载
 rclone mount ssh-remote:/root  ./changhui
 # 强制卸载
-umount -f ./changhui
-
+fusermount3 -zu ./changhui 
+# 不行再用
+sudo umount -f ./changhui
 # tui方式查看
 rclone  ncdu ssh-remote:/root
 
