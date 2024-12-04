@@ -184,3 +184,6 @@ EOF
 ```bash 
 
 然后kubectl exec -it nsenter -- sh -c "clear; (bash || ash || sh)"
+
+# 使用k9s
+sudo k9s ，由于kubectl版本问题，所以需要sudo ，不然shell in pod 会有问题，后面会更新kubectl到低版本
