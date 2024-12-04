@@ -138,3 +138,49 @@ rclone  ncdu ssh-remote:/root
 # webui方式
 rclone rcd  --rc-no-auth --rc-web-gui --rc-serve --rc-addr :5572  
 ```
+# kubectl进入node shell
+用下面的一段yaml生成一个pod，注意镜像里需要有nsenter，修改镜像。
+
+```bash
+kubectl apply -f - << EOF
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    run: nsenter01
+  name: nsenter01
+  namespace: default
+spec:
+  containers:
+  - command:
+    - nsenter
+    - --target
+    - "1"
+    - --mount
+    - --uts
+    - --ipc
+    - --net
+    - --pid
+    - --
+    - bash
+    - -l
+    image: docker.io/library/alpine
+    imagePullPolicy: IfNotPresent
+    name: nsenter
+    securityContext:
+      privileged: true
+    stdin: true
+    stdinOnce: true
+    tty: true
+  hostNetwork: true
+  hostPID: true
+  restartPolicy: Never
+  tolerations:
+  - key: CriticalAddonsOnly
+    operator: Exists
+  - effect: NoExecute
+    operator: Exists
+EOF
+```bash 
+
+然后kubectl exec -it nsenter -- sh -c "clear; (bash || ash || sh)"
