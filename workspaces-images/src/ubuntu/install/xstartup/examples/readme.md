@@ -83,7 +83,8 @@
    ```bash
     # gui模式
    rclone rcd --rc-web-gui
-   rclone rcd  --rc-pass admin  --rc-user gui --rc-serve --rc-addr :5572
+   rclone rcd  --rc-pass admin  --rc-user admin --rc-web-gui  --rc-serve --rc-addr :5572
+   rclone rcd  --rc-no-auth --rc-web-gui --rc-serve --rc-addr :5572 
    # shell 模式
    rclone config - Enter an interactive configuration session.
    rclone copy - Copy files from source to dest, skipping already copied.
