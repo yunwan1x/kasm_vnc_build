@@ -123,8 +123,11 @@
 rclone的配置文件在 ~/.config/rclone/rclone.conf。rclone config 添加配置。mount远程文件系统到本地
 
 ```bash
-# 挂载
+# 简单挂载
 rclone mount ssh-remote:/root  ./changhui
+
+#一条完整的Rclone挂载命令
+rclone mount ssh-remote:/file /data/wwwroot/xxx --allow-other --attr-timeout 5m --vfs-cache-mode full --vfs-cache-max-age 24h --vfs-cache-max-size 10G --vfs-read-chunk-size-limit 100M --buffer-size 100M --daemon
 # 强制卸载
 fusermount3 -zu ./changhui 
 # 不行再用
