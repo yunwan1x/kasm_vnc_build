@@ -25,7 +25,7 @@ tar xvzf helm.tgz
 mv linux-${arch}/helm /usr/local/bin/
 chmod +x /usr/local/bin/helm
 
-wget -O /usr/local/bin/kubectl  https://dl.k8s.io/v1.29.15/bin/linux/${arch}/kubectl
+wget -O /usr/local/bin/kubectl  https://dl.k8s.io/v1.29.10/bin/linux/${arch}/kubectl
 chmod +x /usr/local/bin/kubectl
 
 rm -rf /tmp/*
