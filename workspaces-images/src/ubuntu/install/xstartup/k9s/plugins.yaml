@@ -1,0 +1,107 @@
+plugins:
+  watch-events:
+    shortCut: Shift-E
+    confirm: false
+    description: Get Events
+    scopes:
+    - all
+    command: sh
+    background: false
+    args:
+    - -c
+    - "watch -n 5 kubectl get events --context $CONTEXT --namespace $NAMESPACE --field-selector involvedObject.name=$NAME"
+
+  raw-logs-follow:
+    shortCut: Ctrl-G
+    description: logs -f
+    scopes:
+    - po
+    command: kubectl
+    background: false
+    args:
+    - logs
+    - -f
+    - $NAME
+    - -n
+    - $NAMESPACE
+    - --context
+    - $CONTEXT
+    - --kubeconfig
+    - $KUBECONFIG
+  log-less:
+    shortCut: Shift-K
+    description: "logs|less"
+    scopes:
+    - po
+    command: bash
+    background: false
+    args:
+    - -c
+    - '"$@" | less'
+    - dummy-arg
+    - kubectl
+    - logs
+    - $NAME
+    - -n
+    - $NAMESPACE
+    - --context
+    - $CONTEXT
+    - --kubeconfig
+    - $KUBECONFIG
+  log-less-container:
+    shortCut: Shift-L
+    description: "logs|less"
+    scopes:
+    - containers
+    command: bash
+    background: false
+    args:
+    - -c
+    - '"$@" | less'
+    - dummy-arg
+    - kubectl
+    - logs
+    - -c
+    - $NAME
+    - $POD
+    - -n
+    - $NAMESPACE
+    - --context
+    - $CONTEXT
+    - --kubeconfig
+    - $KUBECONFIG
+
+  debug:
+    shortCut: Shift-D
+    description: Add debug container
+    dangerous: true
+    scopes:
+      - containers
+    command: bash
+    background: false
+    confirm: true
+    args:
+      - -c
+      - "kubectl --kubeconfig=$KUBECONFIG debug -it --context $CONTEXT -n=$NAMESPACE $POD --target=$NAME --image=nicolaka/netshoot:v0.13 --share-processes -- bash"
+  secret-openssl-ca:
+    shortCut: Ctrl-O
+    confirm: false
+    description: Openssl ca.crt
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl get secret --context $CONTEXT -n $NAMESPACE $NAME -o jsonpath='{.data.ca\.crt}' | base64 -d | openssl storeutl -noout -text -certs /dev/stdin |& less
+  secret-openssl-tls:
+    shortCut: Shift-O
+    confirm: false
+    description: Openssl tls.crt
+    scopes:
+      - secrets
+    command: bash
+    background: false
+    args:
+      - -c
+      - kubectl get secret --context $CONTEXT -n $NAMESPACE $NAME -o jsonpath='{.data.tls\.crt}' | base64 -d | openssl storeutl -noout -text -certs /dev/stdin |& less

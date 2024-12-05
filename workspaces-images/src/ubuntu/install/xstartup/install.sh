@@ -13,6 +13,14 @@ mv $STARTUPDIR/examples $HOME/Uploads/
 mkdir -p $HOME/.config/xfce4/terminal/
 mv $STARTUPDIR/terminalrc $HOME/.config/xfce4/terminal/
 mv -f  $STARTUPDIR/websocket.conf /etc/nginx/conf.d
+
+# k9s skin
+mkdir -p  /root/.config/k9s/skins
+mkdir -p  $HOME/.config/k9s/skins
+cp  $STARTUPDIR/k9s/skins/*  /root/.config/k9s/skins
+cp  $STARTUPDIR/k9s/config.yaml  /root/.config/k9s
+cp  $STARTUPDIR/k9s/plugins.yaml  /root/.config/k9s
+echo alias k9s=\"sudo k9s \" >> ${ZDOTDIR:-$HOME}/.zshrc
 BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
