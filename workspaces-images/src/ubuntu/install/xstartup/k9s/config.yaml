@@ -10,7 +10,7 @@ k9s:
     logoless: true
     crumbsless: false
     reactive: false
-    noIcons: true
+    noIcons: false
     skin: transparent
     defaultsToFullScreen: false
   skipLatestRevCheck: false
