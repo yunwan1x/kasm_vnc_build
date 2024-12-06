@@ -75,7 +75,7 @@
 4.  运行本镜像
 
     ``` bash
-    docker run --rm --shm-size=512m -v HOSTPATH:/home/kasm-user/  -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -e IP1=xx.xx.xx.xx  --name  vscodedesktop -p 6905:443 changhui/ubuntu:20.04
+    docker run --rm --shm-size=512m -v HOSTPATH:/home/kasm-user/  -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -e IP1=xx.xx.xx.xx  --name -p 6906:80  vscodedesktop -p 6905:443 changhui/ubuntu:20.04
     ```
 
 5.  集成了drawio
