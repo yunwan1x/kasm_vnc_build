@@ -16,7 +16,7 @@ code-server   --install-extension $STARTUPDIR/vsix/okteto.kubernetes-context-0.1
 code-server   --install-extension $STARTUPDIR/vsix/touchlab.touchlab-vscode-office-3.1.7.vsix
 code-server   --install-extension $STARTUPDIR/vsix/rambit.highlight-counter-1.6.0.vsix
 code-server   --install-extension $STARTUPDIR/vsix/ebicochineal.select-highlight-cochineal-color-0.2.4.vsix
-code-server   --install-extension $STARTUPDIR/vsix/huizhou.githd-2.5.5.vsix
+
 
 
 
