@@ -181,3 +181,20 @@ rclone rcd  --rc-no-auth --rc-web-gui --rc-serve --rc-addr :5572
     ```
 
 5.  net debug tool镜像 <https://github.com/nicolaka/netshoot> , 集成了常用的网络相关调试工具。
+
+# 安装的vscode插件
+
+| 序号 | 插件名称                     | 用处             |
+|------|------------------------------|------------------|
+| 1    | rangav.vscode-thunder-client |                  |
+| 2    | johnpapa.vscode-peacock      |                  |
+| 3    | moshfeu.compare-folders      |                  |
+| 4    | xyz.local-history            | 本地历史         |
+| 5    | quarto.quarto                |                  |
+| 6    | hediet.vscode-drawio         |                  |
+| 7    | alefragnani.project-manager  |                  |
+| 8    | ryu1kn.partial-diff          | 部分比较         |
+| 9    | huizhou.githd                | git view history |
+|      |                              |                  |
+|      |                              |                  |
+|      |                              |                  |

@@ -7,7 +7,7 @@ for plugin in KevinRose.vsc-python-indent wholroyd.jinja cstrap.python-snippets 
 code-server   --install-extension $plugin
 done
 
-for plugin in rangav.vscode-thunder-client johnpapa.vscode-peacock    moshfeu.compare-folders edgardmessias.clipboard-manager;do
+for plugin in rangav.vscode-thunder-client johnpapa.vscode-peacock    moshfeu.compare-folders xyz.local-history huizhou.githd ;do
 code-server   --install-extension $plugin
 done
 
