@@ -27,9 +27,9 @@ rm -rf /tmp/dbeaver.deb
 fi
 mkdir -p $HOME/Desktop
 mv $INST_SCRIPTS/sqldatabase/dbeaver-ce.desktop $HOME/Desktop/
-mkdir -p /home/kasm-user/.local/share
-mv $INST_SCRIPTS/sqldatabase/DBeaverData /home/kasm-user/.local/share/
-chown -R 1000:1000 /home/kasm-user/.local/share/DBeaverData
+mkdir -p $HOME/.local/share
+mv $INST_SCRIPTS/sqldatabase/DBeaverData $HOME/.local/share/
+chown -R 1000:1000 $HOME/.local/share/DBeaverData
 #e170252f762678dec6ca2cc69aba1570769a5d39/
 
 #https://update.code.visualstudio.com/commit:e170252f762678dec6ca2cc69aba1570769a5d39/server-linux-x64/stable

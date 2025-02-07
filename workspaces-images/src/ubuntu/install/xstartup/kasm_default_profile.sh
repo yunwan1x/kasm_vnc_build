@@ -18,7 +18,6 @@ function copy_default_profile_to_home {
     if [  -d "$HOME/.vnc" ]; then
         sudo chown -R 1000:0  $HOME/.vnc
     fi
-
     sudo  cp -rp $DEFAULT_PROFILE_HOME/.  $HOME/
 }
 
