@@ -19,7 +19,7 @@ push: push-base push-idea push-clion
 build-focal:
 	docker build -t kasmweb/core-ubuntu-focal:develop -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
 build-base: build-focal
-	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password mP@@S4Aliyun2021375A
+	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password abcABC@123
 	docker login --username=changhui  --password wy3426231987
 	docker build -t changhui/ubuntu:${base_tag}    -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
 	docker tag changhui/ubuntu:${base_tag} registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag} 
@@ -45,7 +45,7 @@ push-clion:
 run:
 	docker run  -it -d  --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  --name ubuntu -p 2222:22 -p 6901:443  -e USER_NAME=kasm-user -e VNC_PW=password -v /root/changhui/poc:/home/kasm-user/Desktop/poc  changhui/ubuntu:${idea}	
 run-test:
-	docker rm -f ubuntu1 ; docker run  -it   --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10.10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}
+	docker rm -f ubuntu1 ; docker run  -it   --privileged  --shm-size=512m -e DOMAIN_NAME=mydomain.com -e IP1=10 .10.10.1  -e DEBUG=true --name ubuntu1 -p 2232:22 -p 6902:443  -e USER_NAME=kasm-user -e VNC_PW=password changhui/ubuntu:${idea}
 
 
 ## vscode-server
