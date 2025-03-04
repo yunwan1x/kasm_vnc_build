@@ -21,7 +21,7 @@ build-focal:
 build-base: build-focal
 	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password abcABC@123
 	docker login --username=changhui  --password wy3426231987
-	docker build -t changhui/ubuntu:${base_tag}    -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
+	docker build -t changhui/ubuntu:${base_tag}    --progress=plain  -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
 	docker tag changhui/ubuntu:${base_tag} registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag} 
 	docker push registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag}
 	docker push changhui/ubuntu:${base_tag}
