@@ -9,3 +9,5 @@ wget -O /tmp/dbeaver.deb https://github.com/beekeeper-studio/beekeeper-studio/re
 
 apt install /tmp/dbeaver.deb
 mv $INST_SCRIPTS/sqldatabase/BeekeeperStudio.desktop $HOME/Desktop/
+mkdir -p $HOME/.config/beekeeper-studio/
+mv $INST_SCRIPTS/sqldatabase/app.db $HOME/.config/beekeeper-studio/
