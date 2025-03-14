@@ -23,14 +23,12 @@ cp  $STARTUPDIR/k9s/plugins.yaml  /root/.config/k9s
 echo alias k9s=\"sudo k9s \" >> ${ZDOTDIR:-$HOME}/.zshrc
 BUILD_ARCH=$(uname -m)
 arch=amd64
+echo "deb http://ports.ubuntu.com/ubuntu-ports/ jammy main">>/etc/apt/sources.list
+apt update
+apt install -y libc6 g++-11
+rm -rf /var/lib/apt/list/*
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 exit 0
 fi
 strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 
-echo "deb http://ports.ubuntu.com/ubuntu-ports/ jammy main">>/etc/apt/sources.list
-apt update
-apt install libc6
-apt install -y g++-11
-rm -rf /var/lib/apt/list/*
-apt-get clean -y
