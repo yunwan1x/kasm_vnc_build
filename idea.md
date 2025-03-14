@@ -1,6 +1,6 @@
 # idea资源文件：
 
-```bash
+``` bash
 ~=/home/kasm-user
 ~/.config/JetBrains
 ~/.cache/JetBrains

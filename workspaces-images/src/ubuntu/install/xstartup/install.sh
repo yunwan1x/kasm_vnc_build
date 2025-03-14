@@ -27,3 +27,10 @@ if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 exit 0
 fi
 strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+
+echo "deb http://ports.ubuntu.com/ubuntu-ports/ jammy main">>/etc/apt/sources.list
+apt update
+apt install libc6
+apt install -y g++-11
+rm -rf /var/lib/apt/list/*
+apt-get clean -y

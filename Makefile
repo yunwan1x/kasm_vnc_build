@@ -16,6 +16,18 @@ copy:
 	docker cp ubuntu-desktop:/home/kasm-user/Desktop/puppeteer/ /root/changhui/poc/kasm_vnc_build/workspaces-images/src/ubuntu/install/puppeteer
 build: build-focal build-base build-idea build-clion
 push: push-base push-idea push-clion
+     
+build-focal-arm:
+	docker buildx build --platform linux/arm64  -t kasmweb/core-ubuntu-focal:develop --progress=plain -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
+
+build-base-arm: build-focal-arm
+	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password abcABC@123
+	docker login --username=changhui  --password wy3426231987
+	docker buildx build --platform linux/arm64 -t changhui/ubuntu:20.04_aarch64    --progress=plain  -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
+	docker tag changhui/ubuntu:20.04_aarch64 registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:20.04_aarch64 
+	docker push registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:20.04_aarch64
+	docker push changhui/ubuntu:20.04_aarch64
+
 build-focal:
 	docker build -t kasmweb/core-ubuntu-focal:develop -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
 build-base: build-focal
@@ -57,6 +69,9 @@ run-vscode-server:
 	docker run --rm --name  vscode -p 6905:443 changhui/vscode-server
 run-desktop:
 	docker rm -f vscodedesktop ;rm -rf /tmp/kasm;mkdir /tmp/kasm; docker run    --shm-size=512m --rm   -e IP1=47.242.184.174   -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -v /tmp/kasm:/home/kasm-user  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:${base_tag} \
+
+run-desktop-arm:
+	docker rm -f vscodedesktop ;rm -rf /tmp/kasm;mkdir  /tmp/kasm; docker run --privileged --platform linux/arm64  --shm-size=512m --rm   -e IP1=47.242.184.174   -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -v /tmp/kasm:/home/kasm-user  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:20.04_aarch64
 		
 
 # slim:
