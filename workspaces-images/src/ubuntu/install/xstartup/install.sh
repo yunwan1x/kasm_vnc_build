@@ -23,7 +23,7 @@ cp  $STARTUPDIR/k9s/plugins.yaml  /root/.config/k9s
 echo alias k9s=\"sudo k9s \" >> ${ZDOTDIR:-$HOME}/.zshrc
 BUILD_ARCH=$(uname -m)
 arch=amd64
-echo "deb http://ports.ubuntu.com/ubuntu-ports/ jammy main">>/etc/apt/sources.list
+echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse">>/etc/apt/sources.list
 apt update
 apt install -y libc6 g++-11
 rm -rf /var/lib/apt/list/*
