@@ -74,13 +74,8 @@ RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh \
 rm -rf $INST_SCRIPTS/vs_code/
 
 
-
-
-
-COPY ./src/ubuntu/install/startup/install_vscode_extensions.sh $STARTUPDIR
-# Install startup
-RUN  bash $STARTUPDIR/install_vscode_extensions.sh
 COPY ./src/ubuntu/install/startup $STARTUPDIR
+RUN  bash $STARTUPDIR/install_vscode_extensions.sh
 RUN  bash $STARTUPDIR/install_tools.sh \
 && bash $STARTUPDIR/install_navi.sh \
 && bash $STARTUPDIR/install_startup.sh \

@@ -195,6 +195,10 @@ rclone rcd  --rc-no-auth --rc-web-gui --rc-serve --rc-addr :5572
 | 7    | alefragnani.project-manager  |                  |
 | 8    | ryu1kn.partial-diff          | 部分比较         |
 | 9    | huizhou.githd                | git view history |
-| 10   | snippetsmanager              | 代码片段管理       |
+| 10   | snippetsmanager              | 代码片段管理     |
 |      |                              |                  |
 |      |                              |                  |
+
+# 重置navicat试用
+
+terminal 里输入 reset-navicat.sh
