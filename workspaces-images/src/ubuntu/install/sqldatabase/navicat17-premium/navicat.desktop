@@ -2,7 +2,7 @@
 Type=Application
 Name=Navicat Premium 17
 GenericName=Database Development Tool
-Icon=navicat-icon
+Icon=/opt/navicat17-premium/navicat-icon.png
 Exec=/opt/navicat17-premium/AppRun
 Categories=Development;
 Keywords=database;sql;
