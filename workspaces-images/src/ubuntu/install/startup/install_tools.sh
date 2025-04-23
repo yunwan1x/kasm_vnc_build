@@ -12,7 +12,7 @@ arch=arm64
 # apt upgrade -y libc6
 
 fi
-wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.6.30/quarto-1.6.30-linux-${arch}.deb
+wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.28/quarto-1.7.28-linux-${arch}.deb
 apt install /tmp/quarto.deb
 rm -f /tmp/quarto.deb
 
@@ -24,7 +24,7 @@ rm -f /tmp/rclone.deb
 mkdir -p  /home/kasm-user/.cache/
 mv $STARTUPDIR/rclone /home/kasm-user/.cache/
 
-wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.32.7/k9s_linux_${arch}.deb
+wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.50.4/k9s_linux_${arch}.deb
 apt install /tmp/k9s.deb
 rm -f /tmp/k9s.deb
 
