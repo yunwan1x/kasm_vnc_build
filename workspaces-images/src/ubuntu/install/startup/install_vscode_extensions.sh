@@ -7,7 +7,7 @@ for plugin in KevinRose.vsc-python-indent wholroyd.jinja cstrap.python-snippets 
 code-server   --install-extension $plugin
 done
 
-for plugin in rangav.vscode-thunder-client johnpapa.vscode-peacock    moshfeu.compare-folders xyz.local-history zjffun.snippetsmanager ;do
+for plugin in  johnpapa.vscode-peacock    moshfeu.compare-folders xyz.local-history zjffun.snippetsmanager ;do
 code-server   --install-extension $plugin
 echo install $plugin success
 done

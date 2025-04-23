@@ -1,0 +1,13 @@
+#!/bin/bash
+
+export WRAPPER="`readlink -f "$0"`"
+HERE="`dirname "$WRAPPER"`"
+cd $HERE
+
+LD_LIBRARY_PATH=$HERE/usr/lib:~/.config/navicat/Premium/lib/sqlite:~/.config/navicat/Premium/lib/oci:$HERE/usr/lib/oci:$HERE/usr/lib/obci:$HERE/usr/lib/pq-g:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH
+
+QT_PLUGIN_PATH="$HERE/usr/plugins"
+export QT_PLUGIN_PATH
+
+exec -a "$0" "$HERE/usr/bin/navicat" "$@"
