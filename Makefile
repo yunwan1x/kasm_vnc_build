@@ -68,7 +68,7 @@ push-vscode-server:
 run-vscode-server:
 	docker run --rm --name  vscode -p 6905:443 changhui/vscode-server
 run-desktop:
-	docker rm -f vscodedesktop ;rm -rf /tmp/kasm;mkdir /tmp/kasm; docker run    --shm-size=512m --rm   -e IP1=47.242.184.174   -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -v /tmp/kasm:/home/kasm-user  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:${base_tag} \
+	docker rm -f vscodedesktop ;rm -rf /tmp/kasm;mkdir /tmp/kasm; docker run    --shm-size=512m --rm   -e IP1=8.210.191.242   -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -v /tmp/kasm:/home/kasm-user  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:${base_tag} \
 
 run-desktop-arm:
 	docker rm -f vscodedesktop ;rm -rf /tmp/kasm;mkdir  /tmp/kasm; docker run --privileged --platform linux/arm64  --shm-size=512m --rm   -e IP1=47.242.184.174   -e DEBUG=true -e USER_NAME=admin -e VNC_PW=admin  -e DOMAIN_NAME=wy.aliyuncs.com -v /tmp/kasm:/home/kasm-user  --name  vscodedesktop -p 6905:443 -p 6906:80 changhui/ubuntu:20.04_aarch64

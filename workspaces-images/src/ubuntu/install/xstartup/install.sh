@@ -26,7 +26,7 @@ arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 exit 0
 fi
-echo "deb https://mirrors.tuna.tsinghua.edu.cn/ubuntu/ jammy main restricted universe multiverse">>/etc/apt/sources.list
+echo "deb http://mirrors.cloud.aliyuncs.com/ubuntu/ jammy main restricted universe multiverse">>/etc/apt/sources.list
 apt update
 apt install -y libc6 g++-11
 rm -rf /var/lib/apt/list/*
@@ -34,4 +34,6 @@ if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 exit 0
 fi
 strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+# strip --remove-section=.note.ABI-tag /opt/navicat17-premium/usr/lib/libQt6Core.so.6
+
 

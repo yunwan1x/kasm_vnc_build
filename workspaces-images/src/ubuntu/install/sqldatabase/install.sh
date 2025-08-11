@@ -3,12 +3,10 @@ set -ex
 BUILD_ARCH=$(uname -m)
 arch=amd64
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
-exit 0
+arch=arm64
 fi
-mv $INST_SCRIPTS/sqldatabase/navicat17-premium/navicat.desktop $HOME/Desktop/
-mv $INST_SCRIPTS/sqldatabase/navicat17-premium/reset-navicat.sh /usr/local/bin/
-chmod +x  $HOME/Desktop/navicat.desktop
-chmod +x /usr/local/bin/reset-navicat.sh
-mv $INST_SCRIPTS/sqldatabase/navicat17-premium /opt/
-
-
+wget -O /tmp/dbeaver.deb https://github.com/beekeeper-studio/beekeeper-studio/releases/download/v5.3.4/beekeeper-studio_5.3.4_${arch}.deb
+apt install /tmp/dbeaver.deb
+mv $INST_SCRIPTS/sqldatabase/BeekeeperStudio.desktop $HOME/Desktop/
+mkdir -p $HOME/.config/beekeeper-studio/
+mv $INST_SCRIPTS/sqldatabase/app.db $HOME/.config/beekeeper-studio/
