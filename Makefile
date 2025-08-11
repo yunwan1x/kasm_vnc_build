@@ -21,8 +21,6 @@ build-focal-arm:
 	docker buildx build --platform linux/arm64  -t kasmweb/core-ubuntu-focal:develop --progress=plain -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
 
 build-base-arm: build-focal-arm
-	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password abcABC@123
-	docker login --username=changhui  --password wy3426231987
 	docker buildx build --platform linux/arm64 -t changhui/ubuntu:20.04_aarch64    --progress=plain  -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
 	docker tag changhui/ubuntu:20.04_aarch64 registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:20.04_aarch64 
 	docker push registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:20.04_aarch64
@@ -31,11 +29,9 @@ build-base-arm: build-focal-arm
 build-focal:
 	docker build -t kasmweb/core-ubuntu-focal:develop -f ./workspaces-core-images/dockerfile-kasm-ubuntu   ./workspaces-core-images 
 build-base: build-focal
-	docker login --username=mpaas_aliyun_pre@1425475265144594 registry.cn-hangzhou.aliyuncs.com --password abcABC@123
-	docker login --username=changhui  --password wy3426231987
 	docker build -t changhui/ubuntu:${base_tag}    --progress=plain  -f ./workspaces-images/dockerfile-kasm-desktop ./workspaces-images 
-	docker tag changhui/ubuntu:${base_tag} registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag} 
-	docker push registry.cn-hangzhou.aliyuncs.com/mpaas-public/ubuntu:${base_tag}
+	docker tag changhui/ubuntu:${base_tag} mpaasai-registry.cn-hangzhou.cr.aliyuncs.com/mpaas-public/ubuntu:${base_tag} 
+	docker push mpaasai-registry.cn-hangzhou.cr.aliyuncs.com/mpaas-public/ubuntu:${base_tag}
 	docker push changhui/ubuntu:${base_tag}
 push-base:
 	docker push changhui/ubuntu:${base_tag}
