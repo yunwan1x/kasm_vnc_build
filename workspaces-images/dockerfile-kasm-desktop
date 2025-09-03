@@ -57,9 +57,9 @@ COPY ./src/ubuntu/install/openlens $INST_SCRIPTS/openlens/
 RUN bash $INST_SCRIPTS/openlens/install_openlens.sh \
 rm -rf $INST_SCRIPTS/openlens/ 
 
-COPY ./src/ubuntu/install/copyq $INST_SCRIPTS/copyq/
-RUN bash $INST_SCRIPTS/copyq/install.sh \
-rm -rf $INST_SCRIPTS/copyq/
+COPY ./src/ubuntu/install/utools $INST_SCRIPTS/utools/
+RUN bash $INST_SCRIPTS/utools/install.sh \
+rm -rf $INST_SCRIPTS/utools/
 
 COPY  ./src/ubuntu/install/sqldatabase $INST_SCRIPTS/sqldatabase/ 
 RUN bash $INST_SCRIPTS/sqldatabase/install.sh \
@@ -71,16 +71,16 @@ rm -rf $INST_SCRIPTS/deepin_terminal/
 
 COPY  ./src/ubuntu/install/vs_code $INST_SCRIPTS/vs_code/ 
 RUN bash $INST_SCRIPTS/vs_code/install_vs_code_web.sh \
-rm -rf $INST_SCRIPTS/vs_code/
+&& bash $INST_SCRIPTS/vs_code/install_vscode_extensions.sh \
+&& rm -rf $INST_SCRIPTS/vs_code/
 
 
 COPY ./src/ubuntu/install/startup $STARTUPDIR
-RUN  bash $STARTUPDIR/install_vscode_extensions.sh
-RUN  bash $STARTUPDIR/install_tools.sh \
-&& bash $STARTUPDIR/install_navi.sh \
-&& bash $STARTUPDIR/install_startup.sh \
-&& bash $STARTUPDIR/install_ca_cert.sh \
-&& bash $STARTUPDIR/change_owner.sh
+RUN  bash $STARTUPDIR/install_tools.sh 
+RUN bash $STARTUPDIR/install_navi.sh 
+RUN bash $STARTUPDIR/install_startup.sh 
+RUN bash $STARTUPDIR/install_ca_cert.sh 
+RUN bash $STARTUPDIR/change_owner.sh
 
 COPY ./src/ubuntu/install/xstartup $STARTUPDIR
 RUN  bash $STARTUPDIR/install.sh

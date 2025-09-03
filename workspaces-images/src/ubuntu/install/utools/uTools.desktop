@@ -1,0 +1,10 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=uTools
+Comment=
+Exec=/opt/uTools/utools --no-sandbox
+Icon=utools
+Path=
+Terminal=false
+StartupNotify=false

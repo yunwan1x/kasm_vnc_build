@@ -33,7 +33,11 @@ rm -rf /var/lib/apt/list/*
 if [[  "$BUILD_ARCH" =~ ^aarch64$ ]] ; then
 exit 0
 fi
-strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
+
+## install utools
+mkdir -p $HOME/.config/
+mv $STARTUPDIR/uTools  $HOME/.config/
+# strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 # strip --remove-section=.note.ABI-tag /opt/navicat17-premium/usr/lib/libQt6Core.so.6
 
 

@@ -1,6 +1,27 @@
 #!/usr/bin/env bash
 set -e
-apt update 
+cat << EOF >/etc/apt/sources.list
+deb http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ focal main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ focal-updates main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ focal-updates main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ focal-security main restricted universe multiverse
+
+deb http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse
+deb-src http://archive.ubuntu.com/ubuntu/ focal-backports main restricted universe multiverse
+
+deb http://archive.canonical.com/ubuntu focal partner
+deb-src http://archive.canonical.com/ubuntu focal partner
+EOF
+
+apt update
+
+
+
+
 apt-get install -y nano zip  zsh wget curl  bash-completion  openssl git tini fonts-noto-color-emoji libnss3-tools
 
 apt install -y iputils-ping dnsutils  telnet tcpdump  fuse3
@@ -12,19 +33,13 @@ arch=arm64
 # apt upgrade -y libc6
 
 fi
-wget -O /tmp/quarto.deb https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.28/quarto-1.7.28-linux-${arch}.deb
-apt install /tmp/quarto.deb
-rm -f /tmp/quarto.deb
 
 
-wget -O /tmp/rclone.deb https://downloads.rclone.org/v1.68.2/rclone-v1.68.2-linux-${arch}.deb
-apt install /tmp/rclone.deb
-rm -f /tmp/rclone.deb
 
-mkdir -p  /home/kasm-user/.cache/
-mv $STARTUPDIR/rclone /home/kasm-user/.cache/
 
-wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.50.4/k9s_linux_${arch}.deb
+
+
+wget -O /tmp/k9s.deb https://github.com/derailed/k9s/releases/download/v0.50.9/k9s_linux_${arch}.deb
 apt install /tmp/k9s.deb
 rm -f /tmp/k9s.deb
 
